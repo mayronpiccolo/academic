@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research</title>
+<style>
+  :root {
+    --ground: #FAF8F4;
+    --panel: #FFFFFF;
+    --ink: #23262C;
+    --ink-soft: #565B63;
+    --line: #E4DFD5;
+    --accent: #A2621A;        /* burnished amber — reward */
+    --accent-soft: #F3E7D4;
+    --blue: #33566B;          /* Atlantic blue — the crossing */
+    --blue-soft: #E3EBF0;
+    --map-grid: rgba(51, 86, 107, 0.13);
+    --map-arc: rgba(162, 98, 26, 0.55);
+    --map-node: #33566B;
+    --map-land: rgba(51, 86, 107, 0.06);
+    --map-coast: rgba(51, 86, 107, 0.30);
+    --shadow: 0 1px 2px rgba(35,38,44,.05), 0 8px 28px rgba(35,38,44,.07);
+    --serif: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #15181D;
+      --panel: #1D2127;
+      --ink: #E9E5DC;
+      --ink-soft: #A8ACB3;
+      --line: #31363E;
+      --accent: #D99C45;
+      --accent-soft: #35301F;
+      --blue: #8FB4C9;
+      --blue-soft: #23303A;
+      --map-grid: rgba(143, 180, 201, 0.12);
+      --map-arc: rgba(217, 156, 69, 0.55);
+      --map-node: #8FB4C9;
+      --map-land: rgba(143, 180, 201, 0.05);
+      --map-coast: rgba(143, 180, 201, 0.22);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #FAF8F4; --panel: #FFFFFF; --ink: #23262C; --ink-soft: #565B63;
+    --line: #E4DFD5; --accent: #A2621A; --accent-soft: #F3E7D4;
+    --blue: #33566B; --blue-soft: #E3EBF0;
+    --map-grid: rgba(51, 86, 107, 0.13); --map-arc: rgba(162, 98, 26, 0.55); --map-node: #33566B;
+    --map-land: rgba(51, 86, 107, 0.06); --map-coast: rgba(51, 86, 107, 0.30);
+    --shadow: 0 1px 2px rgba(35,38,44,.05), 0 8px 28px rgba(35,38,44,.07);
+  }
+  :root[data-theme="dark"] {
+    --ground: #15181D; --panel: #1D2127; --ink: #E9E5DC; --ink-soft: #A8ACB3;
+    --line: #31363E; --accent: #D99C45; --accent-soft: #35301F;
+    --blue: #8FB4C9; --blue-soft: #23303A;
+    --map-grid: rgba(143, 180, 201, 0.12); --map-arc: rgba(217, 156, 69, 0.55); --map-node: #8FB4C9;
+    --map-land: rgba(143, 180, 201, 0.05); --map-coast: rgba(143, 180, 201, 0.22);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1020px; margin: 0 auto; padding: 12px 24px;
+    display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap;
+  }
+  .nav-name { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; color: var(--ink); margin-right: auto; }
+  nav a.navlink {
+    font-family: var(--sans); font-size: .72rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  nav a.navlink:hover { color: var(--accent); text-decoration: none; }
+
+  /* ---------- hero ---------- */
+  header.hero { padding: 84px 0 64px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  .kicker {
+    font-family: var(--sans); font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--blue); margin: 0 0 18px;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 3.9rem);
+    line-height: 1.05; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  h1 .credential { color: var(--ink-soft); font-weight: 400; font-size: .5em; letter-spacing: 0; white-space: nowrap; }
+  .hero-thesis {
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem); line-height: 1.5; max-width: 34em;
+    color: var(--ink-soft); margin: 22px 0 0; font-style: italic; text-wrap: balance;
+  }
+  .hero-thesis em { color: var(--accent); font-style: inherit; }
+  .hero-roles { margin: 30px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+  .hero-roles li { font-family: var(--sans); font-size: .82rem; color: var(--ink-soft); display: flex; align-items: baseline; gap: 8px; }
+  .hero-roles li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); align-self: center; flex: none; }
+  .hero-wave { position: absolute; right: -40px; bottom: -10px; width: min(52%, 460px); height: 150px; opacity: .5; pointer-events: none; }
+
+  /* ---------- sections ---------- */
+  section { padding: 68px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .sec-grid { display: grid; grid-template-columns: 200px 1fr; gap: 20px 48px; }
+  @media (max-width: 760px) { .sec-grid { grid-template-columns: 1fr; } }
+  .sec-label { position: sticky; top: 72px; align-self: start; }
+  @media (max-width: 760px) { .sec-label { position: static; } }
+  .sec-label h2 {
+    font-family: var(--sans); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 6px; font-weight: 600;
+  }
+  .sec-label p { font-size: .88rem; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+
+  .prose p { margin: 0 0 1.1em; max-width: 62ch; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 30px; }
+  .fact { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .fact b { display: block; font-size: 1.45rem; font-weight: 700; color: var(--blue); font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .fact span { font-family: var(--sans); font-size: .72rem; letter-spacing: .05em; color: var(--ink-soft); }
+
+  .licensure { margin-top: 26px; padding: 16px 20px; border-left: 3px solid var(--blue); background: var(--blue-soft); border-radius: 0 10px 10px 0; }
+  .lic-label { font-family: var(--sans); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin: 0 0 8px; font-weight: 600; }
+  .licensure ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 26px; }
+  .licensure li { font-family: var(--sans); font-size: .9rem; color: var(--ink); display: flex; align-items: baseline; gap: 8px; }
+  .licensure li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); align-self: center; flex: none; }
+
+  /* ---------- education timeline ---------- */
+  .edu-group + .edu-group { margin-top: 34px; }
+  .edu-head { font-family: var(--sans); font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin: 0 0 6px; font-weight: 600; }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li {
+    display: grid; grid-template-columns: 96px 1fr; gap: 6px 20px;
+    padding: 15px 0; border-top: 1px solid var(--line);
+  }
+  .timeline li:last-child { padding-bottom: 0; }
+  .tl-year { font-family: var(--sans); font-size: .82rem; color: var(--accent); font-variant-numeric: tabular-nums; padding-top: 2px; letter-spacing: .02em; }
+  .tl-body { min-width: 0; }
+  .tl-title { margin: 0 0 2px; font-size: 1.02rem; font-weight: 700; line-height: 1.35; }
+  .tl-tag { display: inline-block; font-family: var(--sans); font-size: .62rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); background: var(--blue-soft); border-radius: 999px; padding: 2px 8px; vertical-align: middle; margin-left: 4px; white-space: nowrap; }
+  .tl-inst { margin: 0; font-family: var(--sans); font-size: .82rem; color: var(--ink-soft); }
+  @media (max-width: 460px) { .timeline li { grid-template-columns: 1fr; } .tl-year { padding-top: 0; } }
+
+  /* ---------- contact form ---------- */
+  .contact-form { display: flex; flex-direction: column; gap: 16px; max-width: 34em; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-family: var(--sans); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+  .field input, .field textarea {
+    font-family: var(--serif); font-size: 1rem; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 9px;
+    padding: 11px 13px; width: 100%; transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .field textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+  .field input:focus, .field textarea:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  .field input:user-invalid, .field textarea:user-invalid { border-color: #B4462E; }
+  .form-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .submit-btn {
+    font-family: var(--sans); font-size: .82rem; letter-spacing: .04em; font-weight: 600;
+    color: var(--ground); background: var(--accent); border: 1px solid var(--accent);
+    border-radius: 999px; padding: 11px 26px; cursor: pointer; transition: all .15s ease;
+  }
+  .submit-btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
+  .form-note { font-family: var(--sans); font-size: .8rem; color: var(--ink-soft); margin: 0; }
+  .form-note.err { color: #B4462E; }
+
+  /* ---------- map ---------- */
+  .map-shell { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 18px; }
+  .map-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .map-chips + .map-chips { margin-bottom: 14px; }
+  .chip-label { font-family: var(--sans); font-size: .64rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin-right: 2px; min-width: 42px; }
+  .chip {
+    font-family: var(--sans); font-size: .74rem; letter-spacing: .04em;
+    border: 1px solid var(--line); background: transparent; color: var(--ink-soft);
+    border-radius: 999px; padding: 5px 13px; cursor: pointer; transition: all .15s ease;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: var(--ground); }
+  .map-holder { position: relative; }
+  #map { width: 100%; height: auto; display: block; border-radius: 8px; cursor: crosshair; }
+  .map-tip {
+    position: absolute; pointer-events: none; max-width: 260px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--shadow); padding: 11px 14px; opacity: 0; transition: opacity .15s ease;
+    z-index: 10;
+  }
+  .map-tip.show { opacity: 1; }
+  .map-tip h4 { margin: 0 0 3px; font-size: .95rem; }
+  .map-tip .tip-inst { font-family: var(--sans); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); margin: 0 0 6px; }
+  .map-tip p { margin: 0; font-size: .82rem; line-height: 1.45; color: var(--ink-soft); font-family: var(--sans); }
+  .map-hint { font-family: var(--sans); font-size: .74rem; color: var(--ink-soft); margin: 12px 2px 0; }
+
+  /* ---------- current projects ---------- */
+  .current-projects { margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
+  .cp-head { font-family: var(--sans); font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin: 0 0 2px; font-weight: 600; }
+  .project-card { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px 12px 12px 4px; padding: 16px 20px; box-shadow: var(--shadow); }
+  .project-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-bottom: 8px; }
+  .arm { font-family: var(--sans); font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 3px 11px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+  .project-card h4 { margin: 0 0 5px; font-size: 1.1rem; line-height: 1.3; }
+  .project-card p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--ink-soft); }
+  .status { font-family: var(--sans); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 999px; padding: 2px 10px; margin-left: auto; }
+
+  /* ---------- looking ahead ---------- */
+  .horizons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .horizons { grid-template-columns: 1fr; } }
+  .horizon { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow); }
+  .horizon-head { display: flex; align-items: baseline; gap: 9px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .horizon-num { font-size: 2.1rem; font-weight: 700; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .horizon-unit { font-family: var(--sans); font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+  .goal-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .goal-list p { margin: 6px 0 0; font-size: .9rem; line-height: 1.55; color: var(--ink-soft); }
+  .goal-list strong { color: var(--ink); }
+
+  /* ---------- publications ---------- */
+  .pub-year { font-family: var(--sans); font-size: .78rem; letter-spacing: .16em; color: var(--blue); margin: 34px 0 10px; font-weight: 600; }
+  .pub-group { font-family: var(--sans); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 44px 0 0; padding-top: 26px; border-top: 1px solid var(--line); }
+  .pub-year:first-child { margin-top: 0; }
+  .pub { padding: 14px 0; border-top: 1px solid var(--line); }
+  .pub-title { font-size: 1.02rem; font-weight: 700; line-height: 1.4; margin: 0 0 3px; }
+  .pub-title a { color: var(--ink); }
+  .pub-title a:hover { color: var(--accent); }
+  .pub-meta { font-family: var(--sans); font-size: .8rem; color: var(--ink-soft); margin: 0 0 8px; }
+  .pub-meta i { font-style: italic; font-family: var(--serif); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags .arm { padding: 2px 9px; font-size: .63rem; }
+  .tag {
+    font-family: var(--sans); font-size: .66rem; letter-spacing: .07em; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 999px; background: var(--blue-soft); color: var(--blue);
+  }
+
+  /* ---------- teaching ---------- */
+  .courses { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .courses { grid-template-columns: 1fr; } }
+  .course { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow); }
+  .course h3 { margin: 0 0 4px; font-size: 1.02rem; line-height: 1.35; }
+  .course p { margin: 0; font-family: var(--sans); font-size: .78rem; color: var(--ink-soft); line-height: 1.5; }
+  .teach-note { margin-top: 26px; padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; }
+  .teach-note p { margin: 0; font-size: .92rem; }
+
+  /* ---------- media ---------- */
+  .media-list { display: flex; flex-direction: column; gap: 14px; }
+  .media-item { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; box-shadow: var(--shadow); }
+  .media-kind { font-family: var(--sans); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+  .media-item h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .media-item p { margin: 0; font-size: .9rem; color: var(--ink-soft); }
+
+  /* ---------- footer / links ---------- */
+  footer { padding: 56px 0 72px; }
+  .links-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .link-pill {
+    font-family: var(--sans); font-size: .8rem; letter-spacing: .03em;
+    border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px;
+    color: var(--ink); background: var(--panel); box-shadow: var(--shadow);
+    transition: all .15s ease;
+  }
+  .link-pill:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; transform: translateY(-1px); }
+  .colophon { font-family: var(--sans); font-size: .72rem; color: var(--ink-soft); margin-top: 40px; }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+/* ---- embed overrides ---- */
+html, body { background: var(--ground); }
+body { font-size: 16px; }
+section { padding: 4px 0; border-bottom: none; }
+section:first-of-type { padding-top: 0; }
+.wrap { padding: 0 6px; max-width: 100%; }
+.sec-grid { gap: 14px 40px; }
+.sec-label { position: static; }
+.reveal { opacity: 1 !important; transform: none !important; }
+@media (max-width: 760px) { .sec-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<section id="map-section">
+  <div class="wrap sec-grid reveal">
+    <div class="sec-label">
+      <h2>Research Map</h2>
+      <p>Published collaborations across four continents, plus the projects active now. Hover or tap a node to explore; filter by topic or by arm.</p>
+    </div>
+    <div>
+      <div class="map-shell">
+        <div class="map-chips" role="group" aria-label="Filter by research topic">
+          <span class="chip-label">Topic</span>
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="reward">Reward processing</button>
+          <button class="chip" data-filter="eating">Eating &amp; weight</button>
+          <button class="chip" data-filter="music">Communal music</button>
+          <button class="chip" data-filter="cross">Cross-cultural</button>
+        </div>
+        <div class="map-chips" role="group" aria-label="Filter by research arm">
+          <span class="chip-label">Arm</span>
+          <button class="chip arm-chip" data-filter="understanding">Understanding</button>
+          <button class="chip arm-chip" data-filter="assessing">Assessing</button>
+          <button class="chip arm-chip" data-filter="treating">Treating</button>
+        </div>
+        <div class="map-holder">
+          <canvas id="map" aria-label="Interactive map of research sites and collaborations"></canvas>
+          <div class="map-tip" id="maptip"></div>
+        </div>
+        <p class="map-hint">Larger nodes are co-authored paper collaborations; small nodes are partner countries in the Global Trauma Network. Filter by <strong>topic</strong>, or by <strong>arm</strong> to see where each part of the question is pursued — <em>Understanding</em> spans the whole network, while <em>Assessing</em> and <em>Treating</em> mark the sites where measurement and intervention work is concentrated. Hover any node for detail.</p>
+      </div>
+
+      <div class="current-projects">
+        <h3 class="cp-head">Current Projects</h3>
+        <div class="project-card">
+          <div class="project-top">
+            <span class="arm">Treating</span>
+            <span class="tag">Communal music</span>
+            <span class="status">Pilot paper forthcoming</span>
+          </div>
+          <h4>First Tones</h4>
+          <p>A <strong>reward-based intervention</strong>, built by applying a mechanism established experimentally: communal music acts as a social reward, repairing positive affect and strengthening belonging after social ostracism (<a href="https://pubmed.ncbi.nlm.nih.gov/41028871/">Scientific Reports</a>, 2025). A randomized controlled trial (communal music vs. communal drawing) now tests whether that mechanism helps preschoolers facing familial adversity feel and function better, and why — measuring mental and behavioral health, reward responses via child-friendly fNIRS imaging, and sense of belonging through a new observation tool. Behavioral findings from the pilot are coming out soon.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-top">
+            <span class="arm">Assessing</span>
+            <span class="tag">Eating &amp; weight</span>
+            <span class="status">AN/BN paper forthcoming</span>
+          </div>
+          <h4>Portion-Size Estimation in Eating Disorders</h4>
+          <p>Portion perception is foundational to intake regulation: a portion must be perceived as large before it can trigger regulatory behavior. The <strong>Estimation Error Index (EEI)</strong> makes it measurable — a normalized index separating true perceptual distortion from scale-use artifacts. In anorexia and bulimia nervosa the distortion is magnitude-dependent, appearing specifically at large portions; the work now extends to binge-eating disorder, to culturally-relevant versions of the task, and into bariatric psychological assessment, where the EEI answers a gap in measuring eating psychopathology. A paper on the EEI in AN/BN is coming out soon.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-top">
+            <span class="arm">Understanding</span>
+            <span class="tag">Eating &amp; weight</span>
+            <span class="tag">Cross-cultural</span>
+            <span class="status">Analysis underway</span>
+          </div>
+          <h4>Food Insecurity and Eating Disorders</h4>
+          <p>Using the Healthy Minds Survey (n ≈ 1,876 South American students at U.S. universities, 2020–2025), this project asks how food insecurity — measured with the Hunger Vital Sign screener — relates to eating psychopathology and mental health in a population that is at once immigrant, young, and economically at risk.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-top">
+            <span class="arm">Understanding</span>
+            <span class="tag">Cross-cultural</span>
+            <span class="status">Paper forthcoming</span>
+          </div>
+          <h4>Global Trauma Network</h4>
+          <p>A 13-country collaboration (n ≈ 1,787) examining how child maltreatment and cultural social norms interact to shape mental health — depression, anxiety, trauma, resilience, and post-traumatic growth — across the US, Canada, Georgia, Germany, India, Iran, Israel, Macau, South Africa, Sweden, Switzerland, Türkiye, and the UK. A paper is coming out soon.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-top">
+            <span class="arm">Assessing</span>
+            <span class="tag">Cross-cultural</span>
+            <span class="status">Paper forthcoming</span>
+          </div>
+          <h4>The “Several Days” Problem in Depression Screening (PHQ-9)</h4>
+          <p>Using the U.S. Healthy Minds Survey, this measurement work shows that the shared response option “several days” on the PHQ-9 and GAD-7 screeners spans a wider severity range for students who speak a non-English language at home — semantic non-equivalence of a translated anchor. Replicated across survey waves and echoing his finding in the PHQ-9 Brazilian-Portuguese version. A paper is coming out soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).has("static");
+/* ---------------- research map ---------------- */
+const TRAUMA_DESC = "Partner country in the Global Trauma Network — a 13-country study of how child maltreatment and cultural social norms shape mental health (paper forthcoming).";
+const SITES = [
+  { id: "cam", name: "Cambridge & Boston, USA", inst: "Harvard \u00b7 McLean \u00b7 Cambridge Health Alliance", lat: 42.4, lon: -71.1, hub: true, labelDy: -10,
+    desc: "Home base. Papers: communal music to improve positive affect after social ostracism (Scientific Reports, 2025) with the Hooley Lab, and resting-state fMRI of MDD appetite and weight phenotypes (Psychological Medicine, 2023) with McLean and multi-site U.S. collaborators. The United States is also a partner country in the Global Trauma Network.", arms: ["understanding","treating"], themes: ["reward", "eating", "music", "cross"] },
+  { id: "fri", name: "Fribourg, Switzerland", inst: "University of Fribourg", lat: 46.8, lon: 7.2, labelDy: 15, labelLeft: true,
+    desc: "Doctoral papers with Chantal Martin-Soelch on reward reactivity: hunger and reward in anorexia nervosa (Appetite, 2019), behavioral responses to uncertainty (Frontiers in Psychology, 2019), and hunger and reward in obesity (PLoS One, 2020). Also where he taught as a Chargé de Cours (2018–2022); Switzerland is a partner country in the Global Trauma Network.", arms: ["understanding"], themes: ["reward", "eating", "cross"] },
+  { id: "zur", name: "Zurich, Switzerland", inst: "University Hospital Zurich", lat: 47.4, lon: 8.8, labelDy: -9,
+    desc: "Eating-disorder papers with Gabriella Milos: altered endocannabinoids in anorexia nervosa (European Eating Disorders Review, 2020), meal-portion estimation in bulimia (Eating and Weight Disorders, 2022), and portion-size estimation errors (Eating and Weight Disorders, 2026).", arms: ["understanding","assessing"], themes: ["eating"] },
+  { id: "mum", name: "Mumbai, India", inst: "IIT Bombay", lat: 19.1, lon: 72.9,
+    desc: "Papers with Rashmi Gupta on monetary reward, mood, and pain in Indian students (Scientific Reports, 2022) and a cross-sample network analysis of pain and mental health across WEIRD and non-WEIRD samples (BMC Psychiatry, 2024). India is also a partner country in the Global Trauma Network.", arms: ["understanding"], themes: ["reward", "cross"] },
+  { id: "bra", name: "S\u00e3o Paulo, Brazil", inst: "Brazilian collaborations", lat: -23.6, lon: -46.6, labelDy: 15,
+    desc: "Co-authored the communal-music affect paper (Scientific Reports, 2025) with Diego W. dos Santos, and authored the case for revisiting \u201cseveral days\u201d in the PHQ-9 Brazilian version (Brazilian Journal of Psychiatry, 2025).", arms: ["understanding","assessing","treating"], themes: ["music", "cross"] },
+  { id: "vnm", name: "Hanoi, Vietnam", inst: "Cross-cultural grief network", lat: 21.0, lon: 105.8, labelDy: -10, labelLeft: true,
+    desc: "Paper on the role of Vietnamese mourning culture in grief symptomatology, a study protocol with Le and Killikelly (Grief: The Journal, 2025).", arms: ["assessing"], themes: ["cross"] },
+  // Global Trauma Network partner countries (secondary nodes; US, India, and Switzerland already appear above)
+  { id: "gtn-ca", name: "Canada", inst: "Global Trauma Network", lat: 53.0, lon: -102.0, secondary: true, always: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-uk", name: "United Kingdom", inst: "Global Trauma Network", lat: 52.6, lon: -1.5, secondary: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-de", name: "Germany", inst: "Global Trauma Network", lat: 52.5, lon: 13.4, secondary: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-se", name: "Sweden", inst: "Global Trauma Network", lat: 59.3, lon: 18.1, secondary: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-tr", name: "Türkiye", inst: "Global Trauma Network", lat: 39.9, lon: 32.9, secondary: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-ge", name: "Georgia", inst: "Global Trauma Network", lat: 41.7, lon: 44.8, secondary: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-il", name: "Israel", inst: "Global Trauma Network", lat: 31.8, lon: 35.2, secondary: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-ir", name: "Iran", inst: "Global Trauma Network", lat: 35.7, lon: 51.4, secondary: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-mo", name: "Macau", inst: "Global Trauma Network", lat: 22.2, lon: 113.5, secondary: true, always: true, labelDy: 15, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+  { id: "gtn-za", name: "South Africa", inst: "Global Trauma Network", lat: -26.2, lon: 28.0, secondary: true, always: true, arms: ["understanding"], themes: ["cross"], desc: TRAUMA_DESC },
+];
+
+// Simplified world coastlines (Natural Earth 110m land, Douglas-Peucker simplified) for a sketch-style map behind the nodes.
+const WORLD = [
+  [[107.0,77.0],[114.1,75.8],[109.4,74.2],[123.2,73.0],[123.3,73.7],[127.0,73.6],[131.3,70.8],[132.3,71.8],[139.9,71.5],[139.1,72.4],[140.5,72.8],[159.0,70.9],[160.9,69.4],[167.8,69.6],[169.6,68.7],[170.8,69.0],[170.5,70.1],[178.6,69.4],[180,69.0],[180,65.0],[177.4,64.6],[179.5,62.6],[173.7,61.7],[170.3,59.9],[163.5,59.9],[162.0,58.2],[163.2,57.6],[162.1,54.9],[156.8,51.0],[155.9,56.8],[163.7,61.1],[164.5,62.6],[160.1,60.5],[159.3,61.8],[156.7,61.4],[154.2,59.8],[155.0,59.1],[142.2,59.0],[135.1,54.7],[139.9,54.2],[141.4,52.2],[138.2,46.3],[134.9,43.4],[132.3,43.3],[127.5,39.8],[129.5,36.8],[129.1,35.1],[126.5,34.4],[126.1,36.7],[126.9,36.9],[124.7,38.1],[125.3,39.6],[121.1,38.9],[121.6,40.9],[118.0,39.2],[118.9,37.4],[122.4,37.5],[119.2,34.9],[121.9,31.7],[121.7,28.2],[115.9,22.8],[110.8,21.4],[110.4,20.3],[108.5,21.7],[105.9,19.8],[109.3,13.4],[109.2,11.7],[105.2,8.6],[105.1,9.9],[100.1,13.4],[99.2,9.2],[103.0,5.5],[104.2,1.3],[101.4,2.8],[100.1,6.5],[98.3,7.8],[98.8,11.4],[97.2,16.9],[94.2,16.0],[94.3,18.2],[91.4,22.8],[87.0,21.5],[86.5,20.2],[80.3,15.9],[79.9,10.4],[77.5,8.0],[73.5,16.0],[72.6,21.4],[70.5,20.9],[66.4,25.4],[57.4,25.7],[56.5,27.1],[54.7,26.5],[51.5,27.9],[50.1,30.1],[48.0,30.0],[50.8,24.8],[51.6,25.8],[51.8,24.0],[54.0,24.1],[56.4,26.4],[56.8,24.2],[59.8,22.3],[55.3,17.2],[43.5,12.6],[42.6,16.8],[34.6,28.1],[34.9,29.5],[33.9,27.6],[32.4,29.9],[36.9,22.0],[37.5,18.6],[43.3,12.4],[42.7,11.7],[44.6,10.4],[51.1,12.0],[51.0,10.6],[47.7,4.2],[39.2,-4.7],[40.8,-14.7],[34.8,-19.8],[35.6,-23.7],[32.6,-25.7],[32.2,-28.8],[25.8,-33.9],[19.6,-34.8],[18.4,-34.1],[18.2,-31.7],[15.2,-27.1],[14.3,-22.1],[11.8,-18.1],[13.7,-10.7],[11.9,-5.0],[8.8,-1.1],[9.4,3.7],[8.5,4.8],[5.9,4.3],[4.3,6.3],[-2.0,4.7],[-9.0,4.8],[-16.6,12.2],[-17.6,14.7],[-16.1,18.1],[-17.0,21.9],[-14.4,26.3],[-9.6,29.9],[-9.3,32.6],[-5.9,35.8],[-2.2,35.2],[1.5,36.6],[9.5,37.4],[11.1,36.9],[10.3,33.8],[19.1,30.3],[21.5,32.8],[28.9,30.9],[33.8,31.0],[36.2,36.7],[27.6,36.7],[26.2,39.5],[33.5,42.0],[38.3,40.9],[41.7,42.0],[36.7,45.2],[39.1,47.3],[35.0,46.3],[36.3,45.1],[33.9,44.4],[32.5,45.3],[33.3,46.1],[30.7,46.6],[27.7,42.6],[28.8,41.1],[22.6,40.3],[24.0,37.7],[23.1,37.9],[22.5,36.4],[19.4,40.3],[19.5,41.7],[13.1,45.7],[12.6,44.1],[18.5,40.2],[16.9,40.4],[16.1,38.0],[15.4,40.0],[8.9,44.4],[3.1,43.1],[3.0,41.9],[0.8,41.0],[0.1,38.7],[-2.1,36.7],[-5.4,35.9],[-8.9,36.9],[-9.4,43.0],[-1.4,44.0],[-1.2,46.0],[-4.6,48.7],[-1.6,48.6],[-1.9,49.8],[1.3,50.1],[4.7,53.1],[8.1,53.5],[8.5,57.1],[10.6,57.7],[10.9,56.5],[9.7,55.5],[10.9,54.0],[19.7,54.4],[21.3,55.2],[21.6,57.4],[24.1,57.0],[24.4,58.4],[23.3,59.2],[29.1,60.0],[22.9,59.8],[21.3,60.7],[21.5,63.2],[25.4,65.1],[22.2,65.7],[17.8,62.7],[17.1,61.3],[18.8,60.1],[16.8,58.7],[15.9,56.1],[12.9,55.4],[10.4,59.5],[8.4,58.3],[5.7,58.6],[5.0,62.0],[14.8,67.8],[24.5,71.0],[28.2,71.2],[31.3,70.5],[30.0,70.2],[31.1,69.6],[40.3,67.9],[41.1,66.8],[40.0,66.3],[33.2,66.6],[34.8,65.9],[34.9,64.4],[37.0,63.8],[37.2,65.1],[39.6,64.5],[42.1,66.5],[43.9,66.1],[44.5,66.8],[43.5,68.6],[46.3,68.3],[46.8,67.7],[45.6,67.0],[46.3,66.7],[53.7,68.9],[59.9,68.3],[61.1,68.9],[60.6,69.9],[68.5,68.1],[69.2,68.6],[66.9,69.5],[66.7,71.0],[69.2,72.8],[72.6,72.8],[71.8,71.4],[73.7,68.4],[71.3,66.3],[72.4,66.2],[75.1,67.8],[73.6,69.6],[74.4,70.6],[73.1,71.4],[74.7,72.8],[76.4,71.2],[75.9,71.9],[77.6,72.3],[81.5,71.8],[80.5,73.6],[86.8,73.9],[86.0,74.5],[87.2,75.1],[100.8,76.4],[104.4,77.7]],
+  [[-90.5,69.5],[-90.6,68.5],[-89.2,69.3],[-87.4,67.2],[-85.5,69.9],[-82.6,69.7],[-81.3,69.2],[-81.3,67.6],[-85.8,66.6],[-87.3,64.8],[-93.2,62.0],[-94.7,58.9],[-93.2,58.8],[-92.3,57.1],[-82.3,55.1],[-82.1,53.3],[-79.9,51.2],[-78.6,52.6],[-79.8,54.7],[-76.5,56.5],[-78.5,58.8],[-77.3,59.9],[-78.1,62.3],[-73.8,62.4],[-69.6,61.1],[-69.3,59.0],[-67.6,58.2],[-64.6,60.3],[-61.8,56.3],[-57.3,54.6],[-55.7,52.1],[-60.0,50.2],[-66.4,50.2],[-71.1,46.8],[-65.1,49.2],[-64.2,48.7],[-65.1,48.1],[-64.5,46.2],[-61.5,45.9],[-60.5,47.0],[-59.8,45.9],[-65.4,43.5],[-66.2,44.5],[-64.4,45.3],[-67.1,45.1],[-70.7,43.0],[-70.0,41.6],[-73.7,40.9],[-71.9,40.9],[-74.0,40.8],[-74.9,38.9],[-75.5,39.5],[-75.9,37.2],[-76.3,39.2],[-77.0,38.2],[-75.7,35.6],[-81.3,31.4],[-80.4,25.2],[-84.1,30.1],[-89.2,30.3],[-90.2,29.1],[-93.8,29.7],[-96.6,28.3],[-97.9,22.4],[-96.3,19.3],[-94.4,18.1],[-92.0,18.7],[-90.3,21.0],[-87.1,21.5],[-88.9,15.9],[-83.4,15.3],[-83.8,11.1],[-81.4,8.8],[-79.6,9.6],[-76.8,8.6],[-74.9,11.1],[-71.8,12.4],[-71.7,9.1],[-69.9,12.2],[-68.2,10.6],[-61.9,10.7],[-62.4,9.9],[-57.1,6.0],[-54.0,5.8],[-51.3,4.2],[-50.0,1.7],[-50.4,-0.1],[-44.9,-1.6],[-44.6,-2.7],[-40.0,-2.9],[-35.6,-5.1],[-34.7,-7.3],[-38.7,-13.1],[-40.9,-21.9],[-47.6,-24.9],[-48.9,-28.7],[-53.8,-34.4],[-56.2,-34.9],[-58.4,-33.9],[-56.8,-36.9],[-59.2,-38.7],[-62.3,-38.8],[-62.7,-41.0],[-65.1,-41.1],[-63.5,-42.6],[-67.3,-45.6],[-67.6,-46.3],[-65.6,-47.2],[-66.0,-48.1],[-69.1,-50.7],[-68.2,-52.3],[-70.8,-52.9],[-71.0,-53.8],[-74.9,-52.3],[-75.6,-48.7],[-74.1,-46.9],[-75.6,-46.6],[-74.4,-44.1],[-73.2,-44.5],[-72.7,-42.4],[-74.3,-43.2],[-73.6,-37.2],[-71.4,-32.4],[-70.2,-19.8],[-71.5,-17.4],[-76.0,-14.6],[-79.8,-7.2],[-81.2,-6.1],[-79.8,-2.7],[-81.0,-2.2],[-80.9,-1.1],[-77.1,3.8],[-78.2,8.3],[-79.6,8.9],[-80.9,7.2],[-85.7,9.9],[-87.5,13.3],[-103.5,18.3],[-105.5,19.9],[-106.0,22.8],[-113.9,31.6],[-114.8,31.8],[-114.7,30.2],[-109.4,23.4],[-110.0,22.8],[-112.2,24.7],[-112.3,26.0],[-115.1,27.7],[-114.2,28.6],[-117.3,33.0],[-120.6,34.6],[-124.4,40.3],[-124.7,48.2],[-122.6,47.1],[-122.8,49.0],[-127.4,50.8],[-127.9,52.3],[-134.1,58.1],[-147.1,60.9],[-151.7,59.2],[-150.6,61.3],[-158.4,56.0],[-164.8,54.4],[-157.7,57.6],[-157.0,58.9],[-162.0,58.7],[-161.9,59.6],[-166.1,61.5],[-164.6,63.1],[-160.8,63.8],[-161.5,64.4],[-160.8,64.8],[-165.0,64.4],[-168.1,65.7],[-161.7,66.1],[-166.8,68.4],[-156.6,71.4],[-136.5,68.9],[-128.1,70.5],[-108.9,67.4],[-107.8,67.9],[-108.8,68.3],[-108.2,68.7],[-106.2,68.8],[-101.5,67.6],[-97.7,68.6],[-96.1,68.2],[-96.1,67.3],[-94.2,69.1],[-96.5,70.1],[-95.2,71.9]],
+  [[-27.1,83.5],[-20.8,82.7],[-31.4,82.0],[-12.2,81.3],[-20.0,80.2],[-17.7,80.1],[-19.7,78.8],[-18.5,77.0],[-21.7,76.6],[-19.8,76.1],[-19.6,75.2],[-20.7,75.2],[-19.4,74.3],[-23.6,73.3],[-22.3,72.2],[-24.8,72.3],[-21.8,70.7],[-25.5,71.4],[-26.4,70.2],[-22.3,70.1],[-39.8,65.5],[-42.8,62.7],[-43.4,60.1],[-48.3,60.9],[-51.6,63.6],[-54.0,67.2],[-50.9,69.9],[-54.7,69.6],[-54.4,70.8],[-51.4,70.6],[-55.8,71.7],[-54.7,72.6],[-58.6,75.5],[-68.5,76.1],[-71.4,77.0],[-66.8,77.4],[-73.3,78.0],[-65.7,79.4],[-68.0,80.1],[-62.7,81.8],[-50.4,82.4],[-44.5,81.7],[-46.8,82.6],[-43.4,83.2]],
+  [[143.6,-13.8],[145.4,-15.0],[146.4,-19.0],[148.8,-20.4],[153.1,-26.1],[152.9,-31.6],[150.0,-37.4],[146.3,-39.0],[145.0,-37.9],[143.6,-38.8],[140.6,-38.0],[138.1,-35.6],[138.2,-34.4],[136.8,-35.3],[137.8,-32.9],[136.0,-34.9],[134.3,-32.6],[131.3,-31.5],[118.0,-35.1],[115.0,-34.2],[115.7,-31.6],[113.3,-26.1],[114.2,-26.3],[113.4,-24.4],[114.1,-21.8],[114.2,-22.5],[120.9,-19.7],[125.7,-14.2],[129.6,-15.0],[130.6,-12.5],[132.6,-12.1],[132.4,-11.1],[136.5,-11.9],[135.5,-15.0],[140.2,-17.7],[142.1,-11.0]],
+  [[-86.6,73.2],[-85.8,72.5],[-82.3,73.8],[-80.7,72.1],[-77.8,72.7],[-72.2,71.6],[-67.9,70.1],[-67.0,69.2],[-68.8,68.7],[-61.9,66.9],[-63.9,65.0],[-68.0,66.3],[-64.7,63.4],[-65.0,62.7],[-68.8,63.7],[-66.2,61.9],[-74.8,64.7],[-77.7,64.2],[-78.6,64.6],[-77.9,65.3],[-74.0,65.5],[-72.9,67.7],[-79.0,70.2],[-88.7,70.4],[-90.2,72.2],[-88.4,73.5],[-85.8,73.8]],
+  [[134.1,-1.2],[135.5,-3.4],[138.3,-1.7],[144.6,-3.9],[147.6,-6.1],[147.2,-7.4],[150.7,-10.6],[147.9,-10.1],[144.7,-7.6],[142.6,-9.3],[137.6,-8.4],[138.7,-7.3],[137.9,-5.4],[133.7,-3.5],[133.0,-4.1],[132.0,-2.8],[133.7,-2.2],[130.5,-0.9]],
+  [[141.0,37.1],[140.3,35.1],[135.8,33.5],[135.1,34.6],[131.0,33.9],[132.0,33.1],[131.3,31.5],[130.2,31.4],[129.4,33.3],[132.6,35.4],[135.7,35.5],[136.7,37.3],[139.4,38.2],[140.3,41.2],[141.4,41.4],[141.9,40.0]],
+  [[-3.0,58.6],[-4.1,57.6],[-2.0,57.7],[-3.1,56.0],[1.7,52.7],[1.4,51.3],[-5.2,50.0],[-3.4,51.4],[-5.3,52.0],[-4.2,52.3],[-4.6,53.5],[-2.9,54.0],[-5.6,55.3],[-6.1,56.8],[-5.0,58.6]],
+  [[-114.2,73.1],[-109.9,73.0],[-108.2,71.7],[-108.4,73.1],[-106.5,73.1],[-101.1,69.6],[-102.7,69.5],[-102.4,68.8],[-116.1,69.2],[-117.3,70.0],[-112.4,70.4],[-117.9,70.5],[-116.1,71.3],[-119.4,71.6]],
+  [[125.2,1.4],[123.7,0.2],[120.2,0.2],[120.9,-1.4],[123.3,-0.6],[121.5,-1.9],[123.2,-5.3],[121.5,-4.6],[121.0,-2.6],[120.4,-5.5],[119.4,-5.4],[118.8,-2.8],[120.0,0.6]],
+  [[117.9,1.8],[119.0,0.9],[117.8,0.8],[116.1,-4.0],[110.2,-2.9],[109.1,-0.5],[109.7,2.0],[113.0,3.1],[116.7,6.9],[119.2,5.4],[117.3,3.2]],
+  [[50.1,-13.6],[50.4,-15.7],[47.1,-24.9],[44.0,-25.0],[43.3,-22.1],[44.4,-20.1],[44.4,-16.2],[47.7,-14.6],[49.2,-12.0]],
+  [[-56.1,50.7],[-56.8,49.8],[-53.5,49.2],[-53.1,46.7],[-54.2,47.8],[-55.4,46.9],[-59.3,47.6],[-57.4,50.7],[-55.9,51.6]],
+  [[-79.7,22.8],[-74.2,20.3],[-77.8,19.9],[-77.1,20.4],[-78.7,21.6],[-81.8,22.6],[-85.0,21.9],[-82.3,23.2]],
+  [[143.6,50.7],[144.7,49.0],[143.2,49.3],[142.6,47.9],[143.5,46.1],[142.1,46.0],[141.7,53.3],[142.7,54.4]],
+  [[-14.5,66.5],[-13.6,65.1],[-18.7,63.5],[-22.8,64.0],[-21.8,64.4],[-24.0,64.9],[-22.2,65.4],[-24.3,65.6]],
+  [[-100.4,73.8],[-97.4,73.8],[-98.1,73.0],[-96.5,72.6],[-96.7,71.7],[-102.5,72.5],[-100.4,72.7],[-101.5,73.4]],
+  [[105.8,-5.9],[102.6,-4.2],[95.3,5.5],[97.5,5.2],[103.8,0.1],[103.4,-0.7],[106.1,-3.1]],
+  [[-120.5,71.4],[-123.1,70.9],[-125.9,71.9],[-123.9,73.7],[-124.9,74.3],[-117.6,74.2],[-115.5,73.5]],
+  [[108.6,-6.8],[110.8,-6.5],[115.7,-8.4],[108.3,-7.8],[105.4,-6.9],[106.1,-5.9]],
+  [[152.0,-5.5],[150.2,-6.3],[148.3,-5.7],[150.8,-5.5],[151.5,-4.2],[152.3,-4.3]],
+  [[121.3,18.5],[122.5,17.1],[121.7,14.3],[124.0,13.8],[124.1,12.5],[120.1,15.0]],
+  [[-72.6,19.9],[-68.3,18.6],[-73.9,18.0],[-74.4,18.7],[-72.3,18.7],[-73.4,19.6]],
+  [[57.5,70.7],[51.6,71.5],[55.6,75.1],[68.9,76.5],[58.5,74.3],[55.4,72.4]],
+  [[126.4,8.4],[125.4,5.6],[123.6,7.8],[121.9,7.2],[125.4,9.8]],
+  [[143.9,44.2],[145.3,44.4],[145.5,43.3],[140.0,41.6],[142.0,45.6]],
+  [[-6.8,52.3],[-10.0,51.8],[-9.7,53.9],[-6.7,55.2],[-5.7,54.6]]
+];
+
+(function researchMap() {
+  const canvas = document.getElementById("map");
+  const ctx = canvas.getContext("2d");
+  const tip = document.getElementById("maptip");
+  const holder = canvas.parentElement;
+  const reduced = REDUCED;
+  let W = 0, H = 0, dpr = 1, filter = "all", hovered = null, t = 0, visible = false, raf = null;
+
+  const LON0 = -130, LON1 = 150, LAT0 = 72, LAT1 = -45;
+  const px = s => ({ x: (s.lon - LON0) / (LON1 - LON0) * W, y: (s.lat - LAT0) / (LAT1 - LAT0) * H });
+
+  function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    W = holder.clientWidth;
+    H = Math.max(300, Math.min(430, W * 0.52));
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.height = H + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function arcPath(a, b) {
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const dist = Math.hypot(dx, dy);
+    const cx = mx - dy * 0.22, cy = my + dx * 0.22 - dist * 0.12;
+    return { cx, cy };
+  }
+
+  function active(s) { return filter === "all" || s.themes.includes(filter) || (s.arms && s.arms.includes(filter)); }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const grid = cssVar("--map-grid"), arcC = cssVar("--map-arc"),
+          nodeC = cssVar("--map-node"), accent = cssVar("--accent"),
+          ink = cssVar("--ink"), soft = cssVar("--ink-soft"),
+          land = cssVar("--map-land"), coast = cssVar("--map-coast");
+
+    // continents (sketch-style background)
+    ctx.lineJoin = "round";
+    ctx.fillStyle = land; ctx.strokeStyle = coast; ctx.lineWidth = 1;
+    for (const poly of WORLD) {
+      ctx.beginPath();
+      for (let i = 0; i < poly.length; i++) {
+        const x = (poly[i][0] - LON0) / (LON1 - LON0) * W;
+        const y = (poly[i][1] - LAT0) / (LAT1 - LAT0) * H;
+        i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+    }
+
+    // graticule
+    ctx.strokeStyle = grid; ctx.lineWidth = 1;
+    for (let lon = -120; lon <= 140; lon += 20) {
+      const x = (lon - LON0) / (LON1 - LON0) * W;
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    }
+    for (let lat = 60; lat >= -40; lat -= 20) {
+      const y = (lat - LAT0) / (LAT1 - LAT0) * H;
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+    // equator emphasis
+    const eq = (0 - LAT0) / (LAT1 - LAT0) * H;
+    ctx.strokeStyle = grid; ctx.setLineDash([2, 5]);
+    ctx.beginPath(); ctx.moveTo(0, eq); ctx.lineTo(W, eq); ctx.stroke();
+    ctx.setLineDash([]);
+
+    const hub = px(SITES[0]);
+
+    // arcs from hub
+    for (const s of SITES) {
+      if (s.hub) continue;
+      const p = px(s), on = active(s) && active(SITES[0]);
+      const { cx, cy } = arcPath(hub, p);
+      ctx.strokeStyle = on ? arcC : grid;
+      ctx.lineWidth = on ? (s.secondary ? 0.8 : 1.6) : 0.9;
+      ctx.globalAlpha = s.secondary ? 0.6 : 1;
+      ctx.setLineDash([1, 6]);
+      ctx.lineDashOffset = reduced ? 0 : -t * 18;
+      ctx.beginPath(); ctx.moveTo(hub.x, hub.y); ctx.quadraticCurveTo(cx, cy, p.x, p.y); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+      // travelling pulse
+      if (on && !reduced && !s.secondary) {
+        const u = (t * 0.14 + SITES.indexOf(s) * 0.13) % 1;
+        const bx = (1-u)*(1-u)*hub.x + 2*(1-u)*u*cx + u*u*p.x;
+        const by = (1-u)*(1-u)*hub.y + 2*(1-u)*u*cy + u*u*p.y;
+        ctx.fillStyle = accent;
+        ctx.beginPath(); ctx.arc(bx, by, 2.2, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+
+    // nodes
+    for (const s of SITES) {
+      const p = px(s), on = active(s), isHov = hovered === s;
+      const r = s.hub ? 7 : (s.secondary ? 3.2 : 5);
+      if (on && !reduced && !s.secondary) {
+        const pulse = (Math.sin(t * 2 + p.x) + 1) / 2;
+        ctx.beginPath(); ctx.arc(p.x, p.y, r + 4 + pulse * 4, 0, Math.PI * 2);
+        ctx.strokeStyle = s.hub ? accent : nodeC;
+        ctx.globalAlpha = 0.25 * (on ? 1 : 0.3);
+        ctx.stroke(); ctx.globalAlpha = 1;
+      }
+      ctx.beginPath(); ctx.arc(p.x, p.y, isHov ? r + 2 : r, 0, Math.PI * 2);
+      ctx.fillStyle = on ? (s.hub ? accent : nodeC) : grid;
+      ctx.globalAlpha = s.secondary && !isHov ? 0.85 : 1;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      if (isHov) { ctx.strokeStyle = accent; ctx.lineWidth = 2; ctx.stroke(); }
+      // label — always for primary and flagged nodes; only on hover for the rest of the secondary (trauma-network) cluster
+      if (on && (!s.secondary || s.always || isHov)) {
+        ctx.font = "600 11px system-ui, sans-serif";
+        ctx.fillStyle = isHov ? ink : soft;
+        const short = s.name.split(",")[0].split(" &")[0];
+        const tw = ctx.measureText(short).width;
+        let lx = p.x + 10, ly = p.y + 4;
+        if (s.labelLeft) lx = p.x - 10 - tw;
+        if (s.labelDy) ly = p.y + s.labelDy;
+        if (lx + tw > W - 6) { lx = p.x - 10 - tw; }
+        ctx.fillText(short, lx, ly);
+      }
+    }
+
+    raf = null;
+    if (!reduced && visible) { t += 0.016; raf = requestAnimationFrame(draw); }
+  }
+  function kick() { if (raf === null) raf = requestAnimationFrame(draw); }
+
+  function pick(mx, my) {
+    let best = null, bd = 22;
+    for (const s of SITES) {
+      const p = px(s), d = Math.hypot(p.x - mx, p.y - my);
+      if (d < bd) { bd = d; best = s; }
+    }
+    return best;
+  }
+
+  function showTip(s) {
+    const p = px(s);
+    tip.innerHTML = `<h4>${s.name}</h4><p class="tip-inst">${s.inst}</p><p>${s.desc}</p>`;
+    tip.classList.add("show");
+    const tw = Math.min(260, W * 0.8);
+    let left = p.x + 16;
+    if (left + tw > W) left = Math.max(4, p.x - tw - 16);
+    let top = p.y + 14;
+    tip.style.left = left + "px";
+    tip.style.top = top + "px";
+    requestAnimationFrame(() => {
+      const r = tip.getBoundingClientRect(), hr = holder.getBoundingClientRect();
+      if (r.bottom > hr.bottom) tip.style.top = Math.max(4, p.y - r.height - 14) + "px";
+    });
+  }
+
+  canvas.addEventListener("pointermove", e => {
+    const r = canvas.getBoundingClientRect();
+    const s = pick(e.clientX - r.left, e.clientY - r.top);
+    if (s !== hovered) {
+      hovered = s;
+      if (s) showTip(s); else tip.classList.remove("show");
+      kick();
+    }
+    canvas.style.cursor = s ? "pointer" : "crosshair";
+  });
+  canvas.addEventListener("pointerleave", () => { hovered = null; tip.classList.remove("show"); kick(); });
+  canvas.addEventListener("click", e => {
+    const r = canvas.getBoundingClientRect();
+    const s = pick(e.clientX - r.left, e.clientY - r.top);
+    hovered = s;
+    if (s) showTip(s); else tip.classList.remove("show");
+    kick();
+  });
+
+  document.querySelectorAll(".chip").forEach(ch => {
+    ch.addEventListener("click", () => {
+      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      ch.classList.add("active");
+      filter = ch.dataset.filter;
+      kick();
+    });
+  });
+
+  const obs = new MutationObserver(() => { kick(); });
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  window.addEventListener("resize", () => { resize(); kick(); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) kick(); }).observe(canvas);
+  resize();
+  draw();
+})();
+</script>
+</body>
+</html>
