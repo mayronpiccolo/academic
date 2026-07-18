@@ -256,6 +256,14 @@
   .course p { margin: 0; font-family: var(--sans); font-size: .78rem; color: var(--ink-soft); line-height: 1.5; }
   .teach-note { margin-top: 26px; padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; }
   .teach-note p { margin: 0; font-size: .92rem; }
+  .evals { margin-top: 34px; }
+  .evals-head { font-family: var(--sans); font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; font-weight: 600; }
+  .evals-sub { font-size: .92rem; color: var(--ink-soft); margin: 0 0 16px; }
+  .eval-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 22px; }
+  @media (max-width: 640px) { .eval-quotes { grid-template-columns: 1fr; } }
+  .eval-quotes blockquote { margin: 0; padding: 14px 18px; background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; box-shadow: var(--shadow); font-size: .94rem; line-height: 1.5; color: var(--ink); }
+  .eval-quotes blockquote p { margin: 0; font-style: italic; }
+  .eval-quotes cite { display: block; margin-top: 8px; font-style: normal; font-family: var(--sans); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 
   /* ---------- media ---------- */
   .media-list { display: flex; flex-direction: column; gap: 14px; }
@@ -647,6 +655,23 @@
       </div>
       <div class="teach-note">
         <p>Recognized with multiple Harvard <strong>Certificates of Teaching Excellence</strong> and the 2026 <strong>Annamae &amp; Allan R. Crite Prize</strong>. Courses partner with local NGOs so students build real mental-health resources for immigrant and refugee communities.</p>
+      </div>
+
+      <div class="evals">
+        <h3 class="evals-head">Student Evaluations</h3>
+        <p class="evals-sub">A consistent record of highly-rated teaching across institutions. Figures below are from recent Harvard FAS course evaluations; the full set of reports (Harvard, Columbia, and the University of Fribourg) is linked at the end.</p>
+        <div class="facts">
+          <div class="fact"><b>4.7 / 5</b><span>instructor overall (recent Harvard FAS courses; 4.6–4.9 across courses)</span></div>
+          <div class="fact"><b>79–100%</b><span>evaluation response rates</span></div>
+          <div class="fact"><b>2</b><span>Harvard Certificates of Teaching Excellence (2019, 2020)</span></div>
+        </div>
+        <div class="eval-quotes">
+          <blockquote><p>“Professor Piccolo cares so much about his students and has an infectious enthusiasm for the subject matter.”</p><cite>Harvard College student</cite></blockquote>
+          <blockquote><p>“Mayron makes every class super engaging, and his passion for the subject makes class so fun. I love how interactive the class is.”</p><cite>Harvard College student</cite></blockquote>
+          <blockquote><p>“Very friendly and understanding, and great at breaking down the course content so we could understand it.”</p><cite>Harvard College student</cite></blockquote>
+          <blockquote><p>“Such a caring, passionate, and effective professor.”</p><cite>Harvard College student</cite></blockquote>
+        </div>
+        <a class="link-pill" href="https://drive.google.com/drive/folders/1B6qJFFRU7qJgn0ky0ROokER0dOhgzK6y">All evaluation reports — Harvard, Columbia &amp; Fribourg →</a>
       </div>
     </div>
   </div>
