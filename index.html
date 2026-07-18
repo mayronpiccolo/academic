@@ -58,7 +58,7 @@
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--navh, 88px); }
   body {
     margin: 0;
     background: var(--ground);
@@ -1098,6 +1098,16 @@ const WORLD = [
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) kick(); }).observe(canvas);
   resize();
   draw();
+})();
+
+/* ---------------- sticky-nav anchor offset ---------------- */
+(function navOffset() {
+  const nav = document.querySelector("nav");
+  if (!nav) return;
+  const set = () => document.documentElement.style.setProperty("--navh", (nav.offsetHeight + 14) + "px");
+  set();
+  addEventListener("resize", set);
+  addEventListener("load", set);
 })();
 
 /* ---------------- reveal on scroll ---------------- */
