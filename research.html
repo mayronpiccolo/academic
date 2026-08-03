@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Research — Mayron Piccolo, PhD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Interactive map of Dr. Mayron Piccolo's research collaborations across four continents, plus current projects: First Tones, the Estimation Error Index, food insecurity, the Global Trauma Network, and PHQ-9 measurement work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script defer src="assets/main.js"></script>
+<script defer src="assets/research-map.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-name" href="index.html">M.&nbsp;Piccolo</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-menu" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="education.html">Education</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="looking-ahead.html">Looking Ahead</a>
+      <a href="publications.html">Publications</a>
+      <a href="clinical.html">Clinical</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="media.html">Media</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="ph-top">
+      
+      <div class="ph-title-block">
+        <p class="kicker">Research</p>
+        <h1>Research Map</h1>
+      </div>
+    </div>
+    <p class="standfirst">Published collaborations across four continents, plus the projects active now. Hover or tap a node to explore; filter by arm.</p>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" id="map-section" aria-label="Interactive research map">
+    <div class="wrap reveal">
+      <div class="map-shell">
+        <div class="map-chips" role="group" aria-label="Filter by research arm">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="understanding">Mechanisms</button>
+          <button class="chip" data-filter="assessing">Assessment</button>
+          <button class="chip" data-filter="treating">Intervention</button>
+        </div>
+        <div class="map-holder">
+          <canvas id="map" aria-label="Interactive map of research sites and collaborations"></canvas>
+          <div class="map-tip" id="maptip"></div>
+        </div>
+        <p class="map-hint">Larger nodes are co-authored paper collaborations; small nodes are partner countries in the Global Trauma Network. Filter by <strong>arm</strong> to see where each part of the question is pursued — <em>Mechanisms</em> spans the whole network, while <em>Assessment</em> and <em>Intervention</em> mark the sites where measurement and intervention work is concentrated. Hover any node for detail.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Current projects">
+    <div class="wrap">
+      <div class="sec-grid reveal">
+        <div class="sec-label">
+          <h2>Active Now</h2>
+          <p>Five projects in motion — each one an arm of the same question, pursued in a different place.</p>
+        </div>
+        <div class="current-projects">
+          <h3 class="cp-head" style="margin-top:0">Current Projects</h3>
+          <div class="project-card">
+            <div class="project-top">
+              <span class="arm">Intervention</span>
+              <span class="status">Pilot paper forthcoming</span>
+            </div>
+            <h4>First Tones</h4>
+            <p>A <strong>reward-based intervention</strong>, built by applying a mechanism established experimentally: communal music acts as a social reward, repairing positive affect and strengthening belonging after social ostracism (<a href="https://pubmed.ncbi.nlm.nih.gov/41028871/">Scientific Reports</a>, 2025). A randomized controlled trial (communal music vs. communal drawing) now tests whether that mechanism helps preschoolers facing familial adversity feel and function better, and why — measuring mental and behavioral health, reward responses via child-friendly fNIRS imaging, and sense of belonging through a new observation tool. Behavioral findings from the pilot are coming out soon.</p>
+          </div>
+          <div class="project-card">
+            <div class="project-top">
+              <span class="arm">Assessment</span>
+              <span class="arm">Mechanisms</span>
+              <span class="status">AN/BN paper forthcoming</span>
+            </div>
+            <h4>Portion-Size Estimation in Eating Disorders</h4>
+            <p>Portion perception is foundational to intake regulation: a portion must be perceived as large before it can trigger regulatory behavior. The <strong>Estimation Error Index (EEI)</strong> makes it measurable — a normalized index separating true perceptual distortion from scale-use artifacts. In anorexia and bulimia nervosa the distortion is magnitude-dependent, appearing specifically at large portions; the work now extends to binge-eating disorder, to culturally-relevant versions of the task, and into bariatric psychological assessment, where the EEI answers a gap in measuring eating psychopathology. A paper on the EEI in AN/BN is coming out soon.</p>
+          </div>
+          <div class="project-card">
+            <div class="project-top">
+              <span class="arm">Mechanisms</span>
+              <span class="status">Analysis underway</span>
+            </div>
+            <h4>Food Insecurity and Eating Disorders</h4>
+            <p>Using the Healthy Minds Survey (n ≈ 1,876 South American students at U.S. universities, 2020–2025), this project asks how food insecurity — measured with the Hunger Vital Sign screener — relates to eating psychopathology and mental health in a population that is at once immigrant, young, and economically at risk.</p>
+          </div>
+          <div class="project-card">
+            <div class="project-top">
+              <span class="arm">Mechanisms</span>
+              <span class="status">Paper forthcoming</span>
+            </div>
+            <h4>Global Trauma Network</h4>
+            <p>A 13-country collaboration (n ≈ 1,787) examining how child maltreatment and cultural social norms interact to shape mental health — depression, anxiety, trauma, resilience, and post-traumatic growth — across the US, Canada, Georgia, Germany, India, Iran, Israel, Macau, South Africa, Sweden, Switzerland, Türkiye, and the UK. A paper is coming out soon.</p>
+          </div>
+          <div class="project-card">
+            <div class="project-top">
+              <span class="arm">Assessment</span>
+              <span class="status">Paper forthcoming</span>
+            </div>
+            <h4>The “Several Days” Problem in Depression Screening (PHQ-9)</h4>
+            <p>Using the U.S. Healthy Minds Survey, this measurement work shows that the shared response option “several days” on the PHQ-9 and GAD-7 screeners spans a wider severity range for students who speak a non-English language at home — semantic non-equivalence of a translated anchor. Replicated across survey waves and echoing his finding in the PHQ-9 Brazilian-Portuguese version. A paper is coming out soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-name">Mayron Piccolo</p>
+        <p class="foot-role">Psychologist · Lecturer · Researcher</p>
+      </div>
+      <div>
+        <h2 class="foot-head">Profiles &amp; Links</h2>
+        <div class="links-row">
+          <a class="link-pill" href="https://scholar.google.com/citations?user=V1VsenYAAAAJ&amp;hl=en">Google Scholar</a>
+          <a class="link-pill" href="https://www.researchgate.net/profile/Mayron-Piccolo">ResearchGate</a>
+          <a class="link-pill" href="https://orcid.org/0000-0002-6882-7456">ORCID</a>
+          <a class="link-pill" href="https://psychology.fas.harvard.edu/people/mayron-piccolo">Harvard Psychology</a>
+          <a class="link-pill" href="https://www.linkedin.com/in/mayron-piccolo/">LinkedIn</a>
+          <a class="link-pill" href="https://x.com/piccolo__m">X / Twitter</a>
+        </div>
+      </div>
+    </div>
+    <p class="colophon">Mayron Pereira Piccolo Ribeiro, PhD, BCBA · Department of Psychology, Harvard University · Cambridge, MA</p>
+  </div>
+</footer>
+
+</body>
+</html>
