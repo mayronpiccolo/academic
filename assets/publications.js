@@ -23,9 +23,9 @@
   var TAGNAMES = { reward: "Reward", eating: "Eating & Weight", music: "Music", cross: "Cross-cultural" };
   var ARMNAMES = { understanding: "Mechanisms", assessing: "Assessment", treating: "Intervention" };
   var CHAPTERS = [
-    { y: 2019, t: "A anorexia nervosa e os sistemas neurobiológicos que regulam o consumo de alimentos", a: "Piccolo M, Martin-Soelch C, Araujo J de C, Estanislau C", b: "Psicologia e Análise do Comportamento", pub: "Universidade Estadual de Londrina" },
-    { y: 2019, t: "Aspectos neurobiológicos e sociais da evolução da empatia humana", a: "Filgueiras GB, Maio TP, Bibiano AG, David L, Piccolo M, Ribeiro L, Luzia JC", b: "Psicologia e Análise do Comportamento", pages: "pp. 147–157", pub: "Universidade Estadual de Londrina" },
-    { y: 2018, t: "Causal versus funcional: um diálogo entre Mayr e Skinner", a: "Piccolo M, David L, Dantas LZ, Cinel KC, Muchon C", b: "Análise do Comportamento: conceitos e aplicações a processos educativos, clínicos e organizacionais", pages: "pp. 105–115", pub: "Universidade Estadual de Londrina", url: "https://www.uel.br/pos/pgac/wp-content/uploads/2019/01/UELlivro5dez18press.pdf" }
+    { y: 2019, t: "A anorexia nervosa e os sistemas neurobiológicos que regulam o consumo de alimentos", a: "Piccolo M, Martin-Soelch C, Araujo J de C, Estanislau C", b: "Psicologia e Análise do Comportamento: Pesquisa e Intervenção", pages: "chap. 3, pp. 35–43", pub: "Universidade Estadual de Londrina", url: "https://www.uel.br/pos/pgac/wp-content/uploads/2019/02/Psicologia-e-Analise-do-Comportamento-Interven%C3%A7%C3%A3o-e-Pesquisa-2019.pdf" },
+    { y: 2019, t: "Aspectos neurobiológicos e sociais da evolução da empatia humana", a: "Filgueiras GB, Maio TP, Bibiano AG, David L, Piccolo M, Ribeiro L, Luzia JC", b: "Psicologia e Análise do Comportamento: Pesquisa e Intervenção", pages: "chap. 12, pp. 147–157", pub: "Universidade Estadual de Londrina", url: "https://www.uel.br/pos/pgac/wp-content/uploads/2019/02/Psicologia-e-Analise-do-Comportamento-Interven%C3%A7%C3%A3o-e-Pesquisa-2019.pdf" },
+    { y: 2018, t: "Causal versus funcional: um diálogo entre Mayr e Skinner", a: "Piccolo M, David L, Dantas LZ, Cinel KC, Muchon C", b: "Análise do Comportamento: conceitos e aplicações a processos educativos, clínicos e organizacionais", pages: "chap. 6, pp. 105–115", pub: "Universidade Estadual de Londrina", url: "https://www.uel.br/pos/pgac/wp-content/uploads/2019/01/UELlivro5dez18press.pdf" }
   ];
 
   var lastYear = null, html = "";
