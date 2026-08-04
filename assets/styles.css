@@ -199,7 +199,7 @@ main { display: block; }
 
 .prose p { margin: 0 0 1.25em; max-width: 64ch; font-size: clamp(1rem, 1.4vw, 1.12rem); }
 .prose p:last-child { margin-bottom: 0; }
-.prose p:first-child::first-letter {
+.prose p:first-of-type::first-letter {
   font-family: var(--serif); font-weight: 640; font-size: 3.1em;
   float: left; line-height: .82; padding: 4px 10px 0 0; color: var(--accent);
   font-variation-settings: "opsz" 144;
@@ -558,6 +558,21 @@ main { display: block; }
 /* ------------------------------------------------------------
    Photos
    ------------------------------------------------------------ */
+.photo-float {
+  float: right; width: min(38%, 260px);
+  margin: 4px 0 22px 30px;
+  shape-outside: margin-box;
+}
+.photo-float img { width: 100%; display: block; box-shadow: var(--shadow); filter: saturate(.97); }
+.photo-float figcaption {
+  font-family: var(--sans); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-soft); margin-top: 12px; line-height: 1.5;
+}
+.prose::after { content: ""; display: block; clear: both; }
+@media (max-width: 560px) {
+  .photo-float { float: none; width: min(70%, 260px); margin: 0 0 26px; }
+}
+
 .section-photo { margin: 0 0 30px; position: relative; }
 .section-photo img { width: 100%; display: block; box-shadow: var(--shadow); filter: saturate(.97); }
 .section-photo figcaption {
