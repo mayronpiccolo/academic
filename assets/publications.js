@@ -32,7 +32,7 @@
   for (var i = 0; i < PUBS.length; i++) {
     var p = PUBS[i];
     if (p.y !== lastYear) { html += '<div class="pub-year">' + p.y + "</div>"; lastYear = p.y; }
-    var title = p.url ? '<a href="' + p.url + '">' + p.t + "</a>" : p.t;
+    var title = p.url ? '<a href="' + p.url + '" target="_blank" rel="noopener">' + p.t + "</a>" : p.t;
     var armChips = (p.arms || []).map(function (a) { return '<span class="arm">' + ARMNAMES[a] + "</span>"; }).join("");
     var tags = armChips;
     html += '<div class="pub"><p class="pub-title">' + title + '</p><p class="pub-meta">' + p.a + " · <i>" + p.j + '</i></p><div class="tags">' + tags + "</div></div>";
@@ -43,7 +43,7 @@
     var c = CHAPTERS[k];
     if (c.y !== lastYear) { html += '<div class="pub-year">' + c.y + "</div>"; lastYear = c.y; }
     var pages = c.pages ? " (" + c.pages + ")" : "";
-    var ct = c.url ? '<a href="' + c.url + '">' + c.t + "</a>" : c.t;
+    var ct = c.url ? '<a href="' + c.url + '" target="_blank" rel="noopener">' + c.t + "</a>" : c.t;
     html += '<div class="pub"><p class="pub-title">' + ct + '</p><p class="pub-meta">' + c.a + " · In <i>" + c.b + "</i>" + pages + " · " + c.pub + "</p></div>";
   }
   host.innerHTML = html;
