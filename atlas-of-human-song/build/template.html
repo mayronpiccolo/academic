@@ -1,0 +1,435 @@
+<title>Atlas of Human Song</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,700&family=Archivo:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F1E7;
+    --panel: #FFFDF8;
+    --ink: #191C20;
+    --ink-soft: #575D66;
+    --line: #E0D8C7;
+    --rule: #191C20;
+    --accent: #A85A0F;
+    --accent-deep: #8A4A0C;
+    --accent-soft: #F1E3C9;
+    --blue: #2C4A5E;
+    --blue-soft: #DFE9EF;
+    --map-land: rgba(44, 74, 94, 0.07);
+    --map-coast: rgba(44, 74, 94, 0.30);
+    --map-grid: rgba(44, 74, 94, 0.13);
+    --shadow: 0 1px 2px rgba(25,28,32,.05), 0 10px 32px rgba(25,28,32,.08);
+    --serif: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+    --sans: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--serif); font-size: 17px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+  /* Header */
+  header.site { border-bottom: 1px solid var(--rule); background: var(--paper); }
+  .head-inner { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; flex-wrap: wrap; }
+  .course-tag { font-family: var(--sans); font-size: .67rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .head-note { font-family: var(--sans); font-size: .67rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+
+  .hero { padding: clamp(28px, 5vw, 56px) 0 clamp(18px, 3vw, 30px); }
+  h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.06; margin: 0 0 14px; letter-spacing: -.01em; text-wrap: balance; }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lede { max-width: 62ch; color: var(--ink-soft); margin: 0; font-size: 1.06rem; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  /* Controls */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 18px 0 8px; }
+  .chip {
+    font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .04em;
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    padding: 6px 12px; border-radius: 999px; cursor: pointer; transition: border-color .15s ease, background .15s ease;
+  }
+  .chip .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .chip[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+  .chip.util { border-style: dashed; color: var(--ink-soft); }
+  .chip.util[aria-pressed="true"] { border-style: solid; }
+  .controls .spacer { flex: 1; }
+  .mode-note { font-family: var(--sans); font-size: .72rem; color: var(--ink-soft); }
+
+  /* Map + panel layout */
+  .stage { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; align-items: start; padding: 10px 0 8px; }
+  @media (max-width: 900px) { .stage { grid-template-columns: 1fr; } }
+  .map-card { background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 10px; overflow: hidden; position: relative; }
+  #map { display: block; width: 100%; height: auto; }
+  .map-hint { position: absolute; left: 12px; bottom: 10px; font-family: var(--sans); font-size: .68rem; color: var(--ink-soft); background: color-mix(in srgb, var(--panel) 82%, transparent); padding: 3px 8px; border-radius: 6px; pointer-events: none; }
+  #tooltip {
+    position: absolute; pointer-events: none; opacity: 0; transition: opacity .12s ease;
+    background: var(--ink); color: var(--paper); font-family: var(--sans); font-size: .74rem;
+    padding: 6px 10px; border-radius: 6px; max-width: 240px; z-index: 5; line-height: 1.4;
+  }
+  #tooltip .t-region { color: #C8CDD3; }
+
+  /* Detail panel */
+  .panel { background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 10px; padding: 18px 18px 16px; position: sticky; top: 16px; }
+  .panel h2 { font-family: var(--serif); font-size: 1.3rem; margin: 2px 0 2px; line-height: 1.2; }
+  .panel .region { font-family: var(--sans); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--sans); font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); margin: 10px 0 4px; }
+  .badge .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .panel audio { width: 100%; margin: 12px 0 4px; }
+  .panel .meta { font-family: var(--sans); font-size: .72rem; color: var(--ink-soft); margin: 6px 0 0; }
+  .panel .placeholder { color: var(--ink-soft); font-size: .95rem; margin: 6px 0; }
+  .guess-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 12px 0 4px; }
+  .guess-btn { font-family: var(--sans); font-size: .72rem; font-weight: 600; padding: 7px 6px; border: 1px solid var(--line); background: var(--paper); border-radius: 8px; cursor: pointer; color: var(--ink); }
+  .guess-btn:hover { border-color: var(--ink); }
+  .guess-btn.correct { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .guess-btn.wrong { opacity: .45; text-decoration: line-through; }
+  .verdict { font-family: var(--sans); font-size: .8rem; font-weight: 600; margin: 8px 0 0; }
+  .score { font-family: var(--sans); font-size: .72rem; color: var(--ink-soft); margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .listen-cues { border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 10px; }
+  .listen-cues p { font-family: var(--sans); font-size: .76rem; color: var(--ink-soft); margin: 0; }
+  .listen-cues strong { color: var(--ink); }
+
+  /* Sections */
+  section.block { padding: clamp(26px, 4vw, 44px) 0 6px; }
+  .kicker { font-family: var(--sans); font-size: .67rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+  h3.block-title { font-family: var(--serif); font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; margin: 0 0 10px; letter-spacing: -.01em; }
+  .prose { max-width: 68ch; color: var(--ink); }
+  .prose p { margin: 0 0 12px; }
+
+  .ex-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
+  @media (max-width: 900px) { .ex-grid { grid-template-columns: 1fr; } }
+  .ex { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .ex .ex-tag { font-family: var(--sans); font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-deep); }
+  .ex h4 { font-family: var(--serif); font-size: 1.12rem; margin: 0; line-height: 1.25; }
+  .ex p { font-size: .92rem; color: var(--ink-soft); margin: 0; }
+  .ex .anchor { font-family: var(--sans); font-size: .7rem; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: auto; }
+
+  details.songlist { margin-top: 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+  details.songlist summary { cursor: pointer; font-family: var(--sans); font-size: .8rem; font-weight: 600; padding: 12px 16px; letter-spacing: .04em; }
+  .songtable-wrap { overflow-x: auto; max-height: 380px; overflow-y: auto; border-top: 1px solid var(--line); }
+  table.songs { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: .78rem; }
+  table.songs th, table.songs td { text-align: left; padding: 7px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.songs th { position: sticky; top: 0; background: var(--panel); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+  table.songs tr { cursor: pointer; }
+  table.songs tbody tr:hover { background: var(--accent-soft); }
+  td .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; }
+
+  .refs { font-size: .9rem; max-width: 78ch; }
+  .refs p { margin: 0 0 10px; padding-left: 1.6em; text-indent: -1.6em; }
+  .license-note { font-family: var(--sans); font-size: .78rem; color: var(--ink-soft); max-width: 78ch; border-left: 3px solid var(--accent-soft); padding-left: 14px; margin-top: 16px; }
+
+  footer.site { border-top: 1px solid var(--rule); margin-top: 40px; padding: 20px 0 34px; font-family: var(--sans); font-size: .72rem; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+</style>
+
+<header class="site">
+  <div class="wrap head-inner">
+    <span class="course-tag">PSY 1018 · The Science and Psychology of Music · Harvard College</span>
+    <span class="head-note">1,007 songs · 39 regions · 10 functions</span>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <h1>Atlas of <em>Human Song</em></h1>
+  <p class="lede">Every point is a real song, recorded in a real community, doing a real job — <strong>dance, lullaby, healing, love, mourning, work, play, story, praise, procession</strong>. Click a point and listen. Then ask the course's question: how much of what you hear could <em>anyone, anywhere</em> hear?</p>
+</div>
+
+<div class="wrap">
+  <div class="controls" id="chips" role="group" aria-label="Filter songs by function"></div>
+  <div class="controls" style="padding-top:0;">
+    <button class="chip util" id="practiceToggle" aria-pressed="false">🎯&nbsp; Practice mode — guess the function first</button>
+    <button class="chip util" id="shuffleBtn">🎲&nbsp; Take me somewhere</button>
+    <span class="spacer"></span>
+    <span class="mode-note" id="countNote"></span>
+  </div>
+
+  <div class="stage">
+    <div class="map-card">
+      <svg id="map" viewBox="0 0 960 500" role="img" aria-label="World map of song recordings; each point is a song you can click to play"></svg>
+      <div class="map-hint">Hover a point for the place · click to listen</div>
+      <div id="tooltip"></div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite">
+      <p class="region">Nothing playing</p>
+      <h2>Pick a point on the map</h2>
+      <p class="placeholder">Each excerpt is 10 seconds of vocal music from the Expanded Natural History of Song Discography. In practice mode, the song's function stays hidden until you commit to a guess.</p>
+    </aside>
+  </div>
+
+  <details class="songlist">
+    <summary>Browse all songs as a list (keyboard-friendly)</summary>
+    <div class="songtable-wrap">
+      <table class="songs">
+        <thead><tr><th>Language</th><th>Region</th><th>Function</th></tr></thead>
+        <tbody id="songrows"></tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">Using this in class</p>
+    <h3 class="block-title">Three ways to listen</h3>
+    <div class="prose">
+      <p>This atlas exists so that claims about music's universality stop being abstract. The exercises below pair the map with the week's readings: one on what songs are <em>for</em>, one on what songs <em>share</em>, and one on what happens in our brains when we listen <em>together</em>.</p>
+    </div>
+    <div class="ex-grid">
+      <div class="ex">
+        <span class="ex-tag">Exercise 1 · Functions</span>
+        <h4>Can you hear what a song is for?</h4>
+        <p>Turn on practice mode and work through 8–10 songs. Guess each function before revealing it. Which functions were easy — and which felt like coin flips? Naive listeners reliably identify dance songs, lullabies, and healing songs across cultures; love songs are far harder. Does your accuracy pattern match? What acoustic cues were you actually using?</p>
+        <span class="anchor">Anchors: Mehr et al. (2018, 2019) — form predicts function across societies.</span>
+      </div>
+      <div class="ex">
+        <span class="ex-tag">Exercise 2 · Universals &amp; contrasts</span>
+        <h4>Hunt for statistical universals</h4>
+        <p>Pick one function and listen to it across four regions. No structural feature appears in <em>all</em> musical systems — but some are statistically widespread: discrete pitches, repeated phrases, isorhythm, octave equivalence. Which of these do you hear everywhere you click? Where does a song resist your categories — and is "music" even the community's own word for what you're hearing?</p>
+        <span class="anchor">Anchors: Trehub, Becker, &amp; Morley (2015) — universals, contrasts, and music conjoined with dance and ritual.</span>
+      </div>
+      <div class="ex">
+        <span class="ex-tag">Exercise 3 · Listening together</span>
+        <h4>One song, many synchronized brains</h4>
+        <p>Play one excerpt for the whole room. When people hear the same natural music, their brain responses synchronize — in auditory midbrain and cortex, and in fronto-parietal attention and motor-planning regions — and this synchrony collapses when temporal structure is scrambled. As a group: what did everyone track together (the beat? phrase boundaries? a voice entering)? What does shared neural timing suggest about why musical rituals bond groups?</p>
+        <span class="anchor">Anchors: Abrams et al. (2013) — inter-subject synchronization during natural music listening.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">Data &amp; sources</p>
+    <h3 class="block-title">Where the songs come from</h3>
+    <div class="prose">
+      <p>The recordings are 10-second excerpts from the <strong>Expanded Natural History of Song Discography</strong> (NHS2), an open corpus of 1,007 field recordings of vocal music assembled by The Music Lab and collaborators; this atlas maps a curated subset of 153 excerpts chosen to span all 10 behavioral contexts and all 39 world regions in the corpus (the excerpt IDs shown in the player are the corpus IDs, so any song can be traced back to the full dataset). Each song is placed at the geographic coordinates that Glottolog assigns to the language it is sung in — a language's point location, not a country: the corpus samples <em>societies and communities</em>, which rarely align with national borders. Coastlines are drawn from Natural Earth.</p>
+    </div>
+    <div class="refs">
+      <p>Abrams, D. A., Ryali, S., Chen, T., Chordia, P., Khouzam, A., Levitin, D. J., &amp; Menon, V. (2013). Inter-subject synchronization of brain responses during natural music listening. <em>European Journal of Neuroscience, 37</em>(9), 1458–1469. https://doi.org/10.1111/ejn.12173</p>
+      <p>Bertolo, M., et al. (2025). The Expanded Natural History of Song Discography, a global corpus of vocal music. <em>Open Mind</em>. Corpus: https://doi.org/10.5281/zenodo.8237500 (record licensed CC BY 4.0; audio excerpts distributed for research and teaching under fair use).</p>
+      <p>Hammarström, H., Forkel, R., Haspelmath, M., &amp; Bank, S. (2024). <em>Glottolog</em> [Database]. Max Planck Institute for Evolutionary Anthropology. https://glottolog.org (CC BY 4.0) — language coordinates.</p>
+      <p>Mehr, S. A., Singh, M., York, H., Glowacki, L., &amp; Krasnow, M. M. (2018). Form and function in human song. <em>Current Biology, 28</em>(3), 356–368. https://doi.org/10.1016/j.cub.2017.12.042</p>
+      <p>Mehr, S. A., Singh, M., Knox, D., et al. (2019). Universality and diversity in human song. <em>Science, 366</em>(6468), eaax0868. https://doi.org/10.1126/science.aax0868</p>
+      <p>Trehub, S. E., Becker, J., &amp; Morley, I. (2015). Cross-cultural perspectives on music and musicality. <em>Philosophical Transactions of the Royal Society B, 370</em>, 20140096. https://doi.org/10.1098/rstb.2014.0096</p>
+      <p>Map geometry: Natural Earth (public domain) via world-atlas v2 (topojson/world-atlas, ISC). Rendering: D3.js v7 &amp; topojson-client (ISC).</p>
+    </div>
+    <p class="license-note">Educational use. The field recordings remain the intellectual property of their original collectors and communities; NHS2 distributes brief excerpts for research, and they are embedded here solely for teaching in PSY 1018. Please do not redistribute the audio outside the course context.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <span>PSY 1018 · The Science and Psychology of Music</span>
+    <span>Built from open data · NHS2 · Glottolog · Natural Earth</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script id="world-data" type="application/json">{{WORLD}}</script>
+<script id="song-data" type="application/json">{{SONGS}}</script>
+<script id="audio-data" type="application/json">{{AUDIO}}</script>
+<script>
+(function () {
+  "use strict";
+  var TYPES = ["Story","Healing","Dance","Mourning","Lullaby","Work","Love","Praise","Play","Procession"];
+  var COLORS = {
+    Story: "#8B4513", Healing: "#2E8B57", Dance: "#C25A0A", Mourning: "#93337F",
+    Lullaby: "#0794A5", Work: "#A6780A", Love: "#C43B6B", Praise: "#3D6FB0",
+    Play: "#6F850E", Procession: "#7B5FC0"
+  };
+  var CUES = {
+    Dance: "Listen for: steady, danceable pulse; higher energy; often many voices or accompaniment.",
+    Lullaby: "Listen for: slow tempo, soft dynamics, smooth descending contours, usually a lone voice.",
+    Healing: "Listen for: repetition and formulaic phrases; often ritual pacing and a focused, incantatory delivery.",
+    Love: "Listen for: whatever you expect — this is the hardest category for listeners everywhere. Ask why.",
+    Mourning: "Listen for: wailing or cry-like contours, unsteady timing, strained vocal timbre.",
+    Work: "Listen for: rhythms that could coordinate movement — hauling, pounding, rowing, planting.",
+    Play: "Listen for: short repeating game-like formulas, often children's voices, quick call-and-response.",
+    Story: "Listen for: speech-like delivery, long text lines, narrow pitch range serving the words.",
+    Praise: "Listen for: formal, elevated delivery; often communal, addressed to gods, leaders, or honored people.",
+    Procession: "Listen for: walking-tempo pulse and open-air projection — music that moves through space."
+  };
+  var world = JSON.parse(document.getElementById("world-data").textContent);
+  var songs = JSON.parse(document.getElementById("song-data").textContent);
+  var AUDIO = JSON.parse(document.getElementById("audio-data").textContent);
+
+  var active = new Set(TYPES);
+  var practice = false;
+  var score = { right: 0, total: 0 };
+  var current = null;
+  var currentAudioEl = null;
+
+  // ---- chips ----
+  var chipsBox = document.getElementById("chips");
+  TYPES.forEach(function (t) {
+    var b = document.createElement("button");
+    b.className = "chip"; b.setAttribute("aria-pressed", "true"); b.dataset.type = t;
+    b.innerHTML = '<span class="dot" style="background:' + COLORS[t] + '"></span>' + t;
+    b.addEventListener("click", function (ev) {
+      var solo = active.size === 1 && active.has(t);
+      if (ev.altKey || ev.metaKey) {
+        if (active.has(t)) { active.delete(t); if (!active.size) active = new Set(TYPES); }
+        else active.add(t);
+      } else if (active.size === TYPES.length) { active = new Set([t]); }
+      else if (solo) { active = new Set(TYPES); }
+      else if (active.has(t)) { active.delete(t); if (!active.size) active = new Set(TYPES); }
+      else { active.add(t); }
+      syncChips(); renderPoints();
+    });
+    chipsBox.appendChild(b);
+  });
+  function syncChips() {
+    chipsBox.querySelectorAll(".chip").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(active.has(b.dataset.type)));
+    });
+    var n = songs.filter(function (s) { return active.has(s.type); }).length;
+    document.getElementById("countNote").textContent = n + " of " + songs.length + " songs shown";
+  }
+
+  // ---- practice toggle ----
+  var pt = document.getElementById("practiceToggle");
+  pt.addEventListener("click", function () {
+    practice = !practice;
+    pt.setAttribute("aria-pressed", String(practice));
+    pt.innerHTML = practice ? "🎯&nbsp; Practice mode on — functions hidden" : "🎯&nbsp; Practice mode — guess the function first";
+    if (current) select(current, true);
+    renderPoints();
+  });
+
+  document.getElementById("shuffleBtn").addEventListener("click", function () {
+    var pool = songs.filter(function (s) { return active.has(s.type); });
+    if (!pool.length) return;
+    var s = pool[Math.floor(Math.random() * pool.length)];
+    select(s);
+    focusPoint(s);
+  });
+
+  // ---- map ----
+  var svg = d3.select("#map");
+  var W = 960, H = 500;
+  var projection = d3.geoNaturalEarth1().fitExtent([[8, 8], [W - 8, H - 8]], { type: "Sphere" });
+  var path = d3.geoPath(projection);
+  var land = topojson.feature(world, world.objects.land);
+
+  svg.append("path").attr("d", path({ type: "Sphere" }))
+    .attr("fill", "#FFFDF8").attr("stroke", "none");
+  svg.append("path").attr("d", path(d3.geoGraticule10()))
+    .attr("fill", "none").attr("stroke", "rgba(44,74,94,0.13)").attr("stroke-width", 0.5);
+  svg.append("path").attr("d", path(land))
+    .attr("fill", "rgba(44,74,94,0.07)").attr("stroke", "rgba(44,74,94,0.30)").attr("stroke-width", 0.6);
+
+  var gPts = svg.append("g");
+  var tooltip = document.getElementById("tooltip");
+  var mapCard = document.querySelector(".map-card");
+
+  songs.forEach(function (s) {
+    var p = projection([s.lon, s.lat]);
+    s.x = p[0]; s.y = p[1];
+  });
+
+  function renderPoints() {
+    var shown = songs.filter(function (s) { return active.has(s.type); });
+    var sel = gPts.selectAll("circle").data(shown, function (d) { return d.id; });
+    sel.exit().remove();
+    sel.enter().append("circle")
+      .attr("r", 4.2)
+      .attr("cx", function (d) { return d.x; })
+      .attr("cy", function (d) { return d.y; })
+      .attr("stroke", "#FFFDF8").attr("stroke-width", 1.4)
+      .attr("tabindex", -1)
+      .style("cursor", "pointer")
+      .on("mousemove", function (ev, d) {
+        tooltip.style.opacity = 1;
+        var r = mapCard.getBoundingClientRect();
+        var sr = svg.node().getBoundingClientRect();
+        var fx = (d.x / W) * sr.width, fy = (d.y / H) * sr.height;
+        tooltip.style.left = Math.min(fx + 14, r.width - 190) + "px";
+        tooltip.style.top = Math.max(fy - 14, 6) + "px";
+        tooltip.innerHTML = "<strong>" + d.lang + "</strong><br><span class='t-region'>" + d.region +
+          (practice ? "" : " · " + d.type) + "</span>";
+      })
+      .on("mouseleave", function () { tooltip.style.opacity = 0; })
+      .on("click", function (ev, d) { select(d); })
+      .merge(sel)
+      .attr("fill", function (d) {
+        if (!practice) return COLORS[d.type];
+        var revealedThis = current && current.id === d.id && current.revealed;
+        return revealedThis ? COLORS[d.type] : "#575D66";
+      })
+      .attr("opacity", function (d) { return current && current.id === d.id ? 1 : 0.85; })
+      .attr("r", function (d) { return current && current.id === d.id ? 6.5 : 4.2; });
+  }
+
+  function focusPoint(s) {
+    gPts.selectAll("circle").attr("r", function (d) { return d.id === s.id ? 6.5 : 4.2; })
+      .attr("opacity", function (d) { return d.id === s.id ? 1 : 0.85; });
+  }
+
+  // ---- selection / player ----
+  var panel = document.getElementById("panel");
+  function select(s, keepReveal) {
+    if (currentAudioEl) { try { currentAudioEl.pause(); } catch (e) {} }
+    current = s; current.revealed = keepReveal ? current.revealed : false;
+    renderPoints(); focusPoint(s);
+    var hidden = practice && !current.revealed;
+    var badge = hidden
+      ? '<span class="badge"><span class="dot" style="background:#575D66"></span>Function hidden — guess below</span>'
+      : '<span class="badge" style="border-color:' + COLORS[s.type] + '"><span class="dot" style="background:' + COLORS[s.type] + '"></span>' + s.type + ' song</span>';
+    var html =
+      '<p class="region">' + s.region + '</p>' +
+      '<h2>Sung in ' + s.lang + '</h2>' + badge +
+      '<audio controls preload="auto" id="player" src="' + (AUDIO[s.id] || "") + '"></audio>' +
+      '<p class="meta">Excerpt ' + s.id + ' · language: ' + s.lang + ' (Glottolog ' + s.glottocode + ')</p>';
+    if (hidden) {
+      html += '<div class="guess-grid">' + TYPES.map(function (t) {
+        return '<button class="guess-btn" data-g="' + t + '">' + t + '</button>';
+      }).join("") + '</div><p class="verdict" id="verdict"></p>';
+    } else if (!practice || current.revealed) {
+      html += '<div class="listen-cues"><p><strong>' + s.type + '.</strong> ' + CUES[s.type] + '</p></div>';
+      if (practice && current.revealed && current.lastVerdict) {
+        html = html.replace('<div class="listen-cues">', '<p class="verdict">' + current.lastVerdict + '</p><div class="listen-cues">');
+      }
+    }
+    if (practice) html += '<p class="score">Practice score: ' + score.right + ' / ' + score.total + '</p>';
+    panel.innerHTML = html;
+    currentAudioEl = document.getElementById("player");
+    if (currentAudioEl) { currentAudioEl.play().catch(function () {}); }
+    panel.querySelectorAll(".guess-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        score.total++;
+        var right = b.dataset.g === s.type;
+        if (right) score.right++;
+        current.revealed = true;
+        current.lastVerdict = right ? "✓ Right — this is a " + s.type.toLowerCase() + " song."
+          : "✗ You guessed " + b.dataset.g.toLowerCase() + " — it's a " + s.type.toLowerCase() + " song.";
+        select(s, true);
+      });
+    });
+  }
+
+  // ---- song table ----
+  var rows = document.getElementById("songrows");
+  songs.slice().sort(function (a, b) {
+    return a.region === b.region ? a.lang.localeCompare(b.lang) : a.region.localeCompare(b.region);
+  }).forEach(function (s) {
+    var tr = document.createElement("tr");
+    tr.tabIndex = 0;
+    tr.innerHTML = "<td>" + s.lang + "</td><td>" + s.region + "</td><td><span class='dot' style='background:" +
+      COLORS[s.type] + "'></span>" + s.type + "</td>";
+    function go() { select(s); document.querySelector(".stage").scrollIntoView({ block: "nearest" }); }
+    tr.addEventListener("click", go);
+    tr.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    rows.appendChild(tr);
+  });
+
+  syncChips();
+  renderPoints();
+})();
+</script>

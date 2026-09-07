@@ -1,0 +1,1379 @@
+[
+{
+"id": "NHS2-YYR4",
+"type": "Mourning",
+"region": "Amazon and Orinoco",
+"glottocode": "boro1282",
+"lang": "Bororo",
+"lat": -16.603,
+"lon": -55.2
+},
+{
+"id": "NHS2-S7PH",
+"type": "Story",
+"region": "Amazon and Orinoco",
+"glottocode": "sara1340",
+"lang": "Saramaccan",
+"lat": 4.547,
+"lon": -54.024
+},
+{
+"id": "NHS2-42SL",
+"type": "Healing",
+"region": "Amazon and Orinoco",
+"glottocode": "pume1238",
+"lang": "Pum\u00e9",
+"lat": 7.107,
+"lon": -67.6
+},
+{
+"id": "NHS2-AOIU",
+"type": "Lullaby",
+"region": "Amazon and Orinoco",
+"glottocode": "kara1500",
+"lang": "Karaj\u00e1",
+"lat": -11.188,
+"lon": -50.349
+},
+{
+"id": "NHS2-L9T3",
+"type": "Play",
+"region": "Arctic and Subarctic",
+"glottocode": "gree1280",
+"lang": "Greenlandic Inuit",
+"lat": 67.495,
+"lon": -45.248
+},
+{
+"id": "NHS2-K5DQ",
+"type": "Dance",
+"region": "Arctic and Subarctic",
+"glottocode": "east2534",
+"lang": "Eastern Canadian Inuktitut",
+"lat": 62.173,
+"lon": -75.614
+},
+{
+"id": "NHS2-U13X",
+"type": "Love",
+"region": "Arctic and Subarctic",
+"glottocode": "chip1241",
+"lang": "Chippewa",
+"lat": 47.347,
+"lon": -94.274
+},
+{
+"id": "NHS2-O8Q2",
+"type": "Praise",
+"region": "Arctic and Subarctic",
+"glottocode": "cent2127",
+"lang": "Central Alaskan Yupik",
+"lat": 60.306,
+"lon": -161.486
+},
+{
+"id": "NHS2-FBJU",
+"type": "Procession",
+"region": "Australia",
+"glottocode": "warl1254",
+"lang": "Warlpiri",
+"lat": -20.101,
+"lon": 131.05
+},
+{
+"id": "NHS2-R2YS",
+"type": "Work",
+"region": "Australia",
+"glottocode": "meri1244",
+"lang": "Meriam",
+"lat": -9.596,
+"lon": 143.773
+},
+{
+"id": "NHS2-1BVB",
+"type": "Mourning",
+"region": "Australia",
+"glottocode": "djap1238",
+"lang": "Djapu",
+"lat": -12.88,
+"lon": 136.418
+},
+{
+"id": "NHS2-0TA2",
+"type": "Love",
+"region": "Australia",
+"glottocode": "wala1272",
+"lang": "Waladja",
+"lat": -15.697,
+"lon": 127.617
+},
+{
+"id": "NHS2-TMH3",
+"type": "Praise",
+"region": "British Isles",
+"glottocode": "scot1245",
+"lang": "Scottish Gaelic",
+"lat": 56.757,
+"lon": -5.244
+},
+{
+"id": "NHS2-JD8G",
+"type": "Procession",
+"region": "British Isles",
+"glottocode": "stan1293",
+"lang": "English",
+"lat": 53.0,
+"lon": -1.0
+},
+{
+"id": "NHS2-ACA2",
+"type": "Story",
+"region": "British Isles",
+"glottocode": "iris1255",
+"lang": "Irish English",
+"lat": 53.0,
+"lon": -1.0
+},
+{
+"id": "NHS2-1PUD",
+"type": "Play",
+"region": "British Isles",
+"glottocode": "stan1293",
+"lang": "English",
+"lat": 53.0,
+"lon": -1.0
+},
+{
+"id": "NHS2-F1GZ",
+"type": "Work",
+"region": "Caribbean",
+"glottocode": "anti1245",
+"lang": "Antigua and Barbuda Creole English",
+"lat": 17.068,
+"lon": -61.822
+},
+{
+"id": "NHS2-BM3C",
+"type": "Dance",
+"region": "Caribbean",
+"glottocode": "mart1259",
+"lang": "Martinique Creole French",
+"lat": 14.637,
+"lon": -61.019
+},
+{
+"id": "NHS2-ERLW",
+"type": "Lullaby",
+"region": "Caribbean",
+"glottocode": "anti1245",
+"lang": "Antigua and Barbuda Creole English",
+"lat": 17.068,
+"lon": -61.822
+},
+{
+"id": "NHS2-D4UW",
+"type": "Mourning",
+"region": "Caribbean",
+"glottocode": "gren1247",
+"lang": "Grenadian Creole English",
+"lat": 12.007,
+"lon": -61.699
+},
+{
+"id": "NHS2-43S3",
+"type": "Healing",
+"region": "Caucasus",
+"glottocode": "nucl1302",
+"lang": "Georgian",
+"lat": 41.85,
+"lon": 43.786
+},
+{
+"id": "NHS2-TNEF",
+"type": "Work",
+"region": "Caucasus",
+"glottocode": "nucl1302",
+"lang": "Georgian",
+"lat": 41.85,
+"lon": 43.786
+},
+{
+"id": "NHS2-LCV6",
+"type": "Dance",
+"region": "Caucasus",
+"glottocode": "nucl1235",
+"lang": "Eastern Armenian",
+"lat": 40.0,
+"lon": 45.0
+},
+{
+"id": "NHS2-Y6V2",
+"type": "Love",
+"region": "Caucasus",
+"glottocode": "nort2697",
+"lang": "North Azerbaijani",
+"lat": 40.978,
+"lon": 46.474
+},
+{
+"id": "NHS2-0DXY",
+"type": "Play",
+"region": "Central Africa",
+"glottocode": "lito1235",
+"lang": "Litoka",
+"lat": 2.012,
+"lon": 18.808
+},
+{
+"id": "NHS2-DMS2",
+"type": "Healing",
+"region": "Central Africa",
+"glottocode": "bila1255",
+"lang": "Bila",
+"lat": 1.168,
+"lon": 28.763
+},
+{
+"id": "NHS2-HBHZ",
+"type": "Story",
+"region": "Central Africa",
+"glottocode": "bamb1264",
+"lang": "Bambenzele",
+"lat": 3.651,
+"lon": 17.271
+},
+{
+"id": "NHS2-J6LT",
+"type": "Praise",
+"region": "Central Africa",
+"glottocode": "chad1249",
+"lang": "Chadian Arabic",
+"lat": 14.67,
+"lon": 13.5
+},
+{
+"id": "NHS2-PB4T",
+"type": "Lullaby",
+"region": "Central America",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-13WN",
+"type": "Love",
+"region": "Central America",
+"glottocode": "gari1256",
+"lang": "Garifuna",
+"lat": 15.353,
+"lon": -86.909
+},
+{
+"id": "NHS2-3H55",
+"type": "Healing",
+"region": "Central America",
+"glottocode": "sanb1242",
+"lang": "San Blas Kuna",
+"lat": 9.157,
+"lon": -78.308
+},
+{
+"id": "NHS2-S6AP",
+"type": "Praise",
+"region": "Central America",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-FVGG",
+"type": "Procession",
+"region": "Central Andes",
+"glottocode": "sout2996",
+"lang": "Southern Aymara",
+"lat": -17.142,
+"lon": -70.344
+},
+{
+"id": "NHS2-9P04",
+"type": "Lullaby",
+"region": "Central Andes",
+"glottocode": "ship1254",
+"lang": "Shipibo-Conibo",
+"lat": -7.171,
+"lon": -74.822
+},
+{
+"id": "NHS2-6U9V",
+"type": "Dance",
+"region": "Central Andes",
+"glottocode": "coca1259",
+"lang": "Cocama-Cocamilla",
+"lat": -4.5,
+"lon": -74.0
+},
+{
+"id": "NHS2-42H9",
+"type": "Work",
+"region": "Central Andes",
+"glottocode": "cent2142",
+"lang": "Central Aymara",
+"lat": -17.0,
+"lon": -68.5
+},
+{
+"id": "NHS2-CS8N",
+"type": "Mourning",
+"region": "Central Asia",
+"glottocode": "buru1296",
+"lang": "Burushaski",
+"lat": 36.216,
+"lon": 74.824
+},
+{
+"id": "NHS2-P5JI",
+"type": "Story",
+"region": "Central Asia",
+"glottocode": "kaza1248",
+"lang": "Kazakh",
+"lat": 51.17,
+"lon": 71.454
+},
+{
+"id": "NHS2-7M2U",
+"type": "Love",
+"region": "Central Asia",
+"glottocode": "taji1245",
+"lang": "Tajik",
+"lat": 38.821,
+"lon": 68.555
+},
+{
+"id": "NHS2-M00Z",
+"type": "Praise",
+"region": "Central Asia",
+"glottocode": "shug1248",
+"lang": "Shughni",
+"lat": 37.502,
+"lon": 71.793
+},
+{
+"id": "NHS2-BZJ0",
+"type": "Procession",
+"region": "Central Europe",
+"glottocode": "roma1327",
+"lang": "Romanian",
+"lat": 46.391,
+"lon": 24.226
+},
+{
+"id": "NHS2-9RD9",
+"type": "Mourning",
+"region": "Central Europe",
+"glottocode": "roma1327",
+"lang": "Romanian",
+"lat": 46.391,
+"lon": 24.226
+},
+{
+"id": "NHS2-YN1A",
+"type": "Work",
+"region": "Central Europe",
+"glottocode": "hung1274",
+"lang": "Hungarian",
+"lat": 46.907,
+"lon": 19.656
+},
+{
+"id": "NHS2-IU31",
+"type": "Lullaby",
+"region": "Central Europe",
+"glottocode": "hung1274",
+"lang": "Hungarian",
+"lat": 46.907,
+"lon": 19.656
+},
+{
+"id": "NHS2-4N10",
+"type": "Play",
+"region": "Central Mexico",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-3WPM",
+"type": "Story",
+"region": "Central Mexico",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-QIQS",
+"type": "Healing",
+"region": "Central Mexico",
+"glottocode": "huau1238",
+"lang": "Huautla Mazatec",
+"lat": 18.256,
+"lon": -96.724
+},
+{
+"id": "NHS2-VA7K",
+"type": "Dance",
+"region": "Central Mexico",
+"glottocode": "huic1243",
+"lang": "Huichol",
+"lat": 21.954,
+"lon": -104.062
+},
+{
+"id": "NHS2-WBRK",
+"type": "Procession",
+"region": "East Asia",
+"glottocode": "paiw1248",
+"lang": "Paiwan",
+"lat": 22.327,
+"lon": 120.806
+},
+{
+"id": "NHS2-XD70",
+"type": "Play",
+"region": "East Asia",
+"glottocode": "nucl1643",
+"lang": "Japanese",
+"lat": 35.0,
+"lon": 135.0
+},
+{
+"id": "NHS2-RCXO",
+"type": "Praise",
+"region": "East Asia",
+"glottocode": "kore1280",
+"lang": "Korean",
+"lat": 37.54,
+"lon": 126.98
+},
+{
+"id": "NHS2-SAZD",
+"type": "Work",
+"region": "East Asia",
+"glottocode": "puyu1239",
+"lang": "Puyuma",
+"lat": 22.643,
+"lon": 120.996
+},
+{
+"id": "NHS2-U904",
+"type": "Play",
+"region": "Eastern Africa",
+"glottocode": "soga1242",
+"lang": "Soga",
+"lat": 0.405,
+"lon": 33.394
+},
+{
+"id": "NHS2-F8W7",
+"type": "Lullaby",
+"region": "Eastern Africa",
+"glottocode": "nyan1315",
+"lang": "Nyangatom",
+"lat": 5.398,
+"lon": 35.623
+},
+{
+"id": "NHS2-NIM5",
+"type": "Healing",
+"region": "Eastern Africa",
+"glottocode": "gand1255",
+"lang": "Ganda",
+"lat": 0.669,
+"lon": 32.152
+},
+{
+"id": "NHS2-C07W",
+"type": "Love",
+"region": "Eastern Africa",
+"glottocode": "amha1245",
+"lang": "Amharic",
+"lat": 11.708,
+"lon": 39.543
+},
+{
+"id": "NHS2-10S6",
+"type": "Procession",
+"region": "Eastern Europe",
+"glottocode": "russ1263",
+"lang": "Russian",
+"lat": 59.0,
+"lon": 50.0
+},
+{
+"id": "NHS2-3DYT",
+"type": "Dance",
+"region": "Eastern Europe",
+"glottocode": "latv1249",
+"lang": "Latvian",
+"lat": 56.826,
+"lon": 24.309
+},
+{
+"id": "NHS2-4IIR",
+"type": "Mourning",
+"region": "Eastern Europe",
+"glottocode": "russ1263",
+"lang": "Russian",
+"lat": 59.0,
+"lon": 50.0
+},
+{
+"id": "NHS2-YJU7",
+"type": "Story",
+"region": "Eastern Europe",
+"glottocode": "komi1269",
+"lang": "Komi-Permyak",
+"lat": 59.66,
+"lon": 54.796
+},
+{
+"id": "NHS2-25NZ",
+"type": "Praise",
+"region": "Eastern South America",
+"glottocode": "waya1269",
+"lang": "Wayana",
+"lat": 2.775,
+"lon": -54.443
+},
+{
+"id": "NHS2-CRM7",
+"type": "Story",
+"region": "Eastern South America",
+"glottocode": "kuik1246",
+"lang": "Kuik\u00faro-Kalap\u00e1lo",
+"lat": -12.303,
+"lon": -53.226
+},
+{
+"id": "NHS2-E9PI",
+"type": "Procession",
+"region": "Eastern South America",
+"glottocode": "port1283",
+"lang": "Portuguese",
+"lat": 39.91,
+"lon": -8.1
+},
+{
+"id": "NHS2-613U",
+"type": "Dance",
+"region": "Eastern South America",
+"glottocode": "port1283",
+"lang": "Portuguese",
+"lat": 39.91,
+"lon": -8.1
+},
+{
+"id": "NHS2-KWD9",
+"type": "Love",
+"region": "Eastern Woodlands",
+"glottocode": "mikm1235",
+"lang": "Mi'kmaq",
+"lat": 46.0,
+"lon": -64.0
+},
+{
+"id": "NHS2-U21V",
+"type": "Healing",
+"region": "Eastern Woodlands",
+"glottocode": "cayu1261",
+"lang": "Cayuga",
+"lat": 42.41,
+"lon": -76.597
+},
+{
+"id": "NHS2-UGUF",
+"type": "Lullaby",
+"region": "Eastern Woodlands",
+"glottocode": "cher1273",
+"lang": "Cherokee",
+"lat": 35.466,
+"lon": -83.163
+},
+{
+"id": "NHS2-5C46",
+"type": "Mourning",
+"region": "Eastern Woodlands",
+"glottocode": "sene1264",
+"lang": "Seneca",
+"lat": 42.56,
+"lon": -77.53
+},
+{
+"id": "NHS2-D9WG",
+"type": "Work",
+"region": "Maya Area",
+"glottocode": "gari1256",
+"lang": "Garifuna",
+"lat": 15.353,
+"lon": -86.909
+},
+{
+"id": "NHS2-MLGC",
+"type": "Play",
+"region": "Maya Area",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-BBYW",
+"type": "Love",
+"region": "Maya Area",
+"glottocode": "ladi1251",
+"lang": "Ladino",
+"lat": 41.205,
+"lon": 28.663
+},
+{
+"id": "NHS2-P2A1",
+"type": "Dance",
+"region": "Maya Area",
+"glottocode": "tzot1259",
+"lang": "Tzotzil",
+"lat": 16.636,
+"lon": -92.739
+},
+{
+"id": "NHS2-Y0IQ",
+"type": "Praise",
+"region": "Melanesia",
+"glottocode": "tokp1240",
+"lang": "Tok Pisin",
+"lat": -9.42,
+"lon": 147.303
+},
+{
+"id": "NHS2-LKVC",
+"type": "Lullaby",
+"region": "Melanesia",
+"glottocode": "baeg1237",
+"lang": "Baeggu",
+"lat": -8.49,
+"lon": 160.771
+},
+{
+"id": "NHS2-76SZ",
+"type": "Procession",
+"region": "Melanesia",
+"glottocode": "kuma1280",
+"lang": "Kuman",
+"lat": -5.906,
+"lon": 144.977
+},
+{
+"id": "NHS2-6TYM",
+"type": "Story",
+"region": "Melanesia",
+"glottocode": "tiko1237",
+"lang": "Tikopia",
+"lat": -12.277,
+"lon": 168.822
+},
+{
+"id": "NHS2-33X8",
+"type": "Play",
+"region": "Micronesia",
+"glottocode": "ulit1238",
+"lang": "Ulithian",
+"lat": 9.961,
+"lon": 139.604
+},
+{
+"id": "NHS2-O9IK",
+"type": "Healing",
+"region": "Micronesia",
+"glottocode": "chuu1238",
+"lang": "Chuukese",
+"lat": 7.347,
+"lon": 151.599
+},
+{
+"id": "NHS2-XTVF",
+"type": "Mourning",
+"region": "Micronesia",
+"glottocode": "wole1240",
+"lang": "Woleaian",
+"lat": 7.38,
+"lon": 143.916
+},
+{
+"id": "NHS2-D16Y",
+"type": "Work",
+"region": "Micronesia",
+"glottocode": "ulit1238",
+"lang": "Ulithian",
+"lat": 9.961,
+"lon": 139.604
+},
+{
+"id": "NHS2-LU0Q",
+"type": "Story",
+"region": "Middle East",
+"glottocode": "nort2641",
+"lang": "Northern Kurdish",
+"lat": 37.0,
+"lon": 43.0
+},
+{
+"id": "NHS2-T8GK",
+"type": "Lullaby",
+"region": "Middle East",
+"glottocode": "cent1972",
+"lang": "Central Kurdish",
+"lat": 35.654,
+"lon": 45.808
+},
+{
+"id": "NHS2-ZU2O",
+"type": "Mourning",
+"region": "Middle East",
+"glottocode": "nort3139",
+"lang": "Levantine Arabic",
+"lat": 34.171,
+"lon": 36.047
+},
+{
+"id": "NHS2-XZS0",
+"type": "Procession",
+"region": "Middle East",
+"glottocode": "hadr1236",
+"lang": "Hadrami Arabic",
+"lat": 15.447,
+"lon": 48.652
+},
+{
+"id": "NHS2-MQJA",
+"type": "Dance",
+"region": "North Asia",
+"glottocode": "chuk1273",
+"lang": "Chukchi",
+"lat": 68.644,
+"lon": 170.045
+},
+{
+"id": "NHS2-AJ1X",
+"type": "Play",
+"region": "North Asia",
+"glottocode": "russ1264",
+"lang": "Russia Buriat",
+"lat": 50.853,
+"lon": 105.564
+},
+{
+"id": "NHS2-4NOR",
+"type": "Healing",
+"region": "North Asia",
+"glottocode": "even1259",
+"lang": "Evenki",
+"lat": 61.972,
+"lon": 94.689
+},
+{
+"id": "NHS2-FAYF",
+"type": "Work",
+"region": "North Asia",
+"glottocode": "gily1242",
+"lang": "Amur Nivkh",
+"lat": 52.59,
+"lon": 140.681
+},
+{
+"id": "NHS2-GGHC",
+"type": "Love",
+"region": "Northern Africa",
+"glottocode": "tama1365",
+"lang": "Tamasheq",
+"lat": 14.204,
+"lon": -2.413
+},
+{
+"id": "NHS2-SLI8",
+"type": "Praise",
+"region": "Northern Africa",
+"glottocode": "hass1238",
+"lang": "Hassaniyya",
+"lat": 18.29,
+"lon": -14.11
+},
+{
+"id": "NHS2-CRJW",
+"type": "Healing",
+"region": "Northern Africa",
+"glottocode": "tuni1259",
+"lang": "Tunisian Arabic",
+"lat": 33.797,
+"lon": 9.562
+},
+{
+"id": "NHS2-MQEX",
+"type": "Lullaby",
+"region": "Northern Africa",
+"glottocode": "tuar1240",
+"lang": "Tuareg",
+"lat": 18.815,
+"lon": 5.989
+},
+{
+"id": "NHS2-S33R",
+"type": "Procession",
+"region": "Northern Mexico",
+"glottocode": "seri1257",
+"lang": "Seri",
+"lat": 28.988,
+"lon": -112.384
+},
+{
+"id": "NHS2-DE8R",
+"type": "Dance",
+"region": "Northern Mexico",
+"glottocode": "yaqu1251",
+"lang": "Yaqui",
+"lat": 29.945,
+"lon": -110.681
+},
+{
+"id": "NHS2-A6ZN",
+"type": "Story",
+"region": "Northern Mexico",
+"glottocode": "cent2131",
+"lang": "Central Tarahumara",
+"lat": 27.565,
+"lon": -107.154
+},
+{
+"id": "NHS2-3OER",
+"type": "Love",
+"region": "Northern Mexico",
+"glottocode": "huic1243",
+"lang": "Huichol",
+"lat": 21.954,
+"lon": -104.062
+},
+{
+"id": "NHS2-P426",
+"type": "Work",
+"region": "Northwest Coast and California",
+"glottocode": "tlin1245",
+"lang": "Tlingit",
+"lat": 59.445,
+"lon": -135.29
+},
+{
+"id": "NHS2-8TRZ",
+"type": "Healing",
+"region": "Northwest Coast and California",
+"glottocode": "kwak1269",
+"lang": "Kwak'wala",
+"lat": 50.927,
+"lon": -127.308
+},
+{
+"id": "NHS2-I0MN",
+"type": "Procession",
+"region": "Northwest Coast and California",
+"glottocode": "kwak1269",
+"lang": "Kwak'wala",
+"lat": 50.927,
+"lon": -127.308
+},
+{
+"id": "NHS2-T1CP",
+"type": "Dance",
+"region": "Northwest Coast and California",
+"glottocode": "tlin1245",
+"lang": "Tlingit",
+"lat": 59.445,
+"lon": -135.29
+},
+{
+"id": "NHS2-2YCF",
+"type": "Play",
+"region": "Northwestern South America",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-5BUU",
+"type": "Praise",
+"region": "Northwestern South America",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-FNOC",
+"type": "Mourning",
+"region": "Northwestern South America",
+"glottocode": "amer1254",
+"lang": "Latin American Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-YLXK",
+"type": "Love",
+"region": "Northwestern South America",
+"glottocode": "jiva1245",
+"lang": "Chicham",
+"lat": -4.287,
+"lon": -77.798
+},
+{
+"id": "NHS2-BHQB",
+"type": "Lullaby",
+"region": "Plains",
+"glottocode": "kiow1266",
+"lang": "Kiowa",
+"lat": 34.94,
+"lon": -98.904
+},
+{
+"id": "NHS2-KTHL",
+"type": "Play",
+"region": "Plains and Plateau",
+"glottocode": "chey1247",
+"lang": "Cheyenne",
+"lat": 45.532,
+"lon": -106.659
+},
+{
+"id": "NHS2-LFIO",
+"type": "Praise",
+"region": "Plains and Plateau",
+"glottocode": "dako1258",
+"lang": "Dakota",
+"lat": 45.86,
+"lon": -96.58
+},
+{
+"id": "NHS2-KBLR",
+"type": "Story",
+"region": "Plains and Plateau",
+"glottocode": "pawn1254",
+"lang": "Pawnee",
+"lat": 36.286,
+"lon": -96.894
+},
+{
+"id": "NHS2-NODK",
+"type": "Healing",
+"region": "Plains and Plateau",
+"glottocode": "kali1308",
+"lang": "Kalispel-Pend d'Oreille",
+"lat": 47.583,
+"lon": -114.19
+},
+{
+"id": "NHS2-BGQZ",
+"type": "Work",
+"region": "Polynesia",
+"glottocode": "maor1246",
+"lang": "Maori",
+"lat": -38.288,
+"lon": 176.541
+},
+{
+"id": "NHS2-5XFO",
+"type": "Mourning",
+"region": "Polynesia",
+"glottocode": "maor1246",
+"lang": "Maori",
+"lat": -38.288,
+"lon": 176.541
+},
+{
+"id": "NHS2-1BBL",
+"type": "Praise",
+"region": "Polynesia",
+"glottocode": "samo1305",
+"lang": "Samoan",
+"lat": -13.92,
+"lon": -171.83
+},
+{
+"id": "NHS2-LDPM",
+"type": "Love",
+"region": "Polynesia",
+"glottocode": "maor1246",
+"lang": "Maori",
+"lat": -38.288,
+"lon": 176.541
+},
+{
+"id": "NHS2-GT5R",
+"type": "Lullaby",
+"region": "Scandinavia",
+"glottocode": "norw1258",
+"lang": "Norwegian",
+"lat": 59.92,
+"lon": 10.71
+},
+{
+"id": "NHS2-PASM",
+"type": "Dance",
+"region": "Scandinavia",
+"glottocode": "sout2674",
+"lang": "South Saami",
+"lat": 62.88,
+"lon": 13.701
+},
+{
+"id": "NHS2-AN4C",
+"type": "Story",
+"region": "Scandinavia",
+"glottocode": "norw1258",
+"lang": "Norwegian",
+"lat": 59.92,
+"lon": 10.71
+},
+{
+"id": "NHS2-KLEM",
+"type": "Mourning",
+"region": "Scandinavia",
+"glottocode": "norw1258",
+"lang": "Norwegian",
+"lat": 59.92,
+"lon": 10.71
+},
+{
+"id": "NHS2-AGU1",
+"type": "Work",
+"region": "South Asia",
+"glottocode": "beng1280",
+"lang": "Bengali",
+"lat": 24.0,
+"lon": 90.0
+},
+{
+"id": "NHS2-TFXV",
+"type": "Procession",
+"region": "South Asia",
+"glottocode": "toda1252",
+"lang": "Toda",
+"lat": 11.418,
+"lon": 77.017
+},
+{
+"id": "NHS2-XBJ8",
+"type": "Play",
+"region": "South Asia",
+"glottocode": "guja1252",
+"lang": "Gujarati",
+"lat": 22.687,
+"lon": 71.096
+},
+{
+"id": "NHS2-3LYX",
+"type": "Love",
+"region": "South Asia",
+"glottocode": "pash1269",
+"lang": "Pashto",
+"lat": 31.261,
+"lon": 68.33
+},
+{
+"id": "NHS2-RJC6",
+"type": "Healing",
+"region": "Southeast Asia",
+"glottocode": "temi1246",
+"lang": "Temiar",
+"lat": 4.974,
+"lon": 101.438
+},
+{
+"id": "NHS2-D04O",
+"type": "Work",
+"region": "Southeast Asia",
+"glottocode": "kamb1320",
+"lang": "Central-East Sumbanese",
+"lat": -9.647,
+"lon": 119.769
+},
+{
+"id": "NHS2-TXC2",
+"type": "Procession",
+"region": "Southeast Asia",
+"glottocode": "mang1405",
+"lang": "Manggarai",
+"lat": -8.557,
+"lon": 120.329
+},
+{
+"id": "NHS2-P32P",
+"type": "Lullaby",
+"region": "Southeast Asia",
+"glottocode": "laoo1244",
+"lang": "Lao",
+"lat": 19.0,
+"lon": 102.46
+},
+{
+"id": "NHS2-6HA2",
+"type": "Story",
+"region": "Southeastern Europe",
+"glottocode": "bulg1262",
+"lang": "Bulgarian",
+"lat": 43.365,
+"lon": 25.047
+},
+{
+"id": "NHS2-CY4T",
+"type": "Play",
+"region": "Southeastern Europe",
+"glottocode": "slov1268",
+"lang": "Slovenian",
+"lat": 46.254,
+"lon": 14.777
+},
+{
+"id": "NHS2-ROQE",
+"type": "Dance",
+"region": "Southeastern Europe",
+"glottocode": "mode1248",
+"lang": "Modern Greek",
+"lat": 38.36,
+"lon": 23.13
+},
+{
+"id": "NHS2-4KE5",
+"type": "Mourning",
+"region": "Southeastern Europe",
+"glottocode": "roma1327",
+"lang": "Romanian",
+"lat": 46.391,
+"lon": 24.226
+},
+{
+"id": "NHS2-NPYD",
+"type": "Praise",
+"region": "Southern Africa",
+"glottocode": "tswa1253",
+"lang": "Tswana",
+"lat": -24.368,
+"lon": 24.759
+},
+{
+"id": "NHS2-6JVA",
+"type": "Work",
+"region": "Southern Africa",
+"glottocode": "xhos1239",
+"lang": "Xhosa",
+"lat": -31.039,
+"lon": 28.077
+},
+{
+"id": "NHS2-JFOZ",
+"type": "Healing",
+"region": "Southern Africa",
+"glottocode": "naro1249",
+"lang": "Naro",
+"lat": -22.094,
+"lon": 20.746
+},
+{
+"id": "NHS2-8LF0",
+"type": "Love",
+"region": "Southern Africa",
+"glottocode": "xhos1239",
+"lang": "Xhosa",
+"lat": -31.039,
+"lon": 28.077
+},
+{
+"id": "NHS2-GBI2",
+"type": "Mourning",
+"region": "Southern Europe",
+"glottocode": "port1283",
+"lang": "Portuguese",
+"lat": 39.91,
+"lon": -8.1
+},
+{
+"id": "NHS2-R4RL",
+"type": "Praise",
+"region": "Southern Europe",
+"glottocode": "port1283",
+"lang": "Portuguese",
+"lat": 39.91,
+"lon": -8.1
+},
+{
+"id": "NHS2-XC4A",
+"type": "Play",
+"region": "Southern Europe",
+"glottocode": "stan1288",
+"lang": "Spanish",
+"lat": 40.441,
+"lon": -1.118
+},
+{
+"id": "NHS2-7CEW",
+"type": "Dance",
+"region": "Southern Europe",
+"glottocode": "napo1241",
+"lang": "Napoletano",
+"lat": 39.229,
+"lon": 16.422
+},
+{
+"id": "NHS2-1I26",
+"type": "Lullaby",
+"region": "Southern South America",
+"glottocode": "qawa1238",
+"lang": "Qawasqar",
+"lat": -49.303,
+"lon": -74.708
+},
+{
+"id": "NHS2-S48T",
+"type": "Procession",
+"region": "Southern South America",
+"glottocode": "sout2996",
+"lang": "Southern Aymara",
+"lat": -17.142,
+"lon": -70.344
+},
+{
+"id": "NHS2-WAGM",
+"type": "Story",
+"region": "Southern South America",
+"glottocode": "qawa1238",
+"lang": "Qawasqar",
+"lat": -49.303,
+"lon": -74.708
+},
+{
+"id": "NHS2-VDWK",
+"type": "Love",
+"region": "Southern South America",
+"glottocode": "qawa1238",
+"lang": "Qawasqar",
+"lat": -49.303,
+"lon": -74.708
+},
+{
+"id": "NHS2-J5AX",
+"type": "Praise",
+"region": "Southwest and Basin",
+"glottocode": "kiow1266",
+"lang": "Kiowa",
+"lat": 34.94,
+"lon": -98.904
+},
+{
+"id": "NHS2-RSEC",
+"type": "Lullaby",
+"region": "Southwest and Basin",
+"glottocode": "zuni1245",
+"lang": "Zuni",
+"lat": 35.006,
+"lon": -108.782
+},
+{
+"id": "NHS2-PLYB",
+"type": "Mourning",
+"region": "Southwest and Basin",
+"glottocode": "hava1248",
+"lang": "Havasupai-Walapai-Yavapai",
+"lat": 35.63,
+"lon": -113.385
+},
+{
+"id": "NHS2-MQZS",
+"type": "Dance",
+"region": "Southwest and Basin",
+"glottocode": "hopi1249",
+"lang": "Hopi",
+"lat": 35.765,
+"lon": -110.535
+},
+{
+"id": "NHS2-XRSS",
+"type": "Healing",
+"region": "Western Africa",
+"glottocode": "baou1238",
+"lang": "Baoul\u00e9",
+"lat": 5.425,
+"lon": -4.766
+},
+{
+"id": "NHS2-M6X4",
+"type": "Procession",
+"region": "Western Africa",
+"glottocode": "jola1263",
+"lang": "Jola-Fonyi",
+"lat": 12.758,
+"lon": -15.735
+},
+{
+"id": "NHS2-2UTZ",
+"type": "Work",
+"region": "Western Africa",
+"glottocode": "jola1263",
+"lang": "Jola-Fonyi",
+"lat": 12.758,
+"lon": -15.735
+},
+{
+"id": "NHS2-5NN8",
+"type": "Story",
+"region": "Western Africa",
+"glottocode": "bulu1251",
+"lang": "Bulu (Cameroon)",
+"lat": 3.161,
+"lon": 11.636
+},
+{
+"id": "NHS2-JDTL",
+"type": "Lullaby",
+"region": "Western Europe",
+"glottocode": "stan1290",
+"lang": "French",
+"lat": 48.0,
+"lon": 2.0
+},
+{
+"id": "NHS2-MF7G",
+"type": "Story",
+"region": "Western Europe",
+"glottocode": "dutc1256",
+"lang": "Dutch",
+"lat": 52.0,
+"lon": 5.0
+},
+{
+"id": "NHS2-E2SX",
+"type": "Love",
+"region": "Western Europe",
+"glottocode": "basq1248",
+"lang": "Basque",
+"lat": 43.279,
+"lon": -1.316
+},
+{
+"id": "NHS2-WGYL",
+"type": "Work",
+"region": "Western Europe",
+"glottocode": "dutc1256",
+"lang": "Dutch",
+"lat": 52.0,
+"lon": 5.0
+}
+]
