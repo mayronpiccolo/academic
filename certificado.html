@@ -109,29 +109,27 @@
           <div class="cert-scale" id="cert-scale">
             <div class="cert" id="cert" lang="pt-BR">
               <div class="cert-frame"></div>
-              <div class="cert-head">
-                <svg class="cert-logo" viewBox="0 0 1080 300" aria-hidden="true">
-                  <g transform="translate(2,12) scale(1.26)">
+              <span class="cert-corner tl"></span><span class="cert-corner tr"></span><span class="cert-corner bl"></span><span class="cert-corner br"></span>
+
+              <header class="cert-top">
+                <svg class="cert-emblem" viewBox="0 0 330 240" aria-hidden="true">
+                  <g fill="none" stroke="#2C4A54" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="288" cy="214" rx="11" ry="3"/><path d="M288,211 L288,112 C288,84 262,70 238,70 L226,70"/>
+                  </g>
+                  <path d="M212,94 L242,94 L234,70 L220,70 Z" fill="#E8846A" stroke="#2C4A54" stroke-width="4" stroke-linejoin="round"/>
+                  <g transform="translate(20,72) scale(1.3)">
                     <g fill="none" stroke="#2C4A54" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-                      <ellipse cx="258" cy="214" rx="11" ry="3"/><path d="M258,211 L258,122 C258,96 232,82 208,82 L200,82"/>
-                    </g>
-                    <path d="M186,102 L214,102 L208,82 L192,82 Z" fill="#E8846A" stroke="#2C4A54" stroke-width="4" stroke-linejoin="round"/>
-                    <g transform="translate(24,70) scale(1.26)">
-                      <g fill="none" stroke="#2C4A54" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M28,92 L28,64 C28,54 34,48 44,48 C50,48 54,51 54,56 C54,44 62,38 74,38 L126,38 C138,38 146,44 146,56 C146,51 150,48 156,48 C166,48 172,54 172,64 L172,92 Z"/>
                         <line x1="54" y1="56" x2="54" y2="76"/><line x1="146" y1="56" x2="146" y2="76"/><line x1="54" y1="76" x2="146" y2="76"/><line x1="100" y1="40" x2="100" y2="76"/>
                         <path d="M46,92 L40,110"/><path d="M154,92 L160,110"/><path d="M74,92 L71,108"/><path d="M126,92 L129,108"/>
                       </g>
                       <rect x="60" y="52" width="28" height="28" rx="6" transform="rotate(-12 74 66)" fill="#E8846A" stroke="#2C4A54" stroke-width="4" stroke-linejoin="round"/>
-                    </g>
-                  </g>
-                  <g font-family="Poppins, 'Avenir Next', 'Century Gothic', sans-serif" text-anchor="middle" font-weight="900">
-                    <text x="744" y="120" font-size="100" fill="#2C4A54">PSICOLOGIA</text>
-                    <text x="744" y="244" font-size="100" fill="#2C4A54">NO <tspan font-size="124" fill="#E8846A">SOFÁ</tspan></text>
                   </g>
                 </svg>
-                <p class="cert-kicker">Certificado de participação</p>
-              </div>
+                <p class="cert-brand">Psicologia no <span>Sofá</span></p>
+                <h2 class="cert-title">Certificado de Participação</h2>
+                <span class="cert-rule"></span>
+              </header>
 
               <div class="cert-body">
                 <p class="cert-lead">Certificamos que</p>
@@ -139,7 +137,7 @@
                 <p class="cert-text">participou da palestra <em id="c-title">“Título da palestra”</em>, ministrada por <strong id="c-speaker">Palestrante</strong>, promovida pelo Psicologia no Sofá e realizada online, ao vivo, em <strong id="c-date">6 de outubro de 2026</strong>, com duração de <strong>1 hora de atividade</strong>.</p>
               </div>
 
-              <div class="cert-foot">
+              <footer class="cert-bottom">
                 <div class="cert-sign">
                   <p class="cert-sig-name" id="c-signer">Mayron Pereira Piccolo Ribeiro</p>
                   <p class="cert-sig-role" id="c-role">PhD, BCBA · pelo Psicologia no Sofá</p>
@@ -147,9 +145,7 @@
                 </div>
                 <div class="cert-seal">
                   <svg viewBox="0 0 240 240" aria-hidden="true">
-                    <defs>
-                      <path id="seal-arc" d="M120,120 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/>
-                    </defs>
+                    <defs><path id="seal-arc" d="M120,120 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs>
                     <circle cx="120" cy="120" r="112" fill="#F5EEE1" stroke="#2C4A54" stroke-width="3"/>
                     <circle cx="120" cy="120" r="104" fill="none" stroke="#2C4A54" stroke-width="1.2"/>
                     <circle cx="120" cy="120" r="70" fill="none" stroke="#2C4A54" stroke-width="1.2"/>
@@ -165,14 +161,14 @@
                       <rect x="60" y="52" width="28" height="28" rx="6" transform="rotate(-12 74 66)" fill="#E8846A" stroke="#2C4A54" stroke-width="5" stroke-linejoin="round"/>
                     </g>
                     <text x="120" y="163" text-anchor="middle" font-family="Poppins, 'Avenir Next', 'Century Gothic', sans-serif" font-weight="900" font-size="15" letter-spacing="2" fill="#E8846A" id="c-seal-year">2026</text>
-                                      </svg>
+                  </svg>
                 </div>
-                <div class="cert-meta">
-                  <p><span>Emitido em</span><b id="c-issued">—</b></p>
-                  <p><span>Nº do certificado</span><b id="c-id">—</b></p>
-                  <p><span>Palestra</span><b>mayronpiccolo.com/psicologia-no-sofa.html</b></p>
+                <div class="cert-issue">
+                  <p class="cert-issue-line">Emitido em <b id="c-issued">—</b></p>
+                  <p class="cert-issue-line">Certificado nº <b id="c-id">—</b></p>
+                  <p class="cert-issue-line">mayronpiccolo.com/psicologia-no-sofa.html</p>
                 </div>
-              </div>
+              </footer>
             </div>
           </div>
         </div>
