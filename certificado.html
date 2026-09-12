@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="assets/pns.css?v=20260912b">
 <link rel="stylesheet" href="assets/certificado.css?v=20260912b">
 <script defer src="assets/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
+<script defer src="assets/certificado-pdf.js?v=20260912b"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -331,24 +331,23 @@ var TALKS = [
 
   $("download").addEventListener("click", function () {
     var btn = this; btn.disabled = true; btn.textContent = "Gerando…";
-    var cert = $("cert"), stage = $("cert-scale");
-    var savedTransform = stage.style.transform, savedHeight = stage.style.height;
-    stage.style.transform = "none"; stage.style.height = "794px";   /* capture at 1:1, not through the preview scale */
-    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
-      return html2canvas(cert, { scale: 2, backgroundColor: "#F5EEE1", useCORS: true, logging: false, width: 1123, height: 794, windowWidth: 1280, scrollX: 0, scrollY: -window.scrollY });
-    }).then(function (canvas) {
-      stage.style.transform = savedTransform; stage.style.height = savedHeight;
-      var pdf = new window.jspdf.jsPDF({ orientation: "landscape", unit: "mm", format: "a4", compress: true });
-      pdf.addImage(canvas.toDataURL("image/jpeg", 0.94), "JPEG", 0, 0, 297, 210, undefined, "FAST");
-      pdf.setProperties({ title: "Certificado — " + $("c-name").textContent, subject: current.title, author: "Psicologia no Sofá" });
-      var safe = cleanName(nameEl.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z ]/g, "").trim().replace(/ +/g, "-");
+    var who = SIGNERS[current.signer] || SIGNERS.mayron;
+    var name = cleanName(nameEl.value);
+    window.PNSCert.generate({
+      name: name, title: current.title, speaker: current.speaker,
+      dateText: longDate(current.date), year: current.date.slice(0, 4),
+      issuedText: today(), certId: $("c-id").textContent,
+      signerName: who.name, signerDegrees: who.degrees, signerCred: who.cred || [],
+      mode: current.mode || "live", durationText: current.duration || "1 hora de atividade"
+    }).then(function (pdf) {
+      var safe = name.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z ]/g, "").trim().replace(/ +/g, "-");
       pdf.save("Certificado-Psicologia-no-Sofa-" + safe + ".pdf");
-    }).catch(function () {
-      stage.style.transform = savedTransform; stage.style.height = savedHeight;
-      err.textContent = "Não foi possível gerar o PDF neste navegador. Tente novamente ou use Imprimir → Salvar como PDF."; err.hidden = false;
-      window.print();
+    }).catch(function (e) {
+      err.textContent = "Não foi possível gerar o PDF (" + (e && e.message ? e.message : "erro") + "). Tente novamente; se persistir, use Imprimir → Salvar como PDF."; err.hidden = false;
     }).finally(function () { btn.disabled = false; btn.textContent = "Baixar PDF"; });
   });
+  /* warm the font cache as soon as a valid talk is recognized */
+  codeEl.addEventListener("input", function () { if (findTalk(codeEl.value) && window.PNSCert) window.PNSCert.preload("assets/fonts/").catch(function () {}); });
 
   /* ?codigo=… pre-fills the code (for a link in the chat/Instagram) */
   var q = new URLSearchParams(location.search).get("codigo");
