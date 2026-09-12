@@ -141,9 +141,9 @@
 
               <div class="cert-foot">
                 <div class="cert-sign">
-                  <p class="cert-sig-name">Mayron Piccolo, PhD, BCBA</p>
-                  <p class="cert-sig-role">pelo Psicologia no Sofá</p>
-                  <p class="cert-sig-cred">Licensed Clinical Psychologist, MA/USA · PSYNE10001186<br>Board Certified Behavior Analyst · 1-22-57504</p>
+                  <p class="cert-sig-name" id="c-signer">Mayron Pereira Piccolo Ribeiro</p>
+                  <p class="cert-sig-role" id="c-role">PhD, BCBA · pelo Psicologia no Sofá</p>
+                  <p class="cert-sig-cred" id="c-cred"></p>
                 </div>
                 <div class="cert-seal">
                   <svg viewBox="0 0 240 240" aria-hidden="true">
@@ -207,17 +207,37 @@
 
 <script>
 /* ============================================================
-   TALKS — one entry per certifiable lecture.
-   To add a talk: copy a block, set a new unique code (letters/digits/hyphens,
-   case-insensitive), the title, speaker, and the date as YYYY-MM-DD.
-   The code is announced live at the end of the lecture.
+   ORGANIZADORES — quem pode assinar pelo Psicologia no Sofá.
+   Cada pessoa: nome completo, títulos (degrees, opcional — vão na linha
+   "pelo Psicologia no Sofá") e até duas linhas de credenciais (registro
+   profissional, instituição…). Deixe cred: [] se não houver.
+   ============================================================ */
+var SIGNERS = {
+  mayron: {
+    name: "Mayron Pereira Piccolo Ribeiro",
+    degrees: "PhD, BCBA",
+    cred: ["Licensed Clinical Psychologist, MA/USA · PSYNE10001186",
+           "Board Certified Behavior Analyst · 1-22-57504"]
+  }
+  /* exemplo para acrescentar alguém:
+  ana: { name: "Ana Souza", degrees: "MSc", cred: ["Psicóloga · CRP 06/000000"] }
+  */
+};
+
+/* ============================================================
+   TALKS — uma entrada por palestra certificável.
+   Para acrescentar: copie um bloco, defina um código único (letras/dígitos/
+   hífens; não diferencia maiúsculas), título, palestrante, data (AAAA-MM-DD)
+   e signer = a chave de quem organizou, em SIGNERS acima.
+   O código é anunciado ao vivo, no fim da palestra.
    ============================================================ */
 var TALKS = [
   {
     code: "SOFA-HAYES-1006",
     title: "Psicologia no Sofá com Prof. Steven C. Hayes",
     speaker: "Prof. Steven C. Hayes (University of Nevada, Reno)",
-    date: "2026-10-06"
+    date: "2026-10-06",
+    signer: "mayron"
   }
 ];
 
@@ -272,6 +292,11 @@ var TALKS = [
     $("c-speaker").textContent = current.speaker;
     $("c-date").textContent = longDate(current.date);
     $("c-seal-year").textContent = current.date.slice(0, 4);
+    var who = SIGNERS[current.signer] || SIGNERS.mayron;
+    $("c-signer").textContent = who.name;
+    $("c-role").textContent = (who.degrees ? who.degrees + " · " : "") + "pelo Psicologia no Sofá";
+    var cred = $("c-cred"); cred.textContent = "";
+    (who.cred || []).forEach(function (line, i) { if (i) cred.appendChild(document.createElement("br")); cred.appendChild(document.createTextNode(line)); });
     $("c-issued").textContent = today();
     $("c-id").textContent = "PNS-" + current.date.replace(/-/g, "").slice(2) + "-" + hash(norm(current.code) + "|" + name.toLowerCase());
     /* shrink very long names */
