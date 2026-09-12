@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-lang="pt">
 <head>
 <meta charset="utf-8">
 <title>Certificado de participação — Psicologia no Sofá</title>
@@ -12,7 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Poppins:wght@600;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
-<link rel="stylesheet" href="assets/pns.css">
+<link rel="stylesheet" href="assets/pns.css?v=20260912b">
+<link rel="stylesheet" href="assets/certificado.css?v=20260912b">
 <script defer src="assets/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
@@ -42,11 +43,21 @@
 </header>
 
 <div class="pns">
-<header class="page-hero">
+<nav class="pns-subnav" aria-label="Psicologia no Sofá">
+  <div class="wrap pns-subnav-inner">
+    <a class="pns-subnav-brand" href="psicologia-no-sofa.html">
+      <svg viewBox="0 0 200 130" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M28,92 L28,64 C28,54 34,48 44,48 C50,48 54,51 54,56 C54,44 62,38 74,38 L126,38 C138,38 146,44 146,56 C146,51 150,48 156,48 C166,48 172,54 172,64 L172,92 Z"/><line x1="54" y1="56" x2="54" y2="76"/><line x1="146" y1="56" x2="146" y2="76"/><line x1="54" y1="76" x2="146" y2="76"/><line x1="100" y1="40" x2="100" y2="76"/><path d="M46,92 L40,110"/><path d="M154,92 L160,110"/><path d="M74,92 L71,108"/><path d="M126,92 L129,108"/></g><rect x="60" y="52" width="28" height="28" rx="6" transform="rotate(-12 74 66)" fill="#E8846A" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>
+      <span>Psicologia no <b>Sofá</b></span>
+    </a>
+    <div class="pns-subnav-links"><a href="psicologia-no-sofa.html"><span class="pt">Início</span><span class="en">Home</span></a><a href="pns-agenda.html"><span class="pt">Próxima palestra</span><span class="en">Next lecture</span></a><a href="pns-gravacoes.html"><span class="pt">Gravações</span><span class="en">Recordings</span></a><a href="certificado.html" aria-current="page"><span class="pt">Certificados</span><span class="en">Certificates</span></a><a href="pns-sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a></div>
+    
+  </div>
+</nav>
+<header class="page-hero pns-subhero">
   <div class="wrap">
     <div class="ph-top">
       <div class="ph-title-block">
-        <p class="kicker"><a href="psicologia-no-sofa.html">Psicologia no Sofá</a> · @psicologianosofa</p>
+        <p class="kicker">Psicologia no Sofá · certificados</p>
         <h1>Certificado de <span class="sofa">participação</span></h1>
       </div>
     </div>
@@ -139,8 +150,8 @@
 
               <footer class="cert-bottom">
                 <div class="cert-sign">
-                  <p class="cert-sig-name" id="c-signer">Mayron Pereira Piccolo Ribeiro</p>
-                  <p class="cert-sig-role" id="c-role">PhD, BCBA · pelo Psicologia no Sofá</p>
+                  <p class="cert-sig-name" id="c-signer">Mayron Pereira Piccolo Ribeiro, PhD, BCBA</p>
+                  <p class="cert-sig-role" id="c-role">pelo Psicologia no Sofá</p>
                   <p class="cert-sig-cred" id="c-cred"></p>
                 </div>
                 <div class="cert-seal">
@@ -204,8 +215,8 @@
 <script>
 /* ============================================================
    ORGANIZADORES — quem pode assinar pelo Psicologia no Sofá.
-   Cada pessoa: nome completo, títulos (degrees, opcional — vão na linha
-   "pelo Psicologia no Sofá") e até duas linhas de credenciais (registro
+   Cada pessoa: nome completo, títulos (degrees, opcional — vêm após o nome,
+   na mesma linha) e até duas linhas de credenciais (registro
    profissional, instituição…). Deixe cred: [] se não houver.
    ============================================================ */
 var SIGNERS = {
@@ -289,8 +300,8 @@ var TALKS = [
     $("c-date").textContent = longDate(current.date);
     $("c-seal-year").textContent = current.date.slice(0, 4);
     var who = SIGNERS[current.signer] || SIGNERS.mayron;
-    $("c-signer").textContent = who.name;
-    $("c-role").textContent = (who.degrees ? who.degrees + " · " : "") + "pelo Psicologia no Sofá";
+    $("c-signer").textContent = who.name + (who.degrees ? ", " + who.degrees : "");
+    $("c-role").textContent = "pelo Psicologia no Sofá";
     var cred = $("c-cred"); cred.textContent = "";
     (who.cred || []).forEach(function (line, i) { if (i) cred.appendChild(document.createElement("br")); cred.appendChild(document.createTextNode(line)); });
     $("c-issued").textContent = today();
