@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Poppins:wght@900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
-<link rel="stylesheet" href="assets/pns.css?v=20260912g">
+<link rel="stylesheet" href="assets/pns.css?v=20260912h">
 <script>
   (function () {
     try {
@@ -102,41 +102,88 @@
           <p>Assista às gravações no seu ritmo. O progresso fica salvo; ao concluir pelo menos 90% de uma aula, o certificado é liberado.</p>
           <p class="app-side" id="side"></p>
         </div>
-        <div id="list"><p class="form-note">Carregando…</p></div>
+        <div>
+          <div class="app-filters" id="filters" hidden>
+            <input type="search" id="q" class="app-search" placeholder="Buscar por título, palestrante ou tema…" autocomplete="off">
+            <div class="app-chips" id="chips-abordagem" aria-label="Abordagem / área"></div>
+            <div class="app-chips" id="chips-dur" aria-label="Duração">
+              <button type="button" class="chip" data-dur="curta">até 1h</button>
+              <button type="button" class="chip" data-dur="media">1–2h</button>
+              <button type="button" class="chip" data-dur="longa">mais de 2h</button>
+            </div>
+          </div>
+          <div id="continue" hidden></div>
+          <div id="list"><p class="form-note">Carregando…</p></div>
+        </div>
       </div>
     </div>
   </section>
 <script>
 (function () {
-  var sb = PNS.sb, esc = PNS.esc;
+  var sb = PNS.sb, esc = PNS.esc, $ = function (i) { return document.getElementById(i); };
+  var lectures = [], prog = {}, certs = {}, temas = [], state = { q: "", abordagem: null, dur: null };
+
+  function durClass(s) { return s <= 3900 ? "curta" : (s <= 7500 ? "media" : "longa"); }
+  function card(l) {
+    var p = prog[l.id], pct = p ? Math.min(100, Math.round(100 * p.watched_seconds / l.duration_seconds)) : 0;
+    var status = p && p.completed_at ? '<span class="tl-tag tag-done">Concluída</span>' : (p && p.watched_seconds > 0 ? '<span class="tl-tag">' + pct + '% assistido</span>' : '');
+    var cta = p && p.completed_at ? (certs[l.id] ? 'Ver certificado' : 'Emitir certificado') : (p && p.watched_seconds > 0 ? 'Continuar' : 'Assistir');
+    var meta = [(l.tags || []).join(', '), PNS.fmtTime(l.duration_seconds), l.nota].filter(Boolean).map(esc).join(' · ');
+    var href = 'pns-aula.html?id=' + encodeURIComponent(l.id);
+    return '<li><span class="tl-year">' + esc(PNS.shortDate(l.lecture_date)) + '</span>' +
+      '<div class="tl-body"><h4 class="tl-title"><a href="' + href + '">' + esc(l.speaker_short || l.speaker) + '</a> ' + status + '</h4>' +
+      '<p class="topic">' + esc(l.title) + '</p><p class="app-meta">' + meta + '</p>' +
+      '<div class="app-progress"><span style="width:' + pct + '%"></span></div>' +
+      '<a class="app-cta" href="' + href + '">' + cta + ' →</a></div>' +
+      '<a class="thumb" href="' + href + '" tabindex="-1" aria-hidden="true"><img src="https://i.ytimg.com/vi/' + esc(l.youtube_id) + '/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="dur">' + esc(l.activity_text) + '</span></a></li>';
+  }
+  function matches(l) {
+    if (state.abordagem && (l.tags || []).indexOf(state.abordagem) < 0) return false;
+    if (state.dur && durClass(l.duration_seconds) !== state.dur) return false;
+    if (state.q) { var h = (l.title + " " + l.speaker + " " + (l.tema || "") + " " + (l.tags || []).join(" ")).toLowerCase(); if (h.indexOf(state.q) < 0) return false; }
+    return true;
+  }
+  function render() {
+    var shown = lectures.filter(matches), html = "";
+    var order = temas.map(function (t) { return t.nome; });
+    var groups = {}; shown.forEach(function (l) { var t = l.tema || "Outros temas"; (groups[t] = groups[t] || []).push(l); });
+    Object.keys(groups).sort(function (a, b) { var ia = order.indexOf(a), ib = order.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); }).forEach(function (t) {
+      var d = temas.filter(function (x) { return x.nome === t; })[0];
+      html += '<div class="season-head"><h3>' + esc(t) + '</h3><p>' + groups[t].length + ' aula' + (groups[t].length > 1 ? 's' : '') + '</p></div>' +
+        (d && d.descricao ? '<p class="app-tema-desc">' + esc(d.descricao) + '</p>' : '') +
+        '<ul class="programme">' + groups[t].map(card).join("") + '</ul>';
+    });
+    $("list").innerHTML = html || '<p class="form-note">Nenhuma aula corresponde aos filtros. <button type="button" class="app-link" id="clear">Limpar filtros</button></p>';
+    var c = $("clear"); if (c) c.addEventListener("click", function () { state = { q: "", abordagem: null, dur: null }; $("q").value = ""; syncChips(); render(); });
+  }
+  function syncChips() {
+    document.querySelectorAll("#chips-abordagem .chip").forEach(function (b) { b.classList.toggle("active", b.dataset.ab === state.abordagem); });
+    document.querySelectorAll("#chips-dur .chip").forEach(function (b) { b.classList.toggle("active", b.dataset.dur === state.dur); });
+  }
+  function renderContinue() {
+    var inprog = lectures.filter(function (l) { var p = prog[l.id]; return p && p.watched_seconds > 0 && !p.completed_at; })
+      .sort(function (a, b) { return new Date(prog[b.id].updated_at) - new Date(prog[a.id].updated_at); }).slice(0, 3);
+    if (!inprog.length) return;
+    $("continue").hidden = false;
+    $("continue").innerHTML = '<div class="season-head"><h3>Continuar assistindo</h3><p>onde você parou</p></div><ul class="programme">' + inprog.map(card).join("") + '</ul>';
+  }
+
   PNS.requireAuth().then(function () {
-    return Promise.all([ sb.from("lectures").select("*").eq("published", true).order("sort_order"), sb.from("progress").select("*"), sb.from("certificates").select("lecture_id, id") ]);
+    return Promise.all([ sb.from("lectures").select("*").eq("published", true).order("sort_order"), sb.from("progress").select("*"), sb.from("certificates").select("lecture_id, id"), sb.from("temas").select("*").order("ordem") ]);
   }).then(function (r) {
-    var lectures = r[0].data || [], prog = {}, certs = {};
+    lectures = r[0].data || []; temas = r[3].data || [];
     (r[1].data || []).forEach(function (p) { prog[p.lecture_id] = p; });
     (r[2].data || []).forEach(function (c) { certs[c.lecture_id] = c.id; });
     var done = Object.keys(prog).filter(function (k) { return prog[k].completed_at; }).length;
-    document.getElementById("side").innerHTML = lectures.length + " aulas disponíveis · " + done + " concluída" + (done === 1 ? "" : "s") + ' · <a href="pns-meus-certificados.html">meus certificados</a>';
-    var seasons = [], by = {};
-    lectures.forEach(function (l) { var s = l.season || "Outras"; if (!by[s]) { by[s] = []; seasons.push(s); } by[s].push(l); });
-    var html = "";
-    seasons.forEach(function (s) {
-      html += '<div class="season-head"><h3>' + esc(s) + '</h3><p>' + by[s].length + ' aula' + (by[s].length > 1 ? 's' : '') + '</p></div><ul class="programme">';
-      by[s].forEach(function (l) {
-        var p = prog[l.id], pct = p ? Math.min(100, Math.round(100 * p.watched_seconds / l.duration_seconds)) : 0;
-        var status = p && p.completed_at ? '<span class="tl-tag tag-done">Concluída</span>' : (p && p.watched_seconds > 0 ? '<span class="tl-tag">Em andamento · ' + pct + '%</span>' : '<span class="tl-tag tag-new">Não iniciada</span>');
-        var cta = p && p.completed_at ? (certs[l.id] ? 'Certificado emitido' : 'Emitir certificado') : (p && p.watched_seconds > 0 ? 'Continuar' : 'Assistir');
-        html += '<li><span class="tl-year">' + esc(PNS.shortDate(l.lecture_date)) + '<br><small>' + PNS.fmtTime(l.duration_seconds) + '</small></span>' +
-          '<div class="tl-body"><h4 class="tl-title"><a href="pns-aula.html?id=' + encodeURIComponent(l.id) + '">' + esc(l.speaker_short || l.speaker) + '</a> ' + status + '</h4>' +
-          '<p class="topic">' + esc(l.title) + '</p>' +
-          '<div class="app-progress"><span style="width:' + pct + '%"></span></div>' +
-          '<a class="app-cta" href="pns-aula.html?id=' + encodeURIComponent(l.id) + '">' + cta + ' →</a></div>' +
-          '<a class="thumb" href="pns-aula.html?id=' + encodeURIComponent(l.id) + '" tabindex="-1" aria-hidden="true"><img src="https://i.ytimg.com/vi/' + esc(l.youtube_id) + '/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="dur">' + esc(l.activity_text) + '</span></a></li>';
-      });
-      html += '</ul>';
-    });
-    document.getElementById("list").innerHTML = html || '<p class="form-note">Nenhuma aula publicada ainda.</p>';
-  }).catch(function (e) { if (e.message !== "redirect") document.getElementById("list").innerHTML = '<p class="cert-error">Não foi possível carregar as aulas: ' + esc(e.message) + '</p>'; });
+    $("side").innerHTML = lectures.length + " aulas disponíveis · " + done + " concluída" + (done === 1 ? "" : "s") + ' · <a href="pns-meus-certificados.html">meus certificados</a>';
+    var abs = []; lectures.forEach(function (l) { (l.tags || []).forEach(function (t) { if (abs.indexOf(t) < 0) abs.push(t); }); }); abs.sort(function (x, y) { return x.localeCompare(y, "pt"); });
+    $("chips-abordagem").innerHTML = abs.map(function (x) { return '<button type="button" class="chip" data-ab="' + esc(x) + '">' + esc(x) + '</button>'; }).join("");
+    $("filters").hidden = false;
+    $("chips-abordagem").addEventListener("click", function (e) { var b = e.target.closest(".chip"); if (!b) return; state.abordagem = state.abordagem === b.dataset.ab ? null : b.dataset.ab; syncChips(); render(); });
+    $("chips-dur").addEventListener("click", function (e) { var b = e.target.closest(".chip"); if (!b) return; state.dur = state.dur === b.dataset.dur ? null : b.dataset.dur; syncChips(); render(); });
+    $("q").addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); render(); });
+    renderContinue(); render();
+  }).catch(function (e) { if (e.message !== "redirect") $("list").innerHTML = '<p class="cert-error">Não foi possível carregar as aulas: ' + esc(e.message) + '</p>'; });
 })();
 </script>
 

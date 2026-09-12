@@ -279,3 +279,14 @@
 
 .pns .facts--inline .fact span { font-size: .8rem; letter-spacing: 0; line-height: 1.5; margin-top: 10px; }
 .pns .facts--inline .fact b { font-size: clamp(1.7rem, 3vw, 2.3rem); }
+
+/* catalogue filters */
+.pns .app-filters { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+.pns .app-search { font-family: var(--sans); font-size: .95rem; color: var(--ink); background: var(--panel); border: 1px solid var(--line); padding: 12px 14px; width: 100%; max-width: 520px; }
+.pns .app-search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+.pns .app-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pns .app-chips .chip { cursor: pointer; }
+.pns .app-chips .chip.active { background: var(--rule); border-color: var(--rule); color: var(--paper); }
+.pns .app-meta { margin: 4px 0 0; font-family: var(--sans); font-size: .74rem; letter-spacing: .02em; color: var(--sage); }
+.pns .app-tema-desc { margin: 0 0 14px; font-family: var(--sans); font-size: .84rem; color: var(--ink-soft); }
+.pns #continue .programme { margin-bottom: 26px; }
