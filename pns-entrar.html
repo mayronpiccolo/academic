@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt" data-app="1">
+<head>
+<meta charset="utf-8">
+<title>Entrar — Psicologia no Sofá</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Psicologia no Sofá — free online psychology lectures with leading researchers since 2020. Next lecture, past recordings, and how to follow.">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/icon-512.png" sizes="512x512">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Poppins:wght@900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/pns.css?v=20260912b">
+<script>
+  (function () {
+    try {
+      var q = new URLSearchParams(location.search).get("lang");
+      var saved = localStorage.getItem("pns-lang");
+      var lang = (q === "en" || q === "pt") ? q : (saved === "en" ? "en" : "pt");
+      document.documentElement.setAttribute("data-lang", lang);
+      document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+    } catch (e) {}
+  })();
+</script>
+<script defer src="assets/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="assets/pns-config.js?v=20260912c"></script>
+<script src="assets/pns-app.js?v=20260912c"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-name" href="index.html">M.&nbsp;Piccolo</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-menu" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="education.html">Education</a>
+      <a href="research.html">Research</a>
+      <a href="looking-ahead.html">Looking Ahead</a>
+      <a href="publications.html">Publications</a>
+      <a href="clinical.html">Clinical</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="media.html" aria-current="page">Media</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="pns">
+
+<nav class="pns-subnav" aria-label="Psicologia no Sofá">
+  <div class="wrap pns-subnav-inner">
+    <a class="pns-subnav-brand" href="psicologia-no-sofa.html">
+      <svg viewBox="0 0 200 130" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M28,92 L28,64 C28,54 34,48 44,48 C50,48 54,51 54,56 C54,44 62,38 74,38 L126,38 C138,38 146,44 146,56 C146,51 150,48 156,48 C166,48 172,54 172,64 L172,92 Z"/><line x1="54" y1="56" x2="54" y2="76"/><line x1="146" y1="56" x2="146" y2="76"/><line x1="54" y1="76" x2="146" y2="76"/><line x1="100" y1="40" x2="100" y2="76"/><path d="M46,92 L40,110"/><path d="M154,92 L160,110"/><path d="M74,92 L71,108"/><path d="M126,92 L129,108"/></g><rect x="60" y="52" width="28" height="28" rx="6" transform="rotate(-12 74 66)" fill="#E8846A" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>
+      <span>Psicologia no <b>Sofá</b></span>
+    </a>
+    <div class="pns-subnav-links"><a href="psicologia-no-sofa.html"><span class="pt">Início</span><span class="en">Home</span></a><a href="pns-agenda.html"><span class="pt">Próxima palestra</span><span class="en">Next lecture</span></a><a href="pns-gravacoes.html"><span class="pt">Gravações</span><span class="en">Recordings</span></a><a href="pns-aulas.html"><span class="pt">Aulas</span><span class="en">Lectures</span></a><a href="certificado.html"><span class="pt">Certificados</span><span class="en">Certificates</span></a><a href="pns-sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a></div>
+    
+  </div>
+</nav>
+<header class="page-hero pns-subhero">
+  <div class="wrap">
+    <p class="kicker">Psicologia no Sofá · conta</p>
+    <h1>Entrar no <span class="sofa">Sofá</span></h1>
+    <p class="standfirst">Uma conta gratuita para assistir às aulas gravadas, guardar o progresso e emitir certificados.</p>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-grid">
+        <div class="sec-label">
+          <h2>Sua conta</h2>
+          <p>Gratuita. Serve para guardar o seu progresso nas aulas e emitir os certificados. Usamos apenas nome e e-mail — veja a <a href="pns-privacidade.html">política de privacidade</a>.</p>
+        </div>
+        <div class="app-card">
+          <div class="app-tabs" role="tablist">
+            <button type="button" class="app-tab active" data-tab="login" role="tab" aria-selected="true">Entrar</button>
+            <button type="button" class="app-tab" data-tab="signup" role="tab" aria-selected="false">Criar conta</button>
+          </div>
+
+          <form class="cert-form" id="f-login" novalidate>
+            <div class="field"><label for="l-email">E-mail</label><input id="l-email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="l-pass">Senha</label><input id="l-pass" type="password" autocomplete="current-password" required minlength="8"></div>
+            <div class="form-foot"><button class="cta" type="submit">Entrar</button><button type="button" class="app-link" id="forgot">Esqueci a senha</button></div>
+            <p class="cert-error" id="l-err" role="alert" hidden></p>
+          </form>
+
+          <form class="cert-form" id="f-signup" novalidate hidden>
+            <div class="field"><label for="s-name">Nome completo <span>(como deve aparecer nos certificados)</span></label><input id="s-name" type="text" autocomplete="name" required maxlength="80"></div>
+            <div class="field"><label for="s-email">E-mail</label><input id="s-email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="s-pass">Senha <span>(mínimo 8 caracteres)</span></label><input id="s-pass" type="password" autocomplete="new-password" required minlength="8"></div>
+            <label class="app-check"><input type="checkbox" id="s-consent" required> Li e concordo com a <a href="pns-privacidade.html" target="_blank">política de privacidade</a>.</label>
+            <div class="form-foot"><button class="cta" type="submit">Criar conta</button></div>
+            <p class="cert-error" id="s-err" role="alert" hidden></p>
+          </form>
+
+          <form class="cert-form" id="f-reset" novalidate hidden>
+            <p class="form-note">Defina a sua nova senha.</p>
+            <div class="field"><label for="r-pass">Nova senha</label><input id="r-pass" type="password" autocomplete="new-password" required minlength="8"></div>
+            <div class="form-foot"><button class="cta" type="submit">Salvar senha</button></div>
+            <p class="cert-error" id="r-err" role="alert" hidden></p>
+          </form>
+
+          <p class="app-msg" id="msg" hidden></p>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>
+(function () {
+  var sb = PNS.sb, $ = function (i) { return document.getElementById(i); };
+  var next = PNS.qs("next") || "pns-aulas.html";
+  if (!/^[\w.-]+\.html(\?.*)?$/.test(next)) next = "pns-aulas.html";
+  function show(id) { ["f-login", "f-signup", "f-reset"].forEach(function (f) { $(f).hidden = f !== id; });
+    document.querySelectorAll(".app-tab").forEach(function (t) { var on = t.dataset.tab === (id === "f-signup" ? "signup" : "login"); t.classList.toggle("active", on); t.setAttribute("aria-selected", on); }); }
+  function err(id, m) { var e = $(id); e.textContent = m; e.hidden = !m; }
+  function msg(m) { $("msg").textContent = m; $("msg").hidden = !m; }
+  function pt(e) { var m = (e && e.message) || "";
+    if (/Invalid login/i.test(m)) return "E-mail ou senha incorretos.";
+    if (/already registered|already exists/i.test(m)) return "Já existe uma conta com este e-mail. Use “Entrar”.";
+    if (/rate limit|too many/i.test(m)) return "Muitas tentativas. Aguarde alguns minutos e tente de novo.";
+    if (/Password should be/i.test(m)) return "A senha precisa ter pelo menos 8 caracteres.";
+    if (/not confirmed/i.test(m)) return "E-mail ainda não confirmado. Verifique a sua caixa de entrada.";
+    return "Não foi possível concluir: " + m; }
+
+  document.querySelectorAll(".app-tab").forEach(function (t) { t.addEventListener("click", function () { show(t.dataset.tab === "signup" ? "f-signup" : "f-login"); msg(""); }); });
+  if (PNS.qs("modo") === "criar") show("f-signup");
+
+  $("f-login").addEventListener("submit", function (ev) { ev.preventDefault(); err("l-err", "");
+    sb.auth.signInWithPassword({ email: $("l-email").value.trim(), password: $("l-pass").value })
+      .then(function (r) { if (r.error) throw r.error; location.href = next; })
+      .catch(function (e) { err("l-err", pt(e)); }); });
+
+  $("f-signup").addEventListener("submit", function (ev) { ev.preventDefault(); err("s-err", "");
+    var name = $("s-name").value.replace(/\s+/g, " ").trim();
+    if (name.split(" ").length < 2) return err("s-err", "Digite o nome completo (nome e sobrenome).");
+    if (!$("s-consent").checked) return err("s-err", "É preciso concordar com a política de privacidade.");
+    sb.auth.signUp({ email: $("s-email").value.trim(), password: $("s-pass").value,
+                     options: { data: { full_name: name }, emailRedirectTo: PNS_CONFIG.siteUrl + "/pns-entrar.html" } })
+      .then(function (r) { if (r.error) throw r.error;
+        if (r.data.session) { location.href = next; }
+        else { msg("Conta criada. Enviamos um e-mail de confirmação para " + $("s-email").value.trim() + " — abra o link e depois entre."); show("f-login"); } })
+      .catch(function (e) { err("s-err", pt(e)); }); });
+
+  $("forgot").addEventListener("click", function () { err("l-err", "");
+    var email = $("l-email").value.trim(); if (!email) return err("l-err", "Digite o seu e-mail acima e clique de novo em “Esqueci a senha”.");
+    sb.auth.resetPasswordForEmail(email, { redirectTo: PNS_CONFIG.siteUrl + "/pns-entrar.html" })
+      .then(function (r) { if (r.error) throw r.error; msg("Se este e-mail tiver uma conta, você receberá um link para redefinir a senha."); })
+      .catch(function (e) { err("l-err", pt(e)); }); });
+
+  sb.auth.onAuthStateChange(function (event) { if (event === "PASSWORD_RECOVERY") { show("f-reset"); msg(""); } });
+  $("f-reset").addEventListener("submit", function (ev) { ev.preventDefault(); err("r-err", "");
+    sb.auth.updateUser({ password: $("r-pass").value }).then(function (r) { if (r.error) throw r.error; location.href = "pns-aulas.html"; })
+      .catch(function (e) { err("r-err", pt(e)); }); });
+
+  PNS.getSession().then(function (s) { if (s && !location.hash.includes("type=recovery")) location.replace(next); });
+})();
+</script>
+
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-name">Mayron Piccolo</p>
+        <p class="foot-role">Psychologist · Lecturer · Researcher</p>
+      </div>
+      <div>
+        <h2 class="foot-head">Profiles &amp; Links</h2>
+        <div class="links-row">
+          <a class="link-pill" href="https://scholar.google.com/citations?user=V1VsenYAAAAJ&amp;hl=en">Google Scholar</a>
+          <a class="link-pill" href="https://www.researchgate.net/profile/Mayron-Piccolo">ResearchGate</a>
+          <a class="link-pill" href="https://orcid.org/0000-0002-6882-7456">ORCID</a>
+          <a class="link-pill" href="https://psychology.fas.harvard.edu/people/mayron-piccolo">Harvard Psychology</a>
+          <a class="link-pill" href="https://www.linkedin.com/in/mayron-piccolo/">LinkedIn</a>
+          <a class="link-pill" href="https://x.com/piccolo__m">X / Twitter</a>
+        </div>
+      </div>
+    </div>
+    <p class="colophon">Mayron Pereira Piccolo Ribeiro, PhD, BCBA · Department of Psychology, Harvard University · Cambridge, MA</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement, buttons = document.querySelectorAll("[data-set-lang]");
+    function apply(lang) {
+      root.setAttribute("data-lang", lang);
+      root.lang = lang === "en" ? "en" : "pt-BR";
+      buttons.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-set-lang") === lang); });
+      try { localStorage.setItem("pns-lang", lang); } catch (e) {}
+    }
+    buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-set-lang")); }); });
+    apply(root.getAttribute("data-lang") === "en" ? "en" : "pt");
+  })();
+</script>
+</body>
+</html>
