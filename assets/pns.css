@@ -196,8 +196,9 @@
 .pns .index-card:hover { background: var(--panel); }
 .pns .index-card .ic-go { color: var(--accent); }
 .pns .index-card h3 { color: var(--petrol); }
-.pns .index-grid { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 1000px) { .pns .index-grid { grid-template-columns: repeat(2, 1fr); } }
+.pns .index-grid { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 1100px) { .pns .index-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) { .pns .index-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .pns .index-grid { grid-template-columns: 1fr; } }
 
 /* ============================================================
@@ -269,3 +270,10 @@
 .pns .cert-tabs a:hover { color: var(--accent); }
 .pns .cert-tabs a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--coral); }
 .pns .cert-panel { border-top: 0 !important; }
+
+/* install page */
+.pns .app-steps { margin: 12px 0 0; padding-left: 22px; font-size: .98rem; line-height: 1.6; color: var(--ink-soft); }
+.pns .app-steps li { margin-bottom: 8px; }
+.pns .app-steps strong { color: var(--ink); }
+.pns .ios-share { width: 18px; height: 18px; vertical-align: -3px; fill: var(--petrol); }
+.pns .index-card h3 { font-size: 1.2rem; }

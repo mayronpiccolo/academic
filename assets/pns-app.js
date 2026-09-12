@@ -3,6 +3,7 @@
 (function (global) {
   "use strict";
   var cfg = global.PNS_CONFIG;
+  if (!global.supabase) { console.warn("supabase-js não carregou"); return; }
   var sb = global.supabase.createClient(cfg.supabaseUrl, cfg.supabaseKey, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
   });
