@@ -24,14 +24,14 @@
 <meta name="twitter:title" content="Psicologia no Sofá"><meta name="twitter:description" content="Palestras gratuitas, online e ao vivo com pesquisadores de referência em psicologia e análise do comportamento — em português, direto da fonte. Gravações abertas e certificados."><meta name="twitter:image" content="https://mayronpiccolo.com/assets/pns-og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/sofa.css?v=20260913a">
+<link rel="stylesheet" href="assets/sofa.css?v=20260913c">
 <script>
   (function () { try { var q = new URLSearchParams(location.search).get("lang"), s = localStorage.getItem("pns-lang");
     var l = (q === "en" || q === "pt") ? q : (s === "en" ? "en" : "pt"); document.documentElement.setAttribute("data-lang", l); document.documentElement.lang = l === "en" ? "en" : "pt-BR"; } catch (e) {} })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="assets/pns-config.js?v=20260913a"></script>
-<script src="assets/pns-app.js?v=20260913a"></script>
+<script src="assets/pns-config.js?v=20260913c"></script>
+<script src="assets/pns-app.js?v=20260913c"></script>
 
 </head>
 <body>
@@ -59,17 +59,25 @@
     <div class="actions"><a class="btn btn-primary" href="conversas.html"><span class="pt">Explorar conteúdos</span><span class="en">Explore content</span></a><a class="btn btn-secondary" href="entrar.html?modo=criar"><span class="pt">Criar conta grátis</span><span class="en">Create a free account</span></a></div>
     <div class="trust"><span><span class="pt">Conversas gratuitas</span><span class="en">Free conversations</span></span><span><span class="pt">Certificados verificáveis</span><span class="en">Verifiable certificates</span></span><span><span class="pt">Desde 2020</span><span class="en">Since 2020</span></span></div>
   </div>
-  <div class="hero-visual" aria-hidden="true">
-    <div class="card c1"><img src="https://i.ytimg.com/vi/vKcA-AX3qW4/mqdefault.jpg" alt=""><span class="cap">A. Charles Catania · Master class</span></div>
-    <div class="card c2"><div class="mono">Steven C.<br>Hayes<small>6 out · ao vivo</small></div></div>
-    <div class="card c3"><img src="https://i.ytimg.com/vi/xLBR6By3Nxs/mqdefault.jpg" alt=""><span class="cap">Christian Dunker</span></div>
-    <span class="coral-line"></span>
+  <div class="hero-visual">
+    <div class="strip" id="hero-strip" aria-label="<span class="pt">Conversas em destaque</span><span class="en">Featured conversations</span>">
+      <a class="strip-card" href="hayes.html"><div class="media"><div class="mono"><span>SH</span></div></div><div class="cap"><b>Steven C. Hayes</b><span>Ao vivo · 6 de outubro</span></div></a>
+      <a class="strip-card" href="conversa.html?id=catania-2020-1"><div class="media"><img src="https://i.ytimg.com/vi/vKcA-AX3qW4/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"></div><div class="cap"><b>A. Charles Catania</b><span>Evolution of a Science</span></div></a>
+      <a class="strip-card" href="conversa.html?id=dunker-2020"><div class="media"><img class="portrait" src="assets/speakers/dunker.png" alt="" loading="lazy" width="400" height="400"></div><div class="cap"><b>Christian Dunker</b><span>Atendimento online</span></div></a>
+      <a class="strip-card" href="conversa.html?id=baum-2020"><div class="media"><img class="portrait" src="assets/speakers/baum.png" alt="" loading="lazy" width="400" height="400"></div><div class="cap"><b>William M. Baum</b><span>Three laws of behavior</span></div></a>
+      <a class="strip-card" href="conversa.html?id=hubner-2020"><div class="media"><img src="https://i.ytimg.com/vi/aJ18SWLTUpg/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"></div><div class="cap"><b>Martha Hübner</b><span>Intervenções para a COVID-19</span></div></a>
+      <a class="strip-card" href="conversa.html?id=higbee-2020"><div class="media"><img class="portrait" src="assets/speakers/higbee.png" alt="" loading="lazy" width="400" height="400"></div><div class="cap"><b>Thomas Higbee</b><span>Rotina de atividades</span></div></a>
+      <a class="strip-card" href="conversa.html?id=moraes-2020"><div class="media"><img src="https://i.ytimg.com/vi/fv11gwuqZI8/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"></div><div class="cap"><b>Rui de Moraes Jr.</b><span>Raça e status social</span></div></a>
+      <a class="strip-card" href="conversa.html?id=gusso-2020"><div class="media"><img class="portrait" src="assets/speakers/gusso.png" alt="" loading="lazy" width="400" height="400"></div><div class="cap"><b>Helder Gusso</b><span>Ensino superior na pandemia</span></div></a>
+      <a class="strip-card" href="conversa.html?id=castro-2020"><div class="media"><img src="https://i.ytimg.com/vi/H3n9yjmGZUo/mqdefault.jpg" alt="" loading="lazy" width="320" height="180"></div><div class="cap"><b>Jorge Oliveira-Castro</b><span>Comportamento do consumidor</span></div></a>
+    </div>
+    <div class="strip-nav"><button type="button" class="strip-btn" data-dir="-1" aria-label="Anterior">‹</button><button type="button" class="strip-btn" data-dir="1" aria-label="Próximo">›</button></div>
   </div>
 </div></section>
 
 <section class="proof"><div class="wrap proof-grid">
   <div class="proof-item"><b>4.000+</b><span><span class="pt">participantes desde 2020</span><span class="en">participants since 2020</span></span></div>
-  <div class="proof-item"><b>14+</b><span><span class="pt">conversas gravadas, com certificado</span><span class="en">recorded conversations, with certificate</span></span></div>
+  <div class="proof-item"><b>23h</b><span><span class="pt">de atividade gratuita, com certificado</span><span class="en">of free certified activity</span></span></div>
   <div class="proof-item"><b>2020</b><span><span class="pt">ano de fundação, no auge da pandemia</span><span class="en">founded, at the height of the pandemic</span></span></div>
   <div class="proof-item"><b><span class="pt">Grátis</span><span class="en">Free</span></b><span><span class="pt">todas as Conversas, para sempre</span><span class="en">every Conversation, always</span></span></div>
 </div></section>
@@ -81,10 +89,11 @@
   <div class="speakers">
     <a class="speaker featured" href="hayes.html"><span class="tag tag-coral"><span class="pt">Ao vivo · 6 out</span><span class="en">Live · Oct 6</span></span><div class="portrait"><span class="initials">SH</span></div><div class="body"><h3>Steven C. Hayes</h3><p class="pt">Psicólogo clínico, criador da Terapia de Aceitação e Compromisso (ACT)</p><p class="en">Clinical psychologist, originator of Acceptance and Commitment Therapy (ACT)</p></div></a>
     <a class="speaker" href="conversa.html?id=catania-2020-1"><div class="portrait"><span class="initials">CC</span></div><div class="body"><h3>A. Charles Catania</h3><p class="pt">Cientista do comportamento e autor</p><p class="en">Behavior scientist and author</p></div></a>
-    <a class="speaker" href="conversa.html?id=baum-2020"><div class="portrait"><span class="initials">WB</span></div><div class="body"><h3>William M. Baum</h3><p class="pt">Cientista do comportamento e autor</p><p class="en">Behavior scientist and author</p></div></a>
+    <a class="speaker" href="conversa.html?id=baum-2020"><div class="portrait"><img src="assets/speakers/baum.png" alt="" loading="lazy" width="400" height="400"></div><div class="body"><h3>William M. Baum</h3><p class="pt">Cientista do comportamento e autor</p><p class="en">Behavior scientist and author</p></div></a>
     <a class="speaker" href="conversa.html?id=hubner-2020"><div class="portrait"><span class="initials">MH</span></div><div class="body"><h3>Martha Hübner</h3><p class="pt">Análise do comportamento aplicada à saúde</p><p class="en">Behavior analysis applied to health</p></div></a>
-    <a class="speaker" href="conversa.html?id=dunker-2020"><div class="portrait"><span class="initials">CD</span></div><div class="body"><h3>Christian Dunker</h3><p class="pt">Psicanalista e professor</p><p class="en">Psychoanalyst and professor</p></div></a>
-    <a class="speaker" href="conversa.html?id=higbee-2020"><div class="portrait"><span class="initials">TH</span></div><div class="body"><h3>Thomas Higbee</h3><p class="pt">ABA e autismo</p><p class="en">ABA and autism</p></div></a>
+    <a class="speaker" href="conversa.html?id=dunker-2020"><div class="portrait"><img src="assets/speakers/dunker.png" alt="" loading="lazy" width="400" height="400"></div><div class="body"><h3>Christian Dunker</h3><p class="pt">Psicanalista e professor</p><p class="en">Psychoanalyst and professor</p></div></a>
+    <a class="speaker" href="conversa.html?id=higbee-2020"><div class="portrait"><img src="assets/speakers/higbee.png" alt="" loading="lazy" width="400" height="400"></div><div class="body"><h3>Thomas Higbee</h3><p class="pt">ABA e autismo</p><p class="en">ABA and autism</p></div></a>
+    <a class="speaker" href="conversa.html?id=gusso-2020"><div class="portrait"><img src="assets/speakers/gusso.png" alt="" loading="lazy" width="400" height="400"></div><div class="body"><h3>Helder Gusso</h3><p class="pt">Análise do comportamento e educação</p><p class="en">Behavior analysis and education</p></div></a>
   </div>
   <p class="small" style="margin-top:16px"><a class="more" href="conversas.html"><span class="pt">Conheça todos os convidados →</span><span class="en">Meet all the speakers →</span></a></p>
 </div></section>
@@ -187,7 +196,7 @@
     <p class="roles"><span class="pt">Psicólogo · Pesquisador · Educador</span><span class="en">Psychologist · Researcher · Educator</span></p>
     <p class="pt" style="color:var(--muted);max-width:56ch">Psicólogo clínico e analista do comportamento, professor no Departamento de Psicologia da Universidade Harvard. Criou o Psicologia no Sofá para encurtar a distância entre quem produz conhecimento em Psicologia e quem precisa dele na prática.</p>
     <p class="en" style="color:var(--muted);max-width:56ch">Clinical psychologist and behavior analyst, Lecturer in the Department of Psychology at Harvard University. He created Psicologia no Sofá to shorten the distance between those who produce psychological knowledge and those who need it in practice.</p>
-    <p style="margin-top:18px"><a class="more" href="https://mayronpiccolo.com/about.html"><span class="pt">Conheça Mayron →</span><span class="en">Meet Mayron →</span></a></p>
+    <div class="links-row" style="margin-top:18px"><a class="link-pill" href="https://mayronpiccolo.com/about.html"><span class="pt">Conheça Mayron →</span><span class="en">Meet Mayron →</span></a><a class="link-pill" href="https://www.instagram.com/picc__m/">@picc__m</a></div>
   </div>
 </div></section>
 
@@ -197,6 +206,17 @@
   <p class="lead" style="margin:14px auto 0"><span class="pt">Conta gratuita, conversas abertas, certificado ao concluir.</span><span class="en">Free account, open conversations, certificate on completion.</span></p>
   <div class="actions"><a class="btn btn-primary" href="entrar.html?modo=criar"><span class="pt">Criar conta gratuita</span><span class="en">Create a free account</span></a><a class="btn btn-secondary" href="conversas.html"><span class="pt">Ver as Conversas</span><span class="en">See the Conversations</span></a></div>
 </div></section>
+
+<script>
+(function () {
+  var s = document.getElementById("hero-strip"); if (!s) return;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches, paused = false, timer;
+  function step(dir) { var w = s.querySelector(".strip-card").getBoundingClientRect().width + 14; s.scrollBy({ left: dir * w, behavior: "smooth" }); }
+  document.querySelectorAll(".strip-btn").forEach(function (b) { b.addEventListener("click", function () { step(+b.dataset.dir); paused = true; }); });
+  function tick() { if (paused || document.hidden) return; if (s.scrollLeft + s.clientWidth >= s.scrollWidth - 4) s.scrollTo({ left: 0, behavior: "smooth" }); else step(1); }
+  if (!reduce) { timer = setInterval(tick, 3800); s.addEventListener("pointerenter", function () { paused = true; }); s.addEventListener("pointerleave", function () { paused = false; }); s.addEventListener("touchstart", function () { paused = true; }, { passive: true }); }
+})();
+</script>
 
 </main>
 
@@ -212,7 +232,7 @@
       <div><h4><span class="pt">Institucional</span><span class="en">About</span></h4><ul><li><a href="sobre.html"><span class="pt">Sobre o projeto</span><span class="en">About the project</span></a></li><li><a href="https://www.instagram.com/psicologianosofa/">Instagram</a></li><li><a href="termos.html"><span class="pt">Termos de uso</span><span class="en">Terms of use</span></a></li><li><a href="privacidade.html"><span class="pt">Privacidade</span><span class="en">Privacy</span></a></li><li><a href="https://mayronpiccolo.com/contact.html"><span class="pt">Contato</span><span class="en">Contact</span></a></li></ul></div>
     </div>
     <div class="colophon">
-      <span><span class="pt">Fundado em 2020 por</span><span class="en">Founded in 2020 by</span> <a href="https://mayronpiccolo.com/">Mayron Piccolo, PhD, BCBA</a>.</span>
+      <span><span class="pt">Fundado em 2020</span><span class="en">Founded in 2020</span>.</span>
       <span>© 2026 Psicologia no Sofá</span>
     </div>
   </div>
