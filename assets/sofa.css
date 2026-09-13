@@ -178,11 +178,11 @@ button { font-family: inherit; }
 
 /* ---------- courses split ---------- */
 .split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
-.split .visual { border-radius: 18px; overflow: hidden; background: var(--mint); aspect-ratio: 4 / 3; position: relative; }
+.split .visual { border-radius: 18px; overflow: hidden; background: var(--mint); min-height: 320px; position: relative; display: flex; align-items: center; padding: clamp(28px, 4vw, 48px) 9%; }
 .split .visual .texture { position: absolute; inset: 0; background:
   repeating-linear-gradient(0deg, transparent 0 34px, rgba(44,74,84,.10) 34px 35px),
   linear-gradient(135deg, var(--mint), var(--sand)); }
-.split .visual .quote { position: absolute; left: 8%; right: 8%; top: 18%; font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 500; color: var(--petrol); line-height: 1.6; }
+.split .visual .quote { position: relative; margin: 0; width: 100%; font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 500; color: var(--petrol); line-height: 1.6; }
 .split .visual .quote::before { content: "“"; display: block; font-size: 3rem; line-height: .6; color: var(--coral); margin-bottom: 10px; }
 .split .visual .quote cite { display: block; margin-top: 14px; font-style: normal; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .course-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 22px; }
