@@ -22,25 +22,23 @@
   }
   function requireAuth() {
     return getSession().then(function (s) {
-      if (!s) { location.replace("pns-entrar.html?next=" + encodeURIComponent(location.pathname.split("/").pop() + location.search)); throw new Error("redirect"); }
+      if (!s) { location.replace("entrar.html?next=" + encodeURIComponent(location.pathname.split("/").pop() + location.search)); throw new Error("redirect"); }
       return s;
     });
   }
   function signOut() { return sb.auth.signOut().then(function () { location.href = "psicologia-no-sofa.html"; }); }
 
-  /* account chip in the PnS sub-navigation */
+  /* account control in the platform navigation (#nav-account) */
   function mountAccount() {
-    var host = document.querySelector(".pns-subnav-inner"); if (!host) return;
-    var slot = document.createElement("div"); slot.className = "pns-account"; host.appendChild(slot);
+    var slot = document.getElementById("nav-account"); if (!slot) return;
     function render(session) {
       if (session) {
         var email = session.user.email || "";
-        slot.innerHTML = '<a class="pns-account-link" href="pns-aulas.html" title="' + esc(email) + '">' +
-          '<span class="dot"></span>' + esc(email.length > 22 ? email.slice(0, 20) + "…" : email) + '</a>' +
+        slot.innerHTML = '<a class="btn btn-primary btn-sm" href="minha-conta.html" title="' + esc(email) + '">Minha conta</a>' +
           '<button type="button" class="chip" data-signout>Sair</button>';
         slot.querySelector("[data-signout]").addEventListener("click", signOut);
       } else {
-        slot.innerHTML = '<a class="chip pns-account-enter" href="pns-entrar.html">Entrar</a>';
+        slot.innerHTML = '<a class="btn btn-primary btn-sm" href="entrar.html">Entrar</a>';
       }
     }
     getSession().then(render);
