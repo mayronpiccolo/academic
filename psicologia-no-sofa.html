@@ -24,14 +24,14 @@
 <meta name="twitter:title" content="Psicologia no Sofá"><meta name="twitter:description" content="Palestras gratuitas, online e ao vivo com pesquisadores de referência em psicologia e análise do comportamento — em português, direto da fonte. Gravações abertas e certificados."><meta name="twitter:image" content="https://mayronpiccolo.com/assets/pns-og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/sofa.css?v=20260913f">
+<link rel="stylesheet" href="assets/sofa.css?v=20260913h">
 <script>
   (function () { try { var q = new URLSearchParams(location.search).get("lang"), s = localStorage.getItem("pns-lang");
     var l = (q === "en" || q === "pt") ? q : (s === "en" ? "en" : "pt"); document.documentElement.setAttribute("data-lang", l); document.documentElement.lang = l === "en" ? "en" : "pt-BR"; } catch (e) {} })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="assets/pns-config.js?v=20260913f"></script>
-<script src="assets/pns-app.js?v=20260913f"></script>
+<script src="assets/pns-config.js?v=20260913h"></script>
+<script src="assets/pns-app.js?v=20260913h"></script>
 
 </head>
 <body>
@@ -221,6 +221,14 @@
     function tick() { if (paused || document.hidden) return; if (s.scrollLeft + s.clientWidth >= s.scrollWidth - 4) s.scrollTo({ left: 0, behavior: "smooth" }); else step(1); }
     if (!reduce && s.dataset.auto !== "off") { setInterval(tick, 3800); s.addEventListener("pointerenter", function () { paused = true; }); s.addEventListener("pointerleave", function () { paused = false; }); s.addEventListener("touchstart", function () { paused = true; }, { passive: true }); }
   });
+  var sp = document.getElementById("founder-spot");
+  if (sp) {
+    var slides = sp.querySelectorAll(".spot"), dots = document.querySelector(".spot-dots"), i = 0, hold = false, spReduce = reduce;
+    slides.forEach(function (sl, k) { var d = document.createElement("button"); d.type = "button"; d.setAttribute("role", "tab"); d.setAttribute("aria-label", sl.dataset.name); d.addEventListener("click", function () { go(k); hold = true; }); dots.appendChild(d); });
+    function go(k) { i = (k + slides.length) % slides.length; slides.forEach(function (sl, j) { sl.classList.toggle("active", j === i); }); dots.querySelectorAll("button").forEach(function (d, j) { d.classList.toggle("active", j === i); d.setAttribute("aria-selected", j === i); }); }
+    go(0);
+    if (!spReduce) { setInterval(function () { if (!hold && !document.hidden) go(i + 1); }, 6000); sp.addEventListener("pointerenter", function () { hold = true; }); sp.addEventListener("pointerleave", function () { hold = false; }); }
+  }
 })();
 </script>
 
