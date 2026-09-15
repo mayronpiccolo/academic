@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>The Listening Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,700&family=Archivo:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F1E7; --panel: #FFFDF8; --ink: #191C20; --ink-soft: #575D66;
+    --line: #E0D8C7; --rule: #191C20;
+    --accent: #A85A0F; --accent-deep: #8A4A0C; --accent-soft: #F1E3C9;
+    --blue: #2C4A5E; --blue-soft: #DFE9EF;
+    --melody: #C25A0A; --time: #0794A5; --gestalt: #3D6FB0; --illusion: #93337F;
+    --good: #2E8B57;
+    --shadow: 0 1px 2px rgba(25,28,32,.05), 0 10px 32px rgba(25,28,32,.08);
+    --serif: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+    --sans: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+  header.site { border-bottom: 1px solid var(--rule); }
+  .head-inner { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; flex-wrap: wrap; }
+  .course-tag, .head-note { font-family: var(--sans); font-size: .67rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+
+  .hero { padding: clamp(28px, 5vw, 56px) 0 clamp(12px, 2vw, 20px); }
+  h1 { font-weight: 700; font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.06; margin: 0 0 14px; letter-spacing: -.01em; text-wrap: balance; }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lede { max-width: 62ch; color: var(--ink-soft); margin: 0 0 10px; font-size: 1.06rem; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  .soundcheck { font-family: var(--sans); font-size: .78rem; color: var(--ink-soft); display: inline-flex; gap: 8px; align-items: center; border: 1px dashed var(--line); background: var(--panel); border-radius: 999px; padding: 6px 14px; }
+
+  nav.toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 0 26px; }
+  nav.toc a { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .05em; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 6px 13px; color: var(--ink); display: inline-flex; align-items: center; gap: 7px; }
+  nav.toc a:hover { border-color: var(--ink); text-decoration: none; }
+  nav.toc .dot { width: 9px; height: 9px; border-radius: 50%; }
+
+  section.block { padding: clamp(24px, 4vw, 40px) 0 4px; }
+  .kicker { font-family: var(--sans); font-size: .67rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 6px; }
+  h2.block-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin: 0 0 10px; letter-spacing: -.01em; }
+  .prose { max-width: 68ch; }
+  .prose p { margin: 0 0 12px; }
+
+  .demo { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 20px 22px 18px; margin: 18px 0 26px; }
+  .demo-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .demo h3 { font-size: 1.18rem; margin: 0; }
+  .demo .tag { font-family: var(--sans); font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-soft); }
+  .demo p.exp { font-size: .95rem; color: var(--ink-soft); margin: 4px 0 12px; max-width: 72ch; }
+  .demo p.exp strong { color: var(--ink); }
+
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0; }
+  .btn { font-family: var(--sans); font-size: .76rem; font-weight: 600; letter-spacing: .03em; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
+  .btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .btn.ghost { background: var(--panel); color: var(--ink); border-color: var(--line); }
+  .btn.ghost:hover { border-color: var(--ink); background: var(--panel); }
+  .btn.stop { background: var(--panel); color: #8A2E2E; border-color: #C9A0A0; }
+  .btn:disabled { opacity: .45; cursor: default; }
+  label.ctl { font-family: var(--sans); font-size: .74rem; font-weight: 600; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 8px; }
+  input[type="range"] { accent-color: var(--accent); width: 150px; }
+  .readout { font-family: var(--sans); font-size: .74rem; color: var(--ink); min-width: 7ch; font-variant-numeric: tabular-nums; }
+  .note-line { font-family: var(--sans); font-size: .76rem; color: var(--ink-soft); margin-top: 8px; }
+  .note-line strong { color: var(--ink); }
+  .reveal { font-family: var(--sans); font-size: .8rem; font-weight: 600; margin-top: 8px; }
+
+  .headphones { display: inline-flex; align-items: center; gap: 7px; font-family: var(--sans); font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #7A1E5E; border: 1px solid #D8B6CC; background: #F6E9F1; padding: 4px 11px; border-radius: 999px; }
+
+  svg.widget { display: block; width: 100%; height: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+  .kbd-note { cursor: pointer; }
+  .grid-cell { cursor: pointer; }
+
+  .rating-row { display: flex; gap: 6px; align-items: center; }
+  .rate-btn { font-family: var(--sans); font-size: .78rem; font-weight: 600; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); cursor: pointer; }
+  .rate-btn:hover { border-color: var(--ink); }
+
+  .refs { font-size: .9rem; max-width: 78ch; }
+  .refs p { margin: 0 0 10px; padding-left: 1.6em; text-indent: -1.6em; }
+  .license-note { font-family: var(--sans); font-size: .78rem; color: var(--ink-soft); max-width: 78ch; border-left: 3px solid var(--accent-soft); padding-left: 14px; margin-top: 16px; }
+  footer.site { border-top: 1px solid var(--rule); margin-top: 44px; padding: 20px 0 34px; }
+  footer.site .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--sans); font-size: .72rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap head-inner">
+    <span class="course-tag">PSY 1018 · The Science and Psychology of Music · Harvard College</span>
+    <span class="head-note">12 interactive sound demos · bring headphones</span>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <h1>The <em>Listening</em> Lab</h1>
+  <p class="lede">Melodies are head as one coherent piece. For learning purposes, this page takes a melody apart — <strong>pitch height and chroma, intervals, contour, key</strong>, and the <strong>time</strong> it rides on — and then shows what potentially puts it back together, using the <strong>Gestalt principles</strong> as a guide.</p>
+  <span class="soundcheck">🔊 Click any Play button to wake up the audio — and use <strong>headphones</strong> for the illusions.</span>
+  <nav class="toc" aria-label="Sections">
+    <a href="#melody"><span class="dot" style="background:var(--melody)"></span>Melody</a>
+    <a href="#time"><span class="dot" style="background:var(--time)"></span>Time</a>
+    <a href="#gestalt"><span class="dot" style="background:var(--gestalt)"></span>What binds it</a>
+    <a href="#illusion"><span class="dot" style="background:var(--illusion)"></span>The scale illusion</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+
+<section class="block" id="melody">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--melody)">Part 1 · The elements of melody</p>
+    <h2 class="block-title">Pitch is more than high versus low</h2>
+    <div class="prose">
+      <p>Musical pitch is multidimensional. One dimension is <em>pitch height</em> — how high or low a tone sits, tied to frequency. The more musically important one is <em>chroma</em> — the pitch class a note belongs to (C, D, E…). Tones an octave apart share a chroma (<em>octave equivalence</em>), which is why the pitch space is drawn as a helix: height rises along the spiral while chroma circles back every octave.</p>
+    </div>
+
+    <div class="demo" id="demo-helix">
+      <div class="demo-head"><h3>1 · Height vs. chroma</h3><span class="tag">Pitch helix</span></div>
+      <p class="exp">Play a note, then the <strong>same chroma one octave up</strong> — different height, same "family." Then climb Shepard's endless staircase: tones built to have clear chroma but ambiguous height, so the scale seems to rise forever without getting anywhere.</p>
+      <div id="helix-widget"></div>
+      <div class="row">
+        <button class="btn" id="shepardBtn">▶ Endless staircase (Shepard tones)</button>
+        <button class="btn stop" id="shepardStop" disabled>■ Stop</button>
+        <span class="note-line" style="margin:0">Chroma keeps cycling; height seems to keep rising.</span>
+      </div>
+    </div>
+
+    <div class="demo" id="demo-contour">
+      <div class="demo-head"><h3>2 · Intervals &amp; contour</h3><span class="tag">Melody sketcher</span></div>
+      <p class="exp">Draw a melody by clicking cells, then play it. <strong>Transpose</strong> it: every pitch changes but every interval survives — and it sounds like the <em>same</em> tune (relative pitch). Then keep only the ups-and-downs and scramble the interval sizes: contour alone preserves a family resemblance, but it's no longer quite your melody.</p>
+      <div id="contour-widget"></div>
+      <div class="row">
+        <button class="btn" id="contourPlay">▶ Play my melody</button>
+        <button class="btn ghost" id="contourTranspose">Transpose +5 semitones (same intervals)</button>
+        <button class="btn ghost" id="contourWarp">Same contour, new intervals</button>
+        <button class="btn ghost" id="contourReset">Reset sketch</button>
+      </div>
+      <p class="note-line">Most of us carry melodies as <strong>relations, not absolute pitches</strong> — which is why a tune survives being started too high, too low, or by a room that cannot agree on a starting note.</p>
+    </div>
+
+    <div class="demo" id="demo-key">
+      <div class="demo-head"><h3>3 · Key: run your own probe-tone experiment</h3><span class="tag">Krumhansl &amp; Shepard (1979)</span></div>
+      <p class="exp">The context is a C-major scale that stops one note short — <em>do re mi fa sol la ti</em>, left hanging on the leading tone, exactly where Mendelssohn's visitor left him. Then you hear a single probe tone. Rate how well the probe <strong>fits</strong> that context, 1 (terrible) to 7 (perfect). Do all six and your ratings are plotted against the Krumhansl &amp; Kessler tonal hierarchy: tonic highest, then dominant (5th)and mediant (3rd), then the other in-key tones, out-of-key tones last.</p>
+      <div class="row">
+        <button class="btn" id="probeBtn">▶ Play context + probe 1 of 6</button>
+        <button class="btn ghost" id="probeReset">↺ Start over</button>
+        <span class="readout" id="probeLabel"></span>
+      </div>
+      <div class="row rating-row" id="probeRating" hidden>
+        <span class="tag" style="margin-right:4px">Fit:</span>
+      </div>
+      <div id="probe-chart"></div>
+      <p class="note-line" id="probeSummary"></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="time">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--time)">Part 2 · Time (a preview of the rhythm chapter)</p>
+    <h2 class="block-title">Tempo, meter, rhythm</h2>
+    <div class="prose">
+      <p>Melody rides on time. <em>Tempo</em> is the speed of the underlying pulse; <em>meter</em> is how those pulses are grouped into recurring strong–weak cycles; <em>rhythm</em> is the actual pattern of event durations laid over that grid. The demos below separate the three — notice how your mind <em>imposes</em> a meter.</p>
+    </div>
+
+    <div class="demo" id="demo-tempo">
+      <div class="demo-head"><h3>4 · Tempo</h3><span class="tag">Same tune, new clock</span></div>
+      <p class="exp">At what tempo does the melody stop sounding like a lullaby and start sounding like a dance?</p>
+      <div class="row">
+        <button class="btn" id="tempoPlay">▶ Play</button>
+        <button class="btn stop" id="tempoStop" disabled>■ Stop</button>
+        <label class="ctl">Tempo <input type="range" id="tempoSlider" min="40" max="220" value="100"> <span class="readout" id="tempoVal">100 BPM</span></label>
+      </div>
+    </div>
+
+    <div class="demo" id="demo-meter">
+      <div class="demo-head"><h3>5 · Meter</h3><span class="tag">March or waltz?</span></div>
+      <p class="exp">Identical clicks. Accent every <strong>2nd</strong> and it marches; accent every <strong>3rd</strong> and it waltzes; remove the accents and — listen — your mind still tries to group the ticks itself (subjective meter).</p>
+      <div class="row">
+        <button class="btn" id="meterPlay">▶ Play clicks</button>
+        <button class="btn stop" id="meterStop" disabled>■ Stop</button>
+        <label class="ctl">Accent every
+          <select id="meterSel" style="font-family:var(--sans);font-size:.76rem;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper)">
+            <option value="0">— (none)</option>
+            <option value="2" selected>2nd click (duple)</option>
+            <option value="3">3rd click (triple)</option>
+            <option value="4">4th click (quadruple)</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="demo" id="demo-rhythm">
+      <div class="demo-head"><h3>6 · Rhythm</h3><span class="tag">Pattern over pulse</span></div>
+      <p class="exp">The bottom row is the pulse (the meter's grid). Click cells in the top row to place notes — the <strong>rhythm</strong> is your pattern's timing against that steady grid.</p>
+      <div id="rhythm-widget"></div>
+      <div class="row">
+        <button class="btn" id="rhythmPlay">▶ Loop it</button>
+        <button class="btn stop" id="rhythmStop" disabled>■ Stop</button>
+        <button class="btn ghost" id="rhythmClear">Clear</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="gestalt">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--gestalt)">Part 3 · What binds a melody together</p>
+    <h2 class="block-title">Gestalt principles, in sound</h2>
+    <div class="prose">
+      <p>A melody's tones arrive one by one, like loose beads — yet you hear a strand, not beads. Bregman called the sorting job <em>auditory scene analysis</em>, and argued the Gestalt grouping principles are its rules: <strong>proximity</strong> (in pitch and time), <strong>similarity</strong> (timbre), <strong>good continuation</strong>, and <strong>closure</strong>. Each demo below turns one principle up or down until the melody either fuses or falls apart.</p>
+    </div>
+
+    <div class="demo" id="demo-stream">
+      <div class="demo-head"><h3>7 · Proximity I: one stream or two?</h3><span class="tag">Auditory streaming</span></div>
+      <p class="exp">Two tones alternate: low, high, low, high. When they're <strong>close in pitch or slow</strong>, you hear one bouncing melody. Pull them apart — or speed them up — and the sequence splits into two parallel streams. Find your own boundary.</p>
+      <div class="row">
+        <button class="btn" id="streamPlay">▶ Play</button>
+        <button class="btn stop" id="streamStop" disabled>■ Stop</button>
+        <label class="ctl">Pitch separation <input type="range" id="streamSep" min="1" max="18" value="3"> <span class="readout" id="streamSepVal">3 st</span></label>
+        <label class="ctl">Speed <input type="range" id="streamRate" min="2" max="12" value="5"> <span class="readout" id="streamRateVal">5 /s</span></label>
+      </div>
+      <p class="note-line">Melodies worldwide favor <strong>small intervals</strong> — proximity is what keeps a line sounding like a line.</p>
+    </div>
+
+    <div class="demo" id="demo-interleave">
+      <div class="demo-head"><h3>8 · Proximity II: Dowling's interleaved melodies</h3><span class="tag">Dowling (1973)</span></div>
+      <p class="exp">Two very familiar tunes, note-about-note: A1, B1, A2, B2… Sharing one pitch range, they're an unrecognizable tangle — like reading ITNWTOEMRELLEOADVIEEDS. Slide melody B upward and, at some separation, both tunes pop out. Can you name them <em>before</em> you separate them?</p>
+      <div class="row">
+        <button class="btn" id="ilPlay">▶ Play interleaved</button>
+        <button class="btn stop" id="ilStop" disabled>■ Stop</button>
+        <label class="ctl">Separate melody B by <input type="range" id="ilSep" min="0" max="19" value="0"> <span class="readout" id="ilSepVal">0 st</span></label>
+        <button class="btn ghost" id="ilReveal">Reveal the tunes</button>
+      </div>
+      <p class="reveal" id="ilAnswer" hidden></p>
+    </div>
+
+    <div class="demo" id="demo-scramble">
+      <div class="demo-head"><h3>9 · Proximity III: the octave-scrambled melody</h3><span class="tag">Deutsch's "mysterious melody"</span></div>
+      <p class="exp">Violate pitch proximity and the tones "fly apart": most listeners cannot name a melody they have known since childhood. Guess first, then hear the octaves put back.</p>
+      <div class="row">
+        <button class="btn" id="scramblePlay">▶ Play the mystery melody</button>
+        <button class="btn ghost" id="scrambleNew">New scramble</button>
+        <button class="btn ghost" id="scrambleReveal">▶ Restore the octaves</button>
+        <label class="ctl"><input type="checkbox" id="scrambleFlat"> Flatten the rhythm too</label>
+      </div>
+      <p class="reveal" id="scrambleAnswer" hidden></p>
+    </div>
+
+    <div class="demo" id="demo-timbre">
+      <div class="demo-head"><h3>10 · Similarity: timbre takes over</h3><span class="tag">Grouping by sound color</span></div>
+      <p class="exp">The tangled interleaved tunes again — same pitch range, hopeless. Now give melody B a different <strong>timbre</strong>. Similarity does what proximity couldn't: two instruments, two streams, two recognizable tunes.</p>
+      <div class="row">
+        <button class="btn" id="timbrePlaySame">▶ Same timbre (tangled)</button>
+        <button class="btn" id="timbrePlayDiff">▶ Two timbres (unbraided)</button>
+        <button class="btn stop" id="timbreStop" disabled>■ Stop</button>
+      </div>
+    </div>
+
+    <div class="demo" id="demo-closure">
+      <div class="demo-head"><h3>11 · Closure: the note that wasn't there</h3><span class="tag">DeWitt &amp; Samuel (1990)</span></div>
+      <p class="exp">A rising scale, with a burst of noise near the top. Sometimes the expected note is <strong>under</strong> the noise; sometimes it's simply <strong>gone</strong>. Strong tonal expectations make the two nearly indistinguishable — your auditory system restores the note it was owed. (It's the Mendelssohn-in-the-bath principle: an unresolved leading tone begs for its tonic.)</p>
+      <div class="row">
+        <button class="btn" id="closureA">▶ Version A</button>
+        <button class="btn" id="closureB">▶ Version B</button>
+        <button class="btn ghost" id="closureGuess">One had the note, one didn't — reveal</button>
+      </div>
+      <p class="reveal" id="closureAnswer" hidden></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="illusion">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--illusion)">Part 4 · When the principles betray you</p>
+    <h2 class="block-title">Deutsch's scale illusion</h2>
+    <div class="prose">
+      <p>In 1975 Diana Deutsch played listeners a C-major scale, ascending and descending at once — with consecutive notes of each line <em>alternating between the ears</em>. Each ear actually receives a jagged zig-zag. Yet not one of her 70 participants heard it that way: pitch proximity overrides ear of origin, and you hear two smooth arcs — the high one usually parked in the right ear. Grouping principles are so strong they can tell you the wrong thing about where sounds are.</p>
+    </div>
+    <div class="demo" id="demo-illusion">
+      <div class="demo-head"><h3>12 · Hear it, then dissect it</h3><span class="headphones">🎧 Headphones required</span></div>
+      <p class="exp">Listen once and note what each ear seems to hear. Then audit the channels: play what each ear <em>actually</em> received. Finally, give the two ears different timbres — similarity now sides with spatial location, and the illusion weakens or collapses.</p>
+      <div id="illusion-widget"></div>
+      <div class="row">
+        <button class="btn" id="illusionPlay">▶ Play the illusion</button>
+        <button class="btn ghost" id="illusionLeft">▶ What your left ear really got</button>
+        <button class="btn ghost" id="illusionRight">▶ What your right ear really got</button>
+        <button class="btn ghost" id="illusionPercept">▶ What most people hear</button>
+        <button class="btn ghost" id="illusionTimbre">▶ Two timbres (illusion breaks)</button>
+      </div>
+      <p class="note-line">Most right-handers assign the high line to the right ear even when the headphones are reversed. Left-handers are more variable — ask around the room.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="sources">
+  <div class="wrap">
+    <p class="kicker">Sources</p>
+    <h2 class="block-title">Where this comes from</h2>
+    <div class="prose">
+      <p>Fundamentals of music (based on Tan et al., 2018). All sounds are generated in your browser with the Web Audio API, so the stimuli are close cousins of the originals used in these studies.</p>
+    </div>
+    <div class="refs">
+      <p>Butler, D. (1989). Describing the perception of tonality in music: A critique of the tonal hierarchy theory and a proposal for a theory of intervallic rivalry. <em>Music Perception, 6</em>, 219–242.</p>
+      <p>DeWitt, L. A., &amp; Samuel, A. G. (1990). The role of knowledge-based expectations in music perception: Evidence from musical restoration. <em>Journal of Experimental Psychology: General, 119</em>(2), 123–144.</p>
+      <p>Deutsch, D. (1975). Two-channel listening to musical scales. <em>Journal of the Acoustical Society of America, 57</em>(5), 1156–1160.</p>
+      <p>Dowling, W. J. (1973). The perception of interleaved melodies. <em>Cognitive Psychology, 5</em>(3), 322–337.</p>
+      <p>Krumhansl, C. L. (1979). The psychological representation of musical pitch in a tonal context. <em>Cognitive Psychology, 11</em>(3), 346–374.</p>
+      <p>Krumhansl, C. L., &amp; Kessler, E. J. (1982). Tracing the dynamic changes in perceived tonal organization in a spatial representation of musical keys. <em>Psychological Review, 89</em>(4), 334–368.</p>
+      <p>Krumhansl, C. L., &amp; Shepard, R. N. (1979). Quantification of the hierarchy of tonal functions within a diatonic context. <em>Journal of Experimental Psychology: Human Perception and Performance, 5</em>(4), 579–594.</p>
+      <p>Shepard, R. N. (1964). Circularity in judgments of relative pitch. <em>Journal of the Acoustical Society of America, 36</em>(12), 2346–2353.</p>
+      <p>Tan, S.-L., Pfordresher, P., &amp; Harré, R. (2018). <em>Psychology of music: From sound to significance</em> (2nd ed., Ch. 5, pp. 69–109). Routledge.</p>
+    </div>
+    <p class="license-note">Built for PSY 1018 (Harvard College). Demos are pedagogical approximations of the cited paradigms — parameters simplified for the classroom; consult the original papers for exact stimuli and methods.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>PSY 1018 · The Science and Psychology of Music</span>
+    <span>Companion: the Atlas of Human Song · All audio synthesized in-browser</span>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ============ audio engine ============ */
+let AC = null;
+function ctx() { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); return AC; }
+const live = new Set();
+function stopAll() { live.forEach(o => { try { o.stop(); } catch (e) {} }); live.clear(); document.querySelectorAll(".btn.stop").forEach(b => b.disabled = true); }
+function f(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+function tone(midi, t, dur, opts = {}) {
+  const c = ctx();
+  const o = c.createOscillator(); o.type = opts.type || "sine"; o.frequency.value = f(midi);
+  const g = c.createGain();
+  const peak = opts.gain ?? 0.22;
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + 0.012);
+  g.gain.setValueAtTime(peak, Math.max(t + 0.012, t + dur - 0.06)); g.gain.linearRampToValueAtTime(0, t + dur);
+  let node = g;
+  if (opts.pan !== undefined && c.createStereoPanner) { const p = c.createStereoPanner(); p.pan.value = opts.pan; g.connect(p); node = p; }
+  o.connect(g); node.connect(c.destination);
+  o.start(t); o.stop(t + dur + 0.05); live.add(o); o.onended = () => live.delete(o);
+}
+function noise(t, dur, gain = 0.25) {
+  const c = ctx(); const len = Math.ceil(c.sampleRate * dur); const buf = c.createBuffer(1, len, c.sampleRate);
+  const d = buf.getChannelData(0); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1);
+  const s = c.createBufferSource(); s.buffer = buf; const g = c.createGain();
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(gain, t + 0.01);
+  g.gain.setValueAtTime(gain, t + dur - 0.02); g.gain.linearRampToValueAtTime(0, t + dur);
+  s.connect(g); g.connect(c.destination); s.start(t); s.stop(t + dur + 0.02); live.add(s); s.onended = () => live.delete(s);
+}
+function shepardTone(chromaIdx, t, dur) {
+  const c = ctx(); const center = 261.63 * 4; // weight centered in log-f space
+  for (let oct = 1; oct <= 7; oct++) {
+    const freq = 32.7 * Math.pow(2, oct) * Math.pow(2, chromaIdx / 12);
+    const dist = Math.log2(freq / center); const w = Math.exp(-(dist * dist) / 3.4) * 0.09;
+    if (w < 0.002) continue;
+    const o = c.createOscillator(); o.frequency.value = freq;
+    const g = c.createGain();
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(w, t + 0.015);
+    g.gain.setValueAtTime(w, t + dur - 0.05); g.gain.linearRampToValueAtTime(0, t + dur);
+    o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + 0.05);
+    live.add(o); o.onended = () => live.delete(o);
+  }
+}
+function armStop(btn) { document.getElementById(btn).disabled = false; }
+
+/* ============ 1 · helix / height vs chroma ============ */
+(function () {
+  const CH = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+  const box = document.getElementById("helix-widget");
+  const W = 720, H = 190; let s = `<svg class="widget" viewBox="0 0 ${W} ${H}" aria-label="Two-octave keyboard; same-chroma keys share a color">`;
+  const keys = []; for (let m = 60; m <= 84; m++) keys.push(m);
+  const kw = (W - 40) / keys.length;
+  keys.forEach((m, i) => {
+    const chroma = m % 12; const isC = chroma === 0;
+    const hue = `hsl(${chroma * 30}, 42%, ${CH[chroma].includes("#") ? 78 : 68}%)`;
+    s += `<rect class="kbd-note" data-m="${m}" x="${20 + i * kw}" y="30" width="${kw - 2}" height="120" rx="4" fill="${hue}" stroke="#191C20" stroke-width="${isC ? 1.4 : 0.4}"></rect>`;
+    if (isC || chroma === 7) s += `<text x="${20 + i * kw + kw / 2 - 1}" y="168" font-family="Archivo,sans-serif" font-size="11" fill="#575D66" text-anchor="middle">${CH[chroma]}${Math.floor(m / 12) - 1}</text>`;
+  });
+  s += `<text x="20" y="18" font-family="Archivo,sans-serif" font-size="11" fill="#575D66">Same color = same chroma. C4 and C5 are the "same note," an octave of height apart.</text></svg>`;
+  box.innerHTML = s;
+  box.querySelectorAll(".kbd-note").forEach(k => k.addEventListener("click", () => {
+    const m = +k.dataset.m; const t = ctx().currentTime + 0.02; tone(m, t, 0.55);
+    box.querySelectorAll(".kbd-note").forEach(o => { if (+o.dataset.m % 12 === m % 12) { o.setAttribute("stroke-width", "2.4"); setTimeout(() => o.setAttribute("stroke-width", o.dataset.m % 12 === 0 ? "1.4" : "0.4"), 600); } });
+  }));
+  let shepTimer = null;
+  document.getElementById("shepardBtn").addEventListener("click", () => {
+    stopAll(); clearInterval(shepTimer); let i = 0;
+    const step = () => { shepardTone(i % 12, ctx().currentTime + 0.02, 0.42); i++; };
+    step(); shepTimer = setInterval(step, 380); armStop("shepardStop");
+  });
+  document.getElementById("shepardStop").addEventListener("click", () => { clearInterval(shepTimer); stopAll(); });
+})();
+
+/* ============ 2 · contour sketcher ============ */
+(function () {
+  const ROWS = 8, COLS = 8; const SCALE = [60, 62, 64, 65, 67, 69, 71, 72]; // C major rows bottom→top
+  let cells = [0, 2, 4, 2, 0, 4, 5, 7].map(v => v); // seed: a real little tune shape (row index per column)
+  let shift = 0;
+  const box = document.getElementById("contour-widget");
+  const W = 720, H = 220, cw = (W - 40) / COLS, chh = (H - 50) / ROWS;
+  function render() {
+    let s = `<svg class="widget" viewBox="0 0 ${W} ${H}" aria-label="Melody grid: columns are beats, rows are scale steps">`;
+    for (let r = 0; r < ROWS; r++) for (let col = 0; col < COLS; col++) {
+      const on = cells[col] === r;
+      s += `<rect class="grid-cell" data-r="${r}" data-c="${col}" x="${20 + col * cw + 2}" y="${20 + (ROWS - 1 - r) * chh + 2}" width="${cw - 4}" height="${chh - 4}" rx="5" fill="${on ? "var(--melody)" : "#EFE8D8"}" stroke="${on ? "#8A4A0C" : "#E0D8C7"}"></rect>`;
+    }
+    s += `<text x="20" y="${H - 12}" font-family="Archivo,sans-serif" font-size="11" fill="#575D66">Click a cell in each column · rows are steps of the C-major scale${shift ? " · transposed +" + shift + " st" : ""}</text></svg>`;
+    box.innerHTML = s;
+    box.querySelectorAll(".grid-cell").forEach(c => c.addEventListener("click", () => {
+      cells[+c.dataset.c] = +c.dataset.r; shift = 0; render();
+      tone(SCALE[+c.dataset.r], ctx().currentTime + 0.02, 0.3);
+    }));
+  }
+  render();
+  function play(seq, semis = 0) {
+    stopAll(); const t0 = ctx().currentTime + 0.06;
+    seq.forEach((r, i) => tone(SCALE[r] + semis, t0 + i * 0.34, 0.3));
+  }
+  document.getElementById("contourPlay").addEventListener("click", () => play(cells, shift));
+  document.getElementById("contourTranspose").addEventListener("click", () => { shift = shift ? 0 : 5; render(); play(cells, shift); });
+  document.getElementById("contourWarp").addEventListener("click", () => {
+    // keep signs of intervals, randomize sizes within the grid
+    const warped = [cells[0]];
+    for (let i = 1; i < cells.length; i++) {
+      const dir = Math.sign(cells[i] - cells[i - 1]);
+      let step = dir === 0 ? 0 : dir * (1 + Math.floor(Math.random() * 3));
+      let next = Math.min(ROWS - 1, Math.max(0, warped[i - 1] + step));
+      if (dir > 0 && next <= warped[i - 1]) next = Math.min(ROWS - 1, warped[i - 1] + 1);
+      if (dir < 0 && next >= warped[i - 1]) next = Math.max(0, warped[i - 1] - 1);
+      warped.push(next);
+    }
+    play(warped, 0);
+  });
+  document.getElementById("contourReset").addEventListener("click", () => { cells = [0, 2, 4, 2, 0, 4, 5, 7]; shift = 0; render(); });
+})();
+
+/* ============ 3 · probe tone ============ */
+(function () {
+  const KK = { C: 6.35, "C#": 2.23, D: 3.48, "D#": 2.33, E: 4.38, F: 4.09, "F#": 2.52, G: 5.19, "G#": 2.39, A: 3.66, "A#": 2.29, B: 2.88 };
+  const PROBE_SET = ["G", "C#", "E", "B", "C", "F#"]; // one per level: tonic, dominant, mediant, other diatonic, two chromatic
+  const midiOf = { C: 72, "C#": 73, D: 74, "D#": 75, E: 76, F: 77, "F#": 78, G: 79, "G#": 80, A: 81, "A#": 82, B: 83 };
+  let probes = shuffled(PROBE_SET), idx = 0, ratings = {};
+  function shuffled(a) { const c = a.slice(); for (let i = c.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [c[i], c[j]] = [c[j], c[i]]; } return c; }
+  const btn = document.getElementById("probeBtn"), label = document.getElementById("probeLabel"),
+        resetBtn = document.getElementById("probeReset"),
+        ratingRow = document.getElementById("probeRating"), chartBox = document.getElementById("probe-chart"),
+        summary = document.getElementById("probeSummary");
+  for (let v = 1; v <= 7; v++) { const b = document.createElement("button"); b.className = "rate-btn"; b.textContent = v;
+    b.addEventListener("click", () => rate(v)); ratingRow.appendChild(b); }
+  function playContext(probeMidi) {
+    stopAll(); const t0 = ctx().currentTime + 0.06; const scale = [60, 62, 64, 65, 67, 69, 71]; // incomplete: do–ti, withholding the tonic
+    scale.forEach((m, i) => tone(m, t0 + i * 0.26, 0.24));
+    tone(probeMidi, t0 + scale.length * 0.26 + 0.5, 0.9, { gain: 0.26 });
+  }
+  btn.addEventListener("click", () => {
+    if (idx >= probes.length) return;
+    playContext(midiOf[probes[idx]]);
+    label.textContent = "…how well does that last tone fit?";
+    ratingRow.hidden = false;
+  });
+  function rate(v) {
+    ratings[probes[idx]] = v; idx++;
+    ratingRow.hidden = true; label.textContent = "";
+    if (idx < probes.length) { btn.textContent = `▶ Play context + probe ${idx + 1} of ${probes.length}`; }
+    else { btn.textContent = "✓ All six rated"; btn.disabled = true; }
+    drawChart();
+  }
+  resetBtn.addEventListener("click", () => {
+    stopAll();
+    probes = shuffled(PROBE_SET); idx = 0; ratings = {};
+    btn.disabled = false; btn.textContent = `▶ Play context + probe 1 of ${probes.length}`;
+    ratingRow.hidden = true; label.textContent = ""; chartBox.innerHTML = ""; summary.textContent = "";
+  });
+  function drawChart() {
+    const done = Object.keys(ratings).length; if (!done) return;
+    const names = Object.keys(KK);
+    const W = 720, H = 240, L = 46, B = 34, T = 18, R = 14;
+    const x = i => L + i * (W - L - R) / 11 ;
+    const y = v => T + (H - T - B) * (1 - (v - 1) / 6);
+    let s = `<svg class="widget" viewBox="0 0 ${W} ${H}" aria-label="Your probe-tone ratings compared with the Krumhansl and Kessler tonal hierarchy">`;
+    for (let v = 1; v <= 7; v += 2) s += `<line x1="${L}" y1="${y(v)}" x2="${W - R}" y2="${y(v)}" stroke="#E0D8C7" stroke-width="1"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-family="Archivo,sans-serif" font-size="10" fill="#575D66">${v}</text>`;
+    // K&K profile scaled 1-7 (already on ~1-7 scale)
+    let path = "";
+    names.forEach((n, i) => { path += (i ? "L" : "M") + x(i) + "," + y(KK[n]) + " "; });
+    s += `<path d="${path}" fill="none" stroke="#2C4A5E" stroke-width="2"/>`;
+    names.forEach((n, i) => {
+      s += `<circle cx="${x(i)}" cy="${y(KK[n])}" r="3" fill="#2C4A5E" stroke="#FFFDF8" stroke-width="1.4"/>`;
+      s += `<text x="${x(i)}" y="${H - B + 16}" text-anchor="middle" font-family="Archivo,sans-serif" font-size="10" fill="${["C","D","E","F","G","A","B"].includes(n) ? "#191C20" : "#9A9284"}">${n}</text>`;
+      if (ratings[n] !== undefined) s += `<circle cx="${x(i)}" cy="${y(ratings[n])}" r="6" fill="var(--melody)" stroke="#FFFDF8" stroke-width="1.6"/>`;
+    });
+    s += `<circle cx="${L + 6}" cy="${T + 2}" r="5" fill="var(--melody)"/><text x="${L + 16}" y="${T + 6}" font-family="Archivo,sans-serif" font-size="10.5" fill="#191C20">you</text>`;
+    s += `<line x1="${L + 52}" y1="${T + 2}" x2="${L + 72}" y2="${T + 2}" stroke="#2C4A5E" stroke-width="2"/><text x="${L + 78}" y="${T + 6}" font-family="Archivo,sans-serif" font-size="10.5" fill="#191C20">Krumhansl &amp; Kessler (1982), C major</text>`;
+    s += `</svg>`;
+    chartBox.innerHTML = s;
+    if (done === probes.length) summary.innerHTML = "<strong>Read your profile:</strong> did C and G top your list, with C♯ and F♯ at the bottom? That ordering — tonic, then dominant and mediant, then other in-key tones, then out-of-key — is the tonal hierarchy your years of listening built, with no music theory required. Two things worth arguing about. <strong>B</strong> is the least <em>stable</em> in-key tone and simultaneously the one that most wants to resolve: stability and tendency are separate axes. And B was the last note of the context you just heard, so a high rating for it may be echoic memory rather than tonal knowledge — that confound is the heart of Butler's (1989) critique of this entire paradigm. Start over to hear the probes in a new order.";
+  }
+})();
+
+/* ============ 4 · tempo ============ */
+(function () {
+  const TUNE = [60,60,67,67,69,69,67, 65,65,64,64,62,62,60]; // Twinkle phrase
+  let timer = null;
+  const slider = document.getElementById("tempoSlider"), val = document.getElementById("tempoVal");
+  slider.addEventListener("input", () => val.textContent = slider.value + " BPM");
+  document.getElementById("tempoPlay").addEventListener("click", () => {
+    stopAll(); clearTimeout(timer);
+    const go = () => {
+      const beat = 60 / +slider.value; const t0 = ctx().currentTime + 0.05;
+      TUNE.forEach((m, i) => tone(m, t0 + i * beat, Math.min(beat * 0.9, 0.5)));
+      timer = setTimeout(go, (TUNE.length * beat + 0.6) * 1000);
+    };
+    go(); armStop("tempoStop");
+  });
+  document.getElementById("tempoStop").addEventListener("click", () => { clearTimeout(timer); stopAll(); });
+})();
+
+/* ============ 5 · meter ============ */
+(function () {
+  let timer = null;
+  document.getElementById("meterPlay").addEventListener("click", () => {
+    stopAll(); clearInterval(timer); let i = 0;
+    const step = () => {
+      const n = +document.getElementById("meterSel").value;
+      const strong = n > 0 && i % n === 0;
+      tone(strong ? 86 : 81, ctx().currentTime + 0.02, 0.09, { gain: strong ? 0.34 : 0.16, type: "square" });
+      i++;
+    };
+    step(); timer = setInterval(step, 400); armStop("meterStop");
+  });
+  document.getElementById("meterStop").addEventListener("click", () => { clearInterval(timer); stopAll(); });
+})();
+
+/* ============ 6 · rhythm grid ============ */
+(function () {
+  const STEPS = 16; let pat = [1,0,0,1, 0,0,1,0, 1,0,1,0, 1,0,0,0];
+  const box = document.getElementById("rhythm-widget"); let timer = null, pos = 0;
+  const W = 720, H = 120, cw = (W - 40) / STEPS;
+  function render(cur = -1) {
+    let s = `<svg class="widget" viewBox="0 0 ${W} ${H}">`;
+    for (let i = 0; i < STEPS; i++) {
+      s += `<rect class="grid-cell" data-i="${i}" x="${20 + i * cw + 2}" y="14" width="${cw - 4}" height="44" rx="5" fill="${pat[i] ? "var(--time)" : "#EFE8D8"}" stroke="${i === cur ? "#191C20" : "#E0D8C7"}" stroke-width="${i === cur ? 2 : 1}"></rect>`;
+      s += `<rect x="${20 + i * cw + 2}" y="66" width="${cw - 4}" height="18" rx="4" fill="${i % 4 === 0 ? "#C9D6DD" : "#E4E9EC"}" stroke="${i === cur ? "#191C20" : "none"}"></rect>`;
+    }
+    s += `<text x="20" y="${H - 10}" font-family="Archivo,sans-serif" font-size="11" fill="#575D66">Top: your rhythm (click) · Bottom: the steady pulse beneath it</text></svg>`;
+    box.innerHTML = s;
+    box.querySelectorAll(".grid-cell").forEach(c => c.addEventListener("click", () => { pat[+c.dataset.i] ^= 1; render(); }));
+  }
+  render();
+  document.getElementById("rhythmPlay").addEventListener("click", () => {
+    stopAll(); clearInterval(timer); pos = 0;
+    timer = setInterval(() => {
+      const t = ctx().currentTime + 0.02;
+      if (pos % 4 === 0) tone(69, t, 0.06, { gain: 0.14, type: "square" });
+      if (pat[pos]) tone(76, t, 0.14, { gain: 0.3, type: "triangle" });
+      render(pos); pos = (pos + 1) % STEPS;
+    }, 160);
+    armStop("rhythmStop");
+  });
+  document.getElementById("rhythmStop").addEventListener("click", () => { clearInterval(timer); stopAll(); render(); });
+  document.getElementById("rhythmClear").addEventListener("click", () => { pat = new Array(STEPS).fill(0); render(); });
+})();
+
+/* ============ 7 · streaming ============ */
+(function () {
+  let timer = null;
+  const sep = document.getElementById("streamSep"), rate = document.getElementById("streamRate");
+  sep.addEventListener("input", () => document.getElementById("streamSepVal").textContent = sep.value + " st");
+  rate.addEventListener("input", () => document.getElementById("streamRateVal").textContent = rate.value + " /s");
+  document.getElementById("streamPlay").addEventListener("click", () => {
+    stopAll(); clearInterval(timer); let i = 0;
+    const step = () => {
+      const base = 65; const m = i % 2 === 0 ? base : base + +sep.value;
+      tone(m, ctx().currentTime + 0.02, Math.min(0.85 / +rate.value, 0.24), { type: "triangle", gain: 0.24 });
+      i++;
+      clearInterval(timer); timer = setInterval(step, 1000 / +rate.value);
+    };
+    step(); armStop("streamStop");
+  });
+  document.getElementById("streamStop").addEventListener("click", () => { clearInterval(timer); stopAll(); });
+})();
+
+/* ============ 8-10 · interleaved tunes & timbre ============ */
+const TWINKLE = [60,60,67,67,69,69,67,65,65,64,64,62,62,60];
+const MARY =    [64,62,60,62,64,64,64,62,62,62,64,67,67,64];
+(function () {
+  let timer = null;
+  function playInterleaved(sepB, typeA, typeB) {
+    stopAll(); clearTimeout(timer);
+    const t0 = ctx().currentTime + 0.06; const dur = 0.21, gap = 0.24;
+    for (let i = 0; i < TWINKLE.length; i++) {
+      tone(MARY[i], t0 + (2 * i) * gap, dur, { type: typeA });
+      tone(TWINKLE[i] + sepB, t0 + (2 * i + 1) * gap, dur, { type: typeB });
+    }
+  }
+  const sep = document.getElementById("ilSep");
+  sep.addEventListener("input", () => document.getElementById("ilSepVal").textContent = sep.value + " st");
+  document.getElementById("ilPlay").addEventListener("click", () => { playInterleaved(+sep.value, "sine", "sine"); armStop("ilStop"); });
+  document.getElementById("ilStop").addEventListener("click", stopAll);
+  document.getElementById("ilReveal").addEventListener("click", () => {
+    const a = document.getElementById("ilAnswer"); a.hidden = false;
+    a.textContent = "Melody A: 'Mary Had a Little Lamb' · Melody B: 'Twinkle, Twinkle, Little Star.'";
+  });
+  document.getElementById("timbrePlaySame").addEventListener("click", () => { playInterleaved(0, "sine", "sine"); armStop("timbreStop"); });
+  document.getElementById("timbrePlayDiff").addEventListener("click", () => { playInterleaved(0, "sine", "sawtooth"); armStop("timbreStop"); });
+  document.getElementById("timbreStop").addEventListener("click", stopAll);
+})();
+
+/* ============ 9 · octave scramble ============ */
+(function () {
+  // "Happy Birthday" (melody in the US public domain since 2016) — deliberately a tune used
+  // nowhere else on this page, and carrying its real rhythm, as in Deutsch's demonstration.
+  const HB = [[67,.75],[67,.25],[69,1],[67,1],[72,1],[71,2],
+              [67,.75],[67,.25],[69,1],[67,1],[74,1],[72,2],
+              [67,.75],[67,.25],[79,1],[76,1],[72,1],[71,1],[69,1],
+              [77,.75],[77,.25],[76,1],[72,1],[74,1],[72,2]];
+  const BEAT = 0.44;
+  let octs = null;
+  // Deutsch's recipe: full keyboard range, octaves chosen without any pattern. Two extra
+  // constraints keep proximity genuinely broken — every consecutive pair leaps at least an
+  // octave in actual pitch (so repeated notes never sit still), and no register may ping-pong
+  // with the one before last, which would let the ear build two steady streams instead.
+  const MIN_LEAP = 11, LO = 45, HI = 96;
+  function scrambleOcts() {
+    octs = []; let prevPitch = null, prevOct = null, prevPrevOct = null;
+    HB.forEach(([m]) => {
+      const legal = [-24, -12, 0, 12, 24].filter(o => m + o >= LO && m + o <= HI);
+      let opts = legal;
+      if (prevPitch !== null) {
+        let far = legal.filter(o => o !== prevOct && Math.abs(m + o - prevPitch) >= MIN_LEAP);
+        const noPingPong = far.filter(o => o !== prevPrevOct);
+        if (noPingPong.length) far = noPingPong;
+        if (!far.length) far = legal.filter(o => o !== prevOct);
+        if (!far.length) {
+          const best = Math.max(...legal.map(o => Math.abs(m + o - prevPitch)));
+          far = legal.filter(o => Math.abs(m + o - prevPitch) === best);
+        }
+        opts = far;
+      }
+      const o = opts[Math.floor(Math.random() * opts.length)];
+      octs.push(o); prevPrevOct = prevOct; prevOct = o; prevPitch = m + o;
+    });
+  }
+  scrambleOcts();
+  const isFlat = () => document.getElementById("scrambleFlat").checked;
+  function play(scrambled) {
+    stopAll(); let t = ctx().currentTime + 0.06; const flat = isFlat();
+    HB.forEach(([m, beats], i) => {
+      const b = flat ? 1 : beats;
+      tone(m + (scrambled ? octs[i] : 0), t, Math.min(b * BEAT * 0.92, 0.7));
+      t += b * BEAT;
+    });
+  }
+  document.getElementById("scramblePlay").addEventListener("click", () => play(true));
+  document.getElementById("scrambleNew").addEventListener("click", () => { scrambleOcts(); play(true); });
+  document.getElementById("scrambleReveal").addEventListener("click", () => {
+    const wasFlat = isFlat();
+    play(false); const a = document.getElementById("scrambleAnswer"); a.hidden = false;
+    a.innerHTML = wasFlat
+      ? "It was <strong>'Happy Birthday'</strong> — and you heard it with the rhythm flattened to equal notes, so the only cue left was the bare sequence of chromas. Whatever remained unrecognizable there is pitch proximity's contribution, isolated."
+      : "It was <strong>'Happy Birthday'</strong> — the same chromas in the same rhythm you have known since childhood, with only the octaves moved. If you did recognize it, the rhythm is the likeliest culprit: it is the one channel the scramble never touches. Tick <strong>flatten the rhythm</strong> and run it again to take that cue away too.";
+  });
+})();
+
+/* ============ 11 · closure ============ */
+(function () {
+  // A: tone present under noise; B: tone replaced by noise (which is which is randomized per load)
+  const withTone = Math.random() < 0.5 ? "A" : "B";
+  function playScale(hasTone) {
+    stopAll(); const t0 = ctx().currentTime + 0.06; const beat = 0.3;
+    const seq = [60,62,64,65,67,69,71]; // up to leading tone
+    seq.forEach((m, i) => tone(m, t0 + i * beat, 0.26));
+    const tN = t0 + seq.length * beat;
+    noise(tN, 0.3, 0.3);
+    if (hasTone) tone(72, tN, 0.28, { gain: 0.2 });
+    tone(74, tN + beat, 0.26); tone(76, tN + 2 * beat, 0.4); // continue past it
+  }
+  document.getElementById("closureA").addEventListener("click", () => playScale(withTone === "A"));
+  document.getElementById("closureB").addEventListener("click", () => playScale(withTone === "B"));
+  document.getElementById("closureGuess").addEventListener("click", () => {
+    const a = document.getElementById("closureAnswer"); a.hidden = false;
+    a.textContent = `Version ${withTone} had the tonic under the noise; the other replaced it entirely. If they sounded alike, your expectations restored the missing note — closure at work.`;
+  });
+})();
+
+/* ============ 12 · scale illusion ============ */
+(function () {
+  const asc =  [60, 62, 64, 65, 67, 69, 71, 72];
+  const desc = [72, 71, 69, 67, 65, 64, 62, 60];
+  const box = document.getElementById("illusion-widget");
+  const W = 720, H = 200;
+  (function draw() {
+    const names = ["C4","D4","E4","F4","G4","A4","B4","C5"];
+    let s = `<svg class="widget" viewBox="0 0 ${W} ${H}" aria-label="Scale illusion stimulus: two interleaved scales alternating between the ears">`;
+    const x = i => 60 + i * (W - 110) / 7, y = m => 158 - (m - 60) * 10.5;
+    s += `<text x="20" y="26" font-family="Archivo,sans-serif" font-size="11" fill="#575D66">The stimulus — ● right ear · ○ left ear · both lines at once, ears alternating each step</text>`;
+    [asc, desc].forEach((line, li) => {
+      line.forEach((m, i) => {
+        const right = (i % 2 === (li === 0 ? 0 : 1));
+        s += `<circle cx="${x(i)}" cy="${y(m)}" r="7" fill="${right ? "#191C20" : "#FFFDF8"}" stroke="#191C20" stroke-width="1.6"/>`;
+      });
+    });
+    asc.forEach((m, i) => { if (i < 7) s += ""; });
+    s += `<text x="${x(0) - 34}" y="${y(60) + 4}" font-family="Archivo,sans-serif" font-size="10" fill="#575D66">C4</text>`;
+    s += `<text x="${x(0) - 34}" y="${y(72) + 4}" font-family="Archivo,sans-serif" font-size="10" fill="#575D66">C5</text>`;
+    s += `</svg>`;
+    box.innerHTML = s;
+  })();
+  function playIllusion(typeL, typeR) {
+    stopAll(); const t0 = ctx().currentTime + 0.1; const beat = 0.3;
+    for (let i = 0; i < 8; i++) {
+      const ascRight = i % 2 === 0, descRight = !ascRight;
+      tone(asc[i], t0 + i * beat, 0.27, { pan: ascRight ? 1 : -1, type: ascRight ? typeR : typeL, gain: 0.2 });
+      tone(desc[i], t0 + i * beat, 0.27, { pan: descRight ? 1 : -1, type: descRight ? typeR : typeL, gain: 0.2 });
+    }
+  }
+  function playChannel(pan) {
+    stopAll(); const t0 = ctx().currentTime + 0.1; const beat = 0.3;
+    for (let i = 0; i < 8; i++) {
+      const ascRight = i % 2 === 0;
+      if ((pan === 1) === ascRight) tone(asc[i], t0 + i * beat, 0.27, { pan, gain: 0.22 });
+      if ((pan === 1) !== ascRight) tone(desc[i], t0 + i * beat, 0.27, { pan, gain: 0.22 });
+    }
+  }
+  function playPercept() {
+    stopAll(); const t0 = ctx().currentTime + 0.1; const beat = 0.3;
+    for (let i = 0; i < 8; i++) {
+      tone(Math.max(asc[i], desc[i]), t0 + i * beat, 0.27, { pan: 1, gain: 0.22 });
+      tone(Math.min(asc[i], desc[i]), t0 + i * beat, 0.27, { pan: -1, gain: 0.22 });
+    }
+  }
+  document.getElementById("illusionPlay").addEventListener("click", () => playIllusion("sine", "sine"));
+  document.getElementById("illusionLeft").addEventListener("click", () => playChannel(-1));
+  document.getElementById("illusionRight").addEventListener("click", () => playChannel(1));
+  document.getElementById("illusionPercept").addEventListener("click", playPercept);
+  document.getElementById("illusionTimbre").addEventListener("click", () => playIllusion("sine", "sawtooth"));
+})();
+</script>
+
+</body>
+</html>
