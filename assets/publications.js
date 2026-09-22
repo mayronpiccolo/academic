@@ -5,6 +5,7 @@
   if (!host) return;
 
   var PUBS = [
+    { y: 2026, t: "Food insecurity and positive eating disorder screens among US college students: Disparities, dose-response, and differential item functioning across multiple survey cohorts", a: "Piccolo M", j: "International Journal of Eating Disorders", url: "", arms: ["assessing", "understanding"], tags: ["eating"], status: "In press" },
     { y: 2026, t: "First Tones: Effects of a communal music-engagement intervention on the mental and behavioral health of preschoolers: A pilot randomized controlled trial", a: "Piccolo M, Dos Santos DW, Pancheri-Teixeira V, Teixeira W, Stocchero M, Galdino SR, Sato JR, Pinheiro ED, Tencatt Abrita APC, Zatorre L, Vanzella P, Hooley JM", j: "The Arts in Psychotherapy", url: "https://doi.org/10.1016/j.aip.2026.102508", arms: ["treating"], tags: ["music"] },
     { y: 2026, t: "An exploratory study on portion size estimation errors: psychological correlates in a non-clinical sample with normal weight", a: "Piccolo M, Tandon T, Wadji DL, Haymoz S, Mueller-Pfeiffer C, Milos G, Martin-Soelch C", j: "Eating and Weight Disorders", url: "https://link.springer.com/article/10.1007/s40519-026-01864-2", arms: ["assessing", "understanding"], tags: ["eating"] },
     { y: 2025, t: "Communal music as a tool to improve positive affect after social ostracism or negative autobiographical memory recollection", a: "Piccolo M, Dos Santos DW, Herold S, Hooley JM", j: "Scientific Reports", url: "https://pubmed.ncbi.nlm.nih.gov/41028871/", arms: ["treating", "understanding"], tags: ["music", "reward"] },
@@ -34,7 +35,8 @@
     if (p.y !== lastYear) { html += '<div class="pub-year">' + p.y + "</div>"; lastYear = p.y; }
     var title = p.url ? '<a href="' + p.url + '" target="_blank" rel="noopener">' + p.t + "</a>" : p.t;
     var armChips = (p.arms || []).map(function (a) { return '<span class="arm">' + ARMNAMES[a] + "</span>"; }).join("");
-    var tags = armChips;
+    var statusChip = p.status ? '<span class="pub-status">' + p.status + "</span>" : "";
+    var tags = statusChip + armChips;
     html += '<div class="pub"><p class="pub-title">' + title + '</p><p class="pub-meta">' + p.a + " · <i>" + p.j + '</i></p><div class="tags">' + tags + "</div></div>";
   }
   html += '<div class="pub-group">Book Chapters</div>';
