@@ -9,7 +9,7 @@
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
     new URLSearchParams(window.location.search).has("static");
 
-  var TRAUMA_DESC = "Partner country in the Global Trauma Network — a 13-country study of how child maltreatment and cultural social norms shape mental health (paper forthcoming).";
+  var TRAUMA_DESC = "Partner country in the Global Trauma Network — a 13-country study of how child maltreatment and cultural social norms shape mental health (preprint on medRxiv, 2026).";
   var SITES = [
     { id: "cam", name: "Cambridge & Boston, USA", inst: "Harvard · McLean · Cambridge Health Alliance", lat: 42.4, lon: -71.1, hub: true, labelDy: -10,
       desc: "Home base. Papers: communal music to improve positive affect after social ostracism (Scientific Reports, 2025) with the Hooley Lab, and resting-state fMRI of MDD appetite and weight phenotypes (Psychological Medicine, 2023) from postdoctoral training at McLean Hospital with Diego Pizzagalli and Kristin Javaras, and multi-site U.S. collaborators. The United States is also a partner country in the Global Trauma Network.", arms: ["understanding","treating"], themes: ["reward", "eating", "music", "cross"] },

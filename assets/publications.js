@@ -23,6 +23,9 @@
   ];
   var TAGNAMES = { reward: "Reward", eating: "Eating & Weight", music: "Music", cross: "Cross-cultural" };
   var ARMNAMES = { understanding: "Mechanisms", assessing: "Assessment", treating: "Intervention" };
+  var PREPRINTS = [
+    { y: 2026, t: "When is maltreatment ‘acceptable’? Cross-cultural patterns in child maltreatment exposure and its perceived social acceptability across 13 countries and regions", a: "Jenkins D, Langevin R, Balle SR, Jiaqing O, Makhashvili N, Porat-Butman S, Levi-Gigi E, Ayas G, Ceylan D, Fares-Otero N, Fernández Boente M, Halligan S, Jansson B, Kamari Songhorabadi S, Khayati G, Khormaei F, Martin-Sölch C, Pfaltz M, Piccolo M, Şar V, Schnyder U, Seedat S, Tandon T, Türk Kurtça T, Bartoli E, Spies G, Iqbal N, Oe M; CCTS Child Trauma Network", j: "medRxiv", note: "Posted 9 October 2026 · not peer reviewed", url: "https://doi.org/10.64898/2026.10.07.26364967", arms: ["understanding"], tags: ["cross"] }
+  ];
   var CHAPTERS = [
     { y: 2019, t: "A anorexia nervosa e os sistemas neurobiológicos que regulam o consumo de alimentos", a: "Piccolo M, Martin-Soelch C, Araujo J de C, Estanislau C", b: "Psicologia e Análise do Comportamento: Pesquisa e Intervenção", pages: "chap. 3, pp. 35–43", pub: "Universidade Estadual de Londrina", url: "https://www.uel.br/pos/pgac/wp-content/uploads/2019/02/Psicologia-e-Analise-do-Comportamento-Interven%C3%A7%C3%A3o-e-Pesquisa-2019.pdf" },
     { y: 2019, t: "Aspectos neurobiológicos e sociais da evolução da empatia humana", a: "Filgueiras GB, Maio TP, Bibiano AG, David L, Piccolo M, Ribeiro L, Luzia JC", b: "Psicologia e Análise do Comportamento: Pesquisa e Intervenção", pages: "chap. 12, pp. 147–157", pub: "Universidade Estadual de Londrina", url: "https://www.uel.br/pos/pgac/wp-content/uploads/2019/02/Psicologia-e-Analise-do-Comportamento-Interven%C3%A7%C3%A3o-e-Pesquisa-2019.pdf" },
@@ -39,6 +42,15 @@
     var tags = statusChip + armChips;
     html += '<div class="pub"><p class="pub-title">' + title + '</p><p class="pub-meta">' + p.a + " · <i>" + p.j + '</i></p><div class="tags">' + tags + "</div></div>";
   }
+  html += '<div class="pub-group">Preprints</div>';
+  for (var q = 0; q < PREPRINTS.length; q++) {
+    var r = PREPRINTS[q];
+    html += '<div class="pub-year">' + r.y + "</div>";
+    var rt = r.url ? '<a href="' + r.url + '" target="_blank" rel="noopener">' + r.t + "</a>" : r.t;
+    var rArms = (r.arms || []).map(function (a) { return '<span class="arm">' + ARMNAMES[a] + "</span>"; }).join("");
+    html += '<div class="pub"><p class="pub-title">' + rt + '</p><p class="pub-meta">' + r.a + " \u00b7 <i>" + r.j + '</i> \u00b7 ' + r.note + '</p><div class="tags"><span class="pub-status">Preprint</span>' + rArms + "</div></div>";
+  }
+  lastYear = null;
   html += '<div class="pub-group">Book Chapters</div>';
   lastYear = null;
   for (var k = 0; k < CHAPTERS.length; k++) {
